@@ -159,6 +159,7 @@ flowchart BT
     EC  <--> EE2
     EC  <--> EE3
 
+    style D fill:#ffffff,stroke:#000000,color:#000000
     style EF fill:#dbeafe,stroke:#1d4ed8,color:#1d4ed8,font-weight:bold
 ```
 
