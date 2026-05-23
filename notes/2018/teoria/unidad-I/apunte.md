@@ -267,24 +267,7 @@ movimiento.
 El SGBD acepta órdenes SQL generadas por diversas interfaces de usuario, produce planes de
 evaluación de consultas, los ejecuta contra la base de datos y devuelve las respuestas.
 
-```mermaid
-flowchart BT
-    GD["💾 Gestor de almacenamiento\n(disco)"]
-    GMI["Gestor de memoria intermedia"]
-    AMA["Archivos y métodos de acceso"]
-    OR["Operadores relacionales"]
-    OPT["Optimizador de consultas"]
-    UI["🖥️ Interfaces de usuario / SQL"]
-
-    GT["Gestor de transacciones"]
-    GB["Gestor de bloqueos"]
-    GR["Gestor de recuperaciones"]
-
-    GD --> GMI --> AMA --> OR --> OPT --> UI
-    GT --> OR
-    GB --> OR
-    GR --> AMA
-```
+![Arquitectura del SGBD](../../../resources/2018/u1-arquitectura-sgbd.png)
 
 Cuando un usuario formula una consulta:
 
