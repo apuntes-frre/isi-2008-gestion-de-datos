@@ -138,21 +138,6 @@ Para que el sistema sea útil debe recuperar datos eficientemente. Esta preocupa
 diseño de estructuras de datos complejas, cuya complejidad se oculta a los usuarios a través de
 varios niveles de abstracción:
 
-```mermaid
-mindmap
-  root((MUNDO REAL))
-    Modelado Conceptual
-      Esquema conceptual
-      Modelo Conceptual
-    Diseño Lógico
-      Esquema de BD
-      SGBD / Modelo de BD
-    Diseño Físico
-      Esquema interno
-      Modelo Interno
-    Base de Datos Física
-```
-
 | Nivel                   | Descripción                                                                                                                        |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | **Físico**              | El más bajo. Describe cómo se almacenan realmente los datos (estructuras de datos de bajo nivel).                                  |
