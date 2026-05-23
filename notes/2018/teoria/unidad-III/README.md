@@ -1,4 +1,4 @@
-# Unidad III: El Modelo Relacional
+# Unidad III: Modelado de Datos
 
 > **Gestión de Datos** — Ingeniería en Sistemas de Información, UTN-FRRE
 >
@@ -12,475 +12,551 @@
 
 ## Índice
 
-- [Unidad III: El Modelo Relacional](#unidad-iii-el-modelo-relacional)
-  - [Introducción al Modelo Relacional](#introducción-al-modelo-relacional)
-    - [Creación y modificación de relaciones mediante SQL](#creación-y-modificación-de-relaciones-mediante-sql)
-  - [Restricciones de integridad sobre las relaciones](#restricciones-de-integridad-sobre-las-relaciones)
-    - [Restricciones de clave](#restricciones-de-clave)
-    - [Restricciones de clave foránea (externa)](#restricciones-de-clave-foránea-externa)
-    - [Restricciones generales](#restricciones-generales)
-  - [Cumplimiento de las restricciones de integridad](#cumplimiento-de-las-restricciones-de-integridad)
-    - [Transacciones y restricciones](#transacciones-y-restricciones)
-  - [Consultas de datos relacionales](#consultas-de-datos-relacionales)
-  - [Diseño lógico: del Modelo ER al Modelo Relacional](#diseño-lógico-del-modelo-er-al-modelo-relacional)
-    - [De los conjuntos de entidades a las tablas](#de-los-conjuntos-de-entidades-a-las-tablas)
-    - [De los conjuntos de relaciones a las tablas](#de-los-conjuntos-de-relaciones-a-las-tablas)
-    - [Traducción con restricción de clave](#traducción-con-restricción-de-clave)
-    - [Traducción con restricción de participación](#traducción-con-restricción-de-participación)
-    - [Traducción de entidades débiles](#traducción-de-entidades-débiles)
-    - [Traducción de jerarquías de clase](#traducción-de-jerarquías-de-clase)
-    - [Traducción de diagramas ER con agregación](#traducción-de-diagramas-er-con-agregación)
-    - [Del modelo ER al relacional: más ejemplos](#del-modelo-er-al-relacional-más-ejemplos)
-  - [SGBD Relacionales Comerciales](#sgbd-relacionales-comerciales)
-  - [SGBD Relacionales Open Source](#sgbd-relacionales-open-source)
-  - [SQL](#sql)
+- [Unidad II: Modelado de Datos](#unidad-ii-modelado-de-datos)
+  - [Índice](#índice)
+  - [Introducción](#introducción)
+  - [Proceso de diseño de la Base de Datos](#proceso-de-diseño-de-la-base-de-datos)
+  - [Diseño de base de datos y diagramas ER](#diseño-de-base-de-datos-y-diagramas-er)
+  - [Entidades, atributos y conjuntos de entidades](#entidades-atributos-y-conjuntos-de-entidades)
+  - [Las relaciones y los conjuntos de relaciones](#las-relaciones-y-los-conjuntos-de-relaciones)
+  - [Otras características del modelo ER](#otras-características-del-modelo-er)
+    - [Restricciones de clave en relaciones](#restricciones-de-clave-en-relaciones)
+    - [Restricciones de clave en relaciones ternarias](#restricciones-de-clave-en-relaciones-ternarias)
+    - [Restricciones de participación](#restricciones-de-participación)
+    - [Entidades débiles](#entidades-débiles)
+    - [Jerarquías de clases](#jerarquías-de-clases)
+    - [Agregación](#agregación)
+  - [Diseño conceptual del modelo ER](#diseño-conceptual-del-modelo-er)
+    - [Entidades y atributos](#entidades-y-atributos)
+    - [Entidades y relaciones](#entidades-y-relaciones)
+    - [Relaciones binarias y ternarias](#relaciones-binarias-y-ternarias)
+    - [Agregación y relaciones ternarias](#agregación-y-relaciones-ternarias)
+  - [Resumen de símbolos](#resumen-de-símbolos)
   - [Bibliografía](#bibliografía)
 
 ---
 
-## Introducción al Modelo Relacional
+## Introducción
 
-El modelo relacional, introducido por E.F. Codd a principios de la década del 70, fue el primer modelo de datos en describir información en términos de tablas simples. Se basa en los productos de todas las empresas líderes de bases de datos, como Oracle e IBM, y sistemas de bases de datos de código abierto como MySQL y PostgreSQL.
+El modelado conceptual es una fase importante del diseño de una aplicación fructífera de base de
+datos. Una de las características fundamentales de los SGBD es que proporciona cierto nivel de
+abstracción de los datos, al ocultar detalles de almacenamiento que la mayoría de los usuarios no
+necesita conocer. Un **modelo de datos** (colección de conceptos que sirven para describir la
+estructura de una base de datos) proporciona los medios necesarios para conseguir dicha abstracción.
+Cuando hablamos de estructura de la base de datos nos referimos a los tipos de datos, los vínculos y
+las restricciones que deben cumplirse para esos datos.
 
-La principal estructura de datos del modelo relacional son las **relaciones**. Una relación puede verse como un conjunto de registros. Un campo de datos, también denominado **atributo**, es una columna en una tabla con nombre y tipo. Una **tupla** es básicamente una fila en la tabla. Cada registro/fila en el conjunto de datos es una instancia de la relación.
+Se han propuesto muchos modelos de datos y se pueden clasificar dependiendo de los tipos de
+conceptos que ofrecen para describir la estructura de la base de datos. Los **modelos de datos de
+alto nivel** o **conceptuales** disponen de conceptos muy cercanos al modo como la mayoría de los
+usuarios percibe los datos, mientras que los **modelos de bajo nivel** o **físicos** proporcionan
+conceptos que describen los detalles sobre cómo se almacenan los datos en el ordenador.
 
-Un **esquema** de una relación especifica el nombre de la tabla y los tipos de sus campos. Ejemplo:
+El **modelo de datos Entidad-Relación (ER)** permite describir los datos implicados en una empresa
+real en términos de objetos y de sus relaciones, y se emplea mucho para desarrollar el diseño
+preliminar de la base de datos. Aporta conceptos útiles que permiten pasar de una descripción
+informal de lo que los usuarios desean de su base de datos a otra más detallada y precisa que se
+pueda implementar en un SGBD.
 
-```text
-Alumnos (nombre: string, edad: integer, nota: real)
-```
+---
 
-Una **instancia** de una relación es el conjunto de tuplas en la relación. Cada instancia/ejemplo de la relación es una tabla donde el número de campos es igual al número de atributos del esquema y el número de filas es el número de tuplas.
+## Proceso de diseño de la Base de Datos
 
-![Instancia de la relación Alumnos](../../../../resources/2018/u3-instancia-alumnos.png)
+![Proceso de diseño de la Base de Datos](../../../../resources/2018/u3-proceso-diseno-bd.png)
 
-El **grado** (o aridad) de una relación es el número de campos. La **cardinalidad** de una instancia de la relación es el número de tuplas que contiene.
+El primer paso es la **obtención y análisis de requisitos**. Durante este paso los diseñadores
+entrevistan a los futuros usuarios de la base de datos para entender y documentar sus requisitos de
+datos. El resultado es un conjunto de requisitos del usuario redactado de forma concisa. Estos
+requisitos deben especificarse de la forma más detallada y completa posible.
 
-### Creación y modificación de relaciones mediante SQL
+En paralelo con la especificación de los requisitos de datos, conviene especificar los **requisitos
+funcionales** de la aplicación. Éstos consisten en las transacciones definidas por el usuario que se
+aplicarán a las bases de datos, e incluyen la obtención de datos y la actualización.
 
-El subconjunto de SQL que se emplea para la creación, eliminación y modificación de tablas se denomina lenguaje de definición de datos (LDD). La instrucción `CREATE TABLE` se emplea para crear una nueva relación:
+Una vez recogidos y analizados todos los requisitos, el siguiente paso es crear un **esquema
+conceptual** para la base de datos mediante un modelo conceptual de datos de alto nivel. Este paso
+se denomina **diseño conceptual**. El esquema conceptual es una descripción concisa de los
+requisitos de información de los usuarios, y contiene descripciones detalladas de los tipos de
+entidad, vínculos y restricciones representados según el modelo conceptual de datos usado. Puesto
+que estos conceptos no incluyen detalles de implementación, suelen ser fáciles de entender y pueden
+servir para comunicarse con usuarios no técnicos.
 
-```sql
-CREATE TABLE Alumnos (
-    nombre  CHAR(30),
-    edad    INTEGER,
-    nota    REAL
-);
-```
+A partir de allí se debe usar un SGBD para implementar la base de datos. Esto se logra transformando
+el esquema conceptual del modelo usado al modelo de datos de implementación. Este paso se llama
+**diseño lógico** o **transformación del modelo de datos**, y su resultado es un esquema de la base
+de datos en el modelo de datos que se usará para la implementación.
 
-Observar que se especifica el tipo (dominio) de cada fila y, que esto, el DBMS impone el tipo al momento de insertar datos. El campo `nota` puede tener valores nulos (NULL). Por omisión, todos los campos pueden tener valores NULL, salvo que se especifique la restricción `NOT NULL`. Se puede borrar una tabla completa usando `DROP TABLE Alumnos`.
+El paso final es la fase de **diseño físico**, durante la cual se especifican las estructuras de
+almacenamiento internas, los caminos de acceso y la organización de ficheros de la base de datos. En
+paralelo con estas actividades, se diseñan e implementan programas de aplicación en forma de
+transacciones de la base de datos.
 
-Se puede modificar la estructura de una tabla usando `ALTER TABLE`. Por ejemplo, para agregar la columna salario a la tabla Alumnos:
+---
 
-```sql
-ALTER TABLE Alumnos ADD COLUMN salario INTEGER;
-```
+## Diseño de base de datos y diagramas ER
 
-Las tuplas se insertan en la tabla con `INSERT`:
+El proceso de diseño de base de datos puede dividirse en seis etapas, de las cuales el Modelo ER es
+muy relevante para los tres primeros pasos:
 
-```sql
-INSERT INTO Alumnos (nombre, edad, nota)
-VALUES ('Sanchez', 18, 3.8);
-```
+1. **Análisis de Requisitos.** Comprender los datos que se deben guardar en la base de datos, las
+   aplicaciones que se deben construir sobre ellos y las operaciones que son más frecuentes e
+   imponen requisitos de rendimiento.
 
-Se pueden eliminar tuplas que satisfagan una condición con `DELETE`:
+2. **Diseño conceptual de base de datos.** La información reunida en el análisis de requerimientos
+   se emplea para desarrollar una descripción de alto nivel de los datos que se van a guardar en la
+   base de datos, junto con las restricciones que se sabe que se impondrán sobre esos datos. Este
+   paso se suele llevar a cabo empleando el modelo ER.
 
-```sql
-DELETE FROM Alumnos
-WHERE nombre = 'Sanchez';
+3. **Diseño lógico de la base de datos.** Hay que escoger un SGBD que implemente nuestro diseño de
+   la base de datos y transformar el diseño conceptual en un esquema del modelo de datos del SGBD
+   elegido. Para nosotros, la transformación será de ER a Relacional.
+
+4. **Refinamiento de los esquemas:** análisis del conjunto de relaciones del esquema relacional para
+   identificar posibles problemas y refinarlo. Este paso puede guiarse por la teoría de la
+   normalización de relaciones.
+
+5. **Diseño físico de la base de datos:** se toman en consideración las cargas de trabajo típicas
+   esperadas que deberá soportar la base de datos y se refinará aún más el diseño para garantizar
+   que cumpla con los criterios de rendimiento deseados.
+
+6. **Diseño de aplicaciones y de la seguridad:** identificar las entidades y los procesos
+   relacionados con la aplicación, describir el papel de cada entidad en cada proceso, e identificar
+   las partes de la base de datos que debe tener accesibles cada entidad.
+
+---
+
+## Entidades, atributos y conjuntos de entidades
+
+Una **entidad** es un objeto del mundo real que puede distinguirse de otros objetos. Puede ser un
+objeto con existencia física (una persona, un automóvil, un empleado) o un objeto con existencia
+conceptual (una empresa, un puesto de trabajo, un curso universitario).
+
+Cada entidad tiene propiedades específicas llamadas **atributos** que la describen. En el modelo ER
+se manejan distintos tipos de atributos:
+
+- **Atributos compuestos o simples:** los compuestos se pueden dividir en componentes más pequeños
+  (ej.: Dirección → Calle, Número, Piso); los simples no son divisibles.
+- **Atributos monovaluados o multivaluados:** los monovaluados tienen un único valor por entidad
+  (ej.: Edad); los multivaluados pueden tener un conjunto de valores (ej.: Título de la entidad
+  Persona).
+- **Atributos almacenados o derivados:** el atributo Fecha de Nacimiento es almacenado, pero Edad es
+  derivado (se calcula según la fecha actual cada vez que se consulta la entidad).
+
+Resulta útil identificar conjuntos de entidades similares (**conjunto de entidades**). Estas
+entidades comparten los mismos atributos. Cada atributo está asociado a un **dominio** de valores
+posibles.
+
+Además, para cada conjunto de entidades se escoge una **clave**: un conjunto mínimo de atributos
+cuyos valores identifican de manera unívoca a cada entidad del conjunto. Puede haber más de una
+clave candidata; en ese caso, se escoge una como **clave principal**.
+
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
 ```
 
 ---
 
-## Restricciones de integridad sobre las relaciones
+## Las relaciones y los conjuntos de relaciones
 
-Una **restricción de integridad (RI)** es una condición especificada en un esquema de base de datos que restringe los datos que se pueden almacenar en una instancia de la base de datos. Si una BD está en un estado que satisface todas las RI especificadas en el esquema de la BD, se trata de un **estado legal** de la BD. El SGBD hace cumplir las restricciones de integridad.
+Una **relación** es una asociación entre dos o más entidades. Se puede considerar a los conjuntos de
+relaciones como conjuntos de n-tuplas:
 
-### Restricciones de clave
+> { (e₁, …, eₙ) | e₁ ∈ E₁, …, eₙ ∈ Eₙ }
 
-Una **clave candidata** para una relación es un conjunto de campos que identifica unívocamente a una tupla. Ningún subconjunto propio de dicha clave candidata identifica también de manera unívoca a una tupla. Puede haber más de una clave candidata. Una de ellas se designa como **clave principal** (*primary key*).
+Cada n-tupla denota una relación que implica a n entidades, donde la entidad eᵢ se halla en el
+conjunto de entidades Eᵢ.
 
-**Especificación en SQL:**
-
-```sql
-CREATE TABLE Matriculados (
-    nombre  CHAR(30),
-    cid     CHAR(20),
-    nota    CHAR(10),
-    PRIMARY KEY (nombre, cid)
-);
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    DEPARTAMENTO {
+        string idd PK
+        string nomb
+        string presup
+    }
+    EMPLEADO }o--o{ DEPARTAMENTO : "Trabaja_en (desde)"
 ```
 
-Si la clave principal es un solo campo, puede declararse en línea:
+Las **relaciones también pueden tener atributos descriptivos**, empleados para registrar información
+sobre la relación (no sobre las entidades participantes). Por ejemplo, el atributo `desde` en
+Trabaja_en registra la fecha en que el empleado comenzó a trabajar en ese departamento.
 
-```sql
-CREATE TABLE Alumnos (
-    nombre  CHAR(30) PRIMARY KEY,
-    edad    INTEGER,
-    nota    REAL
-);
+Cada relación debe identificarse de manera unívoca por sus entidades participantes, sin necesidad de
+referencia alguna a los atributos descriptivos.
+
+El siguiente diagrama muestra un **ejemplar del conjunto de relaciones Trabaja_en**, donde la
+participación de ambos conjuntos es total:
+
+![Ejemplar del conjunto de relaciones Trabaja_en](../../../../resources/2018/u3-instancia-trabaja-en.png)
+
+Como ejemplo adicional, cuando cada departamento tiene oficinas en varias ubicaciones y se desea
+registrar las ubicaciones en las que trabaja cada empleado, la relación es **ternaria**:
+
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    DEPARTAMENTO {
+        string idd PK
+        string nomb
+        string presup
+    }
+    UBICACIONES {
+        string direccion PK
+        string capacidad
+    }
+    EMPLEADO }o--o{ DEPARTAMENTO : "Trabaja_en2 (desde)"
+    EMPLEADO }o--o{ UBICACIONES : "Trabaja_en2"
+    DEPARTAMENTO }o--o{ UBICACIONES : "Trabaja_en2"
 ```
 
-### Restricciones de clave foránea (externa)
+Cuando un conjunto de entidades desempeña más de un papel en una relación (ej.: Informa_a entre
+empleados), se usan **indicadores de roles**:
 
-Una **clave foránea** (o externa) es un conjunto de campos de una relación que se utiliza para hacer referencia a una tupla en otra relación. Debe referirse a la clave principal de la otra relación.
-
-Si todas las referencias a claves externas tienen sus correspondientes tuplas en la tabla referenciada, se dice que la BD es **referencialmente íntegra**.
-
-Por ejemplo, considerando que Alumnos(nombre) es la clave principal de la tabla Alumnos, y Matriculados tiene un campo `nombre` que referencia a Alumnos:
-
-```sql
-CREATE TABLE Matriculados (
-    nombre  CHAR(30),
-    cid     CHAR(20),
-    nota    CHAR(10),
-    PRIMARY KEY (nombre, cid),
-    FOREIGN KEY (nombre) REFERENCES Alumnos
-);
-```
-
-![Instancia de Matriculados con clave foránea](../../../../resources/2018/u3-instancia-matriculados.png)
-
-Si se intenta insertar una tupla en Matriculados cuyo `nombre` no exista en Alumnos, el SGBD rechaza la inserción. Del mismo modo, si se intenta borrar una tupla de Alumnos cuyo `nombre` aparece en Matriculados, el SGBD tiene varias opciones según la política de borrado:
-
-- **NO ACTION / RESTRICT** (por defecto): rechaza el borrado.
-- **CASCADE**: borra también las tuplas que hacen referencia.
-- **SET NULL**: pone a NULL el campo de referencia en las tuplas afectadas.
-
-**Especificación en SQL:**
-
-```sql
-CREATE TABLE Matriculados (
-    nombre  CHAR(30),
-    cid     CHAR(20),
-    nota    CHAR(10),
-    PRIMARY KEY (nombre, cid),
-    FOREIGN KEY (nombre) REFERENCES Alumnos
-        ON DELETE CASCADE
-        ON UPDATE NO ACTION
-);
-```
-
-### Restricciones generales
-
-Las restricciones generales se especifican con `CHECK`:
-
-```sql
-CREATE TABLE Alumnos (
-    nombre  CHAR(30),
-    edad    INTEGER,
-    nota    REAL,
-    CHECK (edad >= 16 AND edad <= 99)
-);
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    EMPLEADO ||--o{ EMPLEADO : "Informa_a (supervisor / subordinado)"
 ```
 
 ---
 
-## Cumplimiento de las restricciones de integridad
+## Otras características del modelo ER
 
-El SGBD hace cumplir las RI en el momento de actualización de la BD (INSERT, DELETE, UPDATE). Si alguna actualización viola una RI, el SGBD puede rechazar el comando o ejecutar pasos adicionales compensatorios para garantizar el cumplimiento de las RI.
+### Restricciones de clave en relaciones
 
-Las restricciones de clave se verifican siempre que se inserta o modifica una tupla. Las restricciones de clave foránea se verifican en inserciones, borrados y actualizaciones de tuplas en cualquiera de las tablas participantes.
+Considerando el conjunto de relaciones **Dirige** entre Empleados y Departamentos, con la
+restricción de que cada departamento tiene como máximo un encargado (aunque un empleado puede
+dirigir más de un departamento): esta es una **restricción de clave**, indicada en el diagrama ER
+mediante una flecha de Departamento a Dirige.
 
-### Transacciones y restricciones
-
-En ocasiones puede desearse insertar dos tuplas que hacen referencia mutua (ej.: dos empleados donde cada uno es supervisor del otro). En este caso la RI se viola temporalmente al insertar la primera. SQL permite diferir las verificaciones de RI hasta el final de una transacción:
-
-```sql
-SET CONSTRAINTS nombre_restriccion DEFERRED;
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    DEPARTAMENTO {
+        string idd PK
+        string nomb
+        string presup
+    }
+    EMPLEADO |o--o{ DEPARTAMENTO : "Dirige 1..N (desde)"
 ```
+
+Se dice que este conjunto de relaciones es **de una a varias (1…N)**. El conjunto Trabaja_en, en el
+que cada empleado puede trabajar en varios departamentos y cada departamento puede tener varios
+empleados, es **de varias a varias (N…N)**. Si se añade la restricción de que cada empleado puede
+dirigir como máximo un departamento, se tendría una relación **de una a una (1…1)**.
+
+### Restricciones de clave en relaciones ternarias
+
+Si el conjunto de entidades E tiene una restricción de clave en el conjunto de relaciones R, cada
+entidad de un ejemplar concreto de E aparecerá, como máximo, en una relación de R. Por ejemplo, si
+cada empleado trabaja como máximo en un departamento y en una única ubicación:
+
+![Ejemplar de Trabaja_en3 con restricción de clave](../../../../resources/2018/u3-instancia-trabaja-en3.png)
+
+### Restricciones de participación
+
+La **restricción de participación** determina si todos los elementos de un conjunto de entidades
+participan en una relación:
+
+- **Participación total:** todas las entidades del conjunto participan en al menos una relación (se
+  indica con línea gruesa).
+- **Participación parcial:** algunas entidades pueden no participar.
+
+Por ejemplo, la participación de Departamentos en Dirige es **total** (todo departamento tiene un
+encargado), mientras que la participación de Empleados en Dirige es **parcial** (no todos los
+empleados dirigen un departamento).
+
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    DEPARTAMENTO {
+        string idd PK
+        string nomb
+        string presup
+    }
+    EMPLEADO |o--|| DEPARTAMENTO : "Dirige (desde)"
+    EMPLEADO }|--|{ DEPARTAMENTO : "Trabaja_en (desde)"
+```
+
+### Entidades débiles
+
+Un **conjunto de entidades débiles** es aquel cuyos atributos no permiten identificar de manera
+unívoca a sus entidades sin tomar en consideración la clave principal de otra entidad (**propietaria
+identificadora**).
+
+Restricciones que deben cumplirse:
+
+- El conjunto propietario y el débil deben participar en una relación **de uno a varias** (cada
+  propietaria se asocia con una o varias entidades débiles, pero cada entidad débil solo tiene una
+  propietaria). Este conjunto se denomina **conjunto de relaciones identificadoras**.
+- El conjunto de entidades débiles debe tener **participación total** en el conjunto de relaciones
+  identificadoras.
+
+El conjunto de atributos de un conjunto de entidades débiles que identifica de manera unívoca a una
+entidad débil para una entidad propietaria dada se denomina **clave parcial** (subrayada con línea
+punteada en el diagrama).
+
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    POLIZA {
+        string costo
+    }
+    BENEFICIARIOS {
+        string nombrep
+        string edad
+    }
+    EMPLEADO ||--o{ POLIZA : "tiene"
+    POLIZA ||--|{ BENEFICIARIOS : "cubre (identificadora)"
+```
+
+### Jerarquías de clases
+
+A veces resulta natural clasificar las entidades en un conjunto de entidades en **subclases**. Por
+ejemplo, `Empleados_temp` y `Empleados_fijos` son subclases de `Empleados`. Todos los atributos de
+`Empleados` se **heredan** por los conjuntos de entidades derivados.
+
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    EMPLEADO_TEMP {
+        float sueldo_hora
+        int horas_trab
+    }
+    EMPLEADO_FIJO {
+        string idcontrato
+    }
+    EMPLEADO ||--o| EMPLEADO_TEMP : "ES"
+    EMPLEADO ||--o| EMPLEADO_FIJO : "ES"
+```
+
+Las jerarquías de clases se pueden considerar desde dos puntos de vista:
+
+- **Especialización:** `Empleados` está especializado en subclases. La superclase se define primero,
+  luego las subclases con sus atributos específicos.
+- **Generalización:** `Empleados_temp` y `Empleados_fijos` se generalizan en `Empleados`. Las
+  subclases se definen primero, luego la superclase.
+
+Se pueden especificar dos tipos de restricciones:
+
+- **Restricciones de solapamiento:** determinan si se permite que dos clases contengan la misma
+  entidad (ej.: un empleado puede ser tanto `Empleados_fijos` como `Empleados_veteranos` → se denota
+  "SOLAPA A").
+- **Restricciones de cobertura:** determinan si las entidades de las subclases incluyen de manera
+  colectiva a todas las entidades de la superclase (ej.: "Motos Y Coches CUBREN
+  Vehículos_motorizados").
+
+### Agregación
+
+La **agregación** permite indicar que un conjunto de relaciones (identificado mediante un cuadro
+discontinuo) participa en otro conjunto de relaciones. Se usa cuando hace falta expresar una
+relación entre relaciones.
+
+Por ejemplo, si cada proyecto es financiado por uno o varios departamentos (relación Financia), y el
+departamento que financia un proyecto puede asignar empleados para que lo controlen (relación
+Controla), Controla debería asociar relaciones de Financia con entidades de Empleados. Esto se
+modela mediante agregación:
+
+![Diagrama de Agregación](../../../../resources/2018/u3-agregacion.png)
+
+¿Cuándo emplear la agregación en lugar de una relación ternaria? Cuando existen **dos relaciones
+diferentes** con sus propios atributos (en el ejemplo, `hasta` de Controla vs. `desde` de Financia),
+o cuando se quieren expresar restricciones de integridad que no pueden expresarse con una relación
+ternaria.
 
 ---
 
-## Consultas de datos relacionales
+## Diseño conceptual del modelo ER
 
-SQL es el lenguaje de consulta más popular para los SGBD relacionales. Siempre existe un símbolo `*` que denota todos los campos del conjunto de datos. La condición `A = 'Miguel'` es un predicado básico. El símbolo `%` en la condición `LIKE` denota cualquier cadena:
+El desarrollo de diagramas ER supone escoger entre varias opciones:
 
-```sql
-SELECT *
-FROM   Alumnos A
-WHERE  A.edad = 18;
+- ¿Un concepto dado se debe modelar como entidad o como atributo?
+- ¿Un determinado concepto se debe modelar como entidad o como relación?
+- ¿Se deben emplear relaciones binarias o ternarias?
+- ¿Se debe emplear la agregación?
+
+### Entidades y atributos
+
+Cuando se identifican los atributos de un conjunto de entidades no resulta a veces evidente si una
+determinada propiedad se debe modelar como atributo o como conjunto de entidades. Por ejemplo, para
+añadir información sobre el domicilio al conjunto Empleados:
+
+- **Como atributo:** resulta adecuado si solo hace falta registrar un domicilio por empleado y basta
+  con pensar en el domicilio como una cadena de caracteres.
+- **Como entidad Domicilios** (con relación Tiene_domicilio): necesario cuando hay que registrar más
+  de una dirección por empleado, o cuando se desea capturar la estructura del domicilio (ciudad,
+  provincia, país, código postal) para soportar consultas como "Buscar todos los empleados con
+  domicilio en Madrid".
+
+Otro caso: si cada empleado puede trabajar en un departamento dado en **más de un período**, no se
+puede usar un atributo `desde`/`hasta` en la relación (cada relación se identifica únicamente por
+sus entidades participantes). La solución es introducir un conjunto de entidades `Duración` con
+atributos `desde` y `hasta`:
+
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    DEPARTAMENTO {
+        string idd PK
+        string nomb
+        string presup
+    }
+    DURACION {
+        date desde
+        date hasta
+    }
+    EMPLEADO }o--o{ DEPARTAMENTO : "Trabaja_en4"
+    EMPLEADO }o--o{ DURACION : ""
+    DEPARTAMENTO }o--o{ DURACION : ""
 ```
 
-```sql
-SELECT A.nombre, e.salario
-FROM   Alumnos A, INNER_JOIN Empleados e
-WHERE  A.nombre = 'Miguel' AND A.nombre LIKE '%iguel';
+### Entidades y relaciones
+
+Si el presupuesto discrecional es una suma que abarca a todos los departamentos dirigidos por un
+empleado, asociarlo como atributo de la relación Dirige llevaría a **almacenamiento redundante**. La
+solución es introducir un nuevo conjunto de entidades `Encargados` (como subclase de Empleados):
+
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    ENCARGADO {
+        string idencarg PK
+        float presupuestod
+    }
+    DEPARTAMENTO {
+        string idd PK
+        string nomb
+        string presup
+    }
+    EMPLEADO ||--o| ENCARGADO : "ES"
+    ENCARGADO |o--o{ DEPARTAMENTO : "Dirige3 (desde)"
 ```
+
+### Relaciones binarias y ternarias
+
+Hay situaciones en que intentar emplear una sola relación ternaria resulta inadecuado y es mejor
+usar dos relaciones binarias. Por ejemplo, si se tienen los requisitos de que dos empleados no
+pueden poseer conjuntamente una póliza, y cada póliza debe ser propiedad de algún empleado:
+
+```mermaid
+erDiagram
+    EMPLEADO {
+        string dni PK
+        string nombre
+        string plaza
+    }
+    POLIZAS {
+        string idpoliza PK
+        float costo
+    }
+    BENEFICIARIO {
+        string nombrep
+        string edad
+    }
+    EMPLEADO ||--|{ POLIZAS : "Dependen"
+    POLIZAS ||--|{ BENEFICIARIO : "Cubre"
+```
+
+Hay situaciones, no obstante, en las que una relación asocia de manera inherente a más de dos
+entidades. Como ejemplo típico de relación ternaria: los conjuntos Repuestos, Proveedores y
+Departamentos, y el conjunto de relaciones Contratos (con el atributo `cant`). Un contrato
+especifica que un determinado proveedor suministrará una cierta cantidad de un repuesto concreto a
+un cierto departamento. Esta relación no puede capturarse de manera adecuada mediante relaciones
+binarias, por dos razones:
+
+- El hecho de que el proveedor P pueda suministrar el repuesto R, que D necesite R, y que D compre a
+  P, no implica necesariamente que D compre realmente R a P.
+- No se puede representar adecuadamente el atributo `cant` de los contratos.
+
+```mermaid
+erDiagram
+    REPUESTOS {
+        string idrep PK
+        string nombre
+        string otrodato
+    }
+    PROVEEDORES {
+        string idprov PK
+        string otrosdatos
+    }
+    DEPARTAMENTO {
+        string idd PK
+        string otrosdatos
+    }
+    REPUESTOS }o--o{ PROVEEDORES : "Contratos (cant)"
+    REPUESTOS }o--o{ DEPARTAMENTO : "Contratos"
+    PROVEEDORES }o--o{ DEPARTAMENTO : "Contratos"
+```
+
+### Agregación y relaciones ternarias
+
+La decisión de emplear la agregación o una relación ternaria viene determinada principalmente por la
+existencia de una relación que vincule un conjunto de relaciones con un conjunto de entidades, o por
+determinadas restricciones de integridad que se deseen expresar. Por ejemplo, si se quiere expresar
+la restricción de que cada financiamiento (de un proyecto por un departamento) esté controlado como
+máximo por un empleado, esa restricción **no puede expresarse** con una relación ternaria Financia2,
+pero **sí puede expresarse** fácilmente con la agregación, trazando una flecha desde la relación
+agregada Financia a la relación Controla.
 
 ---
 
-## Diseño lógico: del Modelo ER al Modelo Relacional
+## Resumen de símbolos
 
-### De los conjuntos de entidades a las tablas
-
-Cada conjunto de entidades se convierte en una relación (tabla). Los atributos del conjunto de entidades se convierten en columnas de la tabla. La clave principal del conjunto de entidades se convierte en la clave principal de la tabla.
-
-Ejemplo para el conjunto de entidades Empleados:
-
-```sql
-CREATE TABLE Empleados (
-    dni     CHAR(11),
-    nombre  CHAR(30),
-    plaza   CHAR(20),
-    PRIMARY KEY (dni)
-);
-```
-
-![Diagrama ER de referencia: Empleados y Trabaja_en](../../../../resources/2018/u3-er-trabaja-en.png)
-
-### De los conjuntos de relaciones a las tablas
-
-Cada conjunto de relaciones se mapea a una tabla. Los campos de esta tabla incluyen:
-
-- Las claves principales de todos los conjuntos de entidades participantes (como claves foráneas).
-- Los atributos descriptivos del conjunto de relaciones.
-
-La clave principal de la tabla de relaciones es la combinación de las claves principales de todas las entidades participantes (salvo que haya restricciones de clave).
-
-```sql
-CREATE TABLE Trabaja_en (
-    dni         CHAR(11),
-    idd         CHAR(20),
-    desde       DATE,
-    PRIMARY KEY (dni, idd),
-    FOREIGN KEY (dni)  REFERENCES Empleados,
-    FOREIGN KEY (idd)  REFERENCES Departamentos
-);
-```
-
-### Traducción con restricción de clave
-
-Cuando existe una restricción de clave (relación 1:N), la clave principal de la tabla de relaciones puede reducirse. En el conjunto de relaciones Dirige (donde cada departamento tiene como máximo un encargado), la clave principal de Dirige puede ser solo `idd`:
-
-```sql
-CREATE TABLE Dirige (
-    dni     CHAR(11),
-    idd     CHAR(20),
-    desde   DATE,
-    PRIMARY KEY (idd),
-    FOREIGN KEY (dni)  REFERENCES Empleados,
-    FOREIGN KEY (idd)  REFERENCES Departamentos
-);
-```
-
-![Diagramas ER: Informa_a y Dirige](../../../../resources/2018/u3-er-informa-a-dirige.png)
-
-Una alternativa más eficiente es incorporar la información de la relación en la tabla del conjunto de entidades que tiene la flecha (el "lado uno"):
-
-```sql
-CREATE TABLE Departamentos (
-    idd         CHAR(20),
-    nombred     CHAR(30),
-    presup      REAL,
-    dni_jefe    CHAR(11),
-    desde       DATE,
-    PRIMARY KEY (idd),
-    FOREIGN KEY (dni_jefe) REFERENCES Empleados
-);
-```
-
-### Traducción con restricción de participación
-
-Si la participación es **total** (todas las entidades deben participar en la relación), se puede agregar la restricción `NOT NULL` al campo de clave foránea incorporado. Por ejemplo, si todo departamento debe tener un jefe:
-
-```sql
-CREATE TABLE Departamentos (
-    idd         CHAR(20),
-    nombred     CHAR(30),
-    presup      REAL,
-    dni_jefe    CHAR(11) NOT NULL,
-    desde       DATE,
-    PRIMARY KEY (idd),
-    FOREIGN KEY (dni_jefe) REFERENCES Empleados
-        ON DELETE NO ACTION
-);
-```
-
-### Traducción de entidades débiles
-
-Un conjunto de entidades débiles se convierte en una tabla que incluye:
-
-- Sus propios atributos (incluyendo la clave parcial).
-- La clave principal de la entidad propietaria (como clave foránea).
-- La clave principal resultante es la combinación de ambas.
-- La restricción de la relación identificadora se mapea con `ON DELETE CASCADE`.
-
-![Diagrama ER: Póliza y Beneficiarios (entidad débil)](../../../../resources/2018/u3-er-poliza-beneficiarios.png)
-
-```sql
-CREATE TABLE Polizas (
-    idpoliza    INTEGER,
-    costo       REAL,
-    dni         CHAR(11) NOT NULL,
-    PRIMARY KEY (idpoliza),
-    FOREIGN KEY (dni) REFERENCES Empleados
-        ON DELETE CASCADE
-);
-
-CREATE TABLE Beneficiarios (
-    nombrep     CHAR(30),
-    edad        INTEGER,
-    idpoliza    INTEGER NOT NULL,
-    PRIMARY KEY (nombrep, idpoliza),
-    FOREIGN KEY (idpoliza) REFERENCES Polizas
-        ON DELETE CASCADE
-);
-```
-
-### Traducción de jerarquías de clase
-
-![Diagrama ER: Jerarquía ES](../../../../resources/2018/u3-er-jerarquia-es.png)
-
-Hay dos enfoques principales para traducir jerarquías ES al modelo relacional:
-
-1. **Una tabla por jerarquía:** una única tabla con todos los atributos de todas las subclases, más un campo `tipo` que indica la subclase. Las columnas no aplicables tendrán valor NULL.
-
-```sql
-CREATE TABLE Empleados_jerarquia (
-    dni             CHAR(11),
-    nombre          CHAR(30),
-    plaza           CHAR(20),
-    tipo            CHAR(20),
-    sueldo_hora     REAL,
-    horas_trab      INTEGER,
-    idcontrato      CHAR(20),
-    PRIMARY KEY (dni)
-);
-```
-
-1. **Una tabla por subclase:** una tabla para la superclase y tablas separadas para cada subclase, con la clave principal de la superclase como clave foránea.
-
-```sql
-CREATE TABLE Empleados (
-    dni     CHAR(11),
-    nombre  CHAR(30),
-    plaza   CHAR(20),
-    PRIMARY KEY (dni)
-);
-
-CREATE TABLE Empleados_temp (
-    dni         CHAR(11),
-    sueldo_hora REAL,
-    horas_trab  INTEGER,
-    PRIMARY KEY (dni),
-    FOREIGN KEY (dni) REFERENCES Empleados
-);
-
-CREATE TABLE Empleados_fijos (
-    dni         CHAR(11),
-    idcontrato  CHAR(20),
-    PRIMARY KEY (dni),
-    FOREIGN KEY (dni) REFERENCES Empleados
-);
-```
-
-### Traducción de diagramas ER con agregación
-
-![Diagrama ER: Agregación Controla/Financia](../../../../resources/2018/u3-er-agregacion-controla.png)
-
-Los conjuntos de entidades Empleados, Proyectos y Departamentos y el conjunto de relaciones Financia se asignan como ya se describió antes. Para el conjunto de relaciones Controla se crea una relación con los atributos: clave de Empleados (*dni*), los de Financia (*idd*, *idp*) y los atributos descriptivos de Controla (*hasta*):
-
-```sql
-CREATE TABLE Controla (
-    dni     CHAR(11),
-    idp     CHAR(20),
-    idd     CHAR(20),
-    hasta   DATE,
-    PRIMARY KEY (idp, idd),
-    FOREIGN KEY (dni)       REFERENCES Empleados,
-    FOREIGN KEY (idp, idd)  REFERENCES Financia
-);
-```
-
-### Del modelo ER al relacional: más ejemplos
-
-![Diagrama ER: Suscriptor y Pólizas](../../../../resources/2018/u3-er-suscriptor-polizas.png)
-
-Considerando el diagrama, se pueden capturar las restricciones de clave y participación mediante las siguientes definiciones SQL. La clave principal de Pólizas refleja que cada póliza pertenece a un único empleado. La restricción `ON DELETE CASCADE` en Beneficiarios garantiza que al eliminar una póliza se eliminan también sus beneficiarios.
-
-```sql
-CREATE TABLE Polizas (
-    idpoliza    INTEGER,
-    costo       REAL,
-    dni         CHAR(11) NOT NULL,
-    PRIMARY KEY (idpoliza),
-    FOREIGN KEY (dni) REFERENCES Empleados
-        ON DELETE CASCADE
-);
-
-CREATE TABLE Beneficiarios (
-    nombrep     CHAR(30),
-    edad        INTEGER,
-    idpoliza    INTEGER NOT NULL,
-    PRIMARY KEY (nombrep, idpoliza),
-    FOREIGN KEY (idpoliza) REFERENCES Polizas
-        ON DELETE CASCADE
-);
-```
-
----
-
-## SGBD Relacionales Comerciales
-
-| SGBD | Descripción |
-| ---- | ----------- |
-| **Oracle** | Sistema de gestión de base de datos relacional, escalable y multiusuario con más de 40 años en el mercado. Muy usado en grandes empresas. Su mayor desventaja es su nivel de licenciamiento. |
-| **Microsoft SQL Server** | Múltiples ediciones (incluyendo Express gratuita). Soporta procedimientos almacenados, vistas y potente interfaz gráfico de administración. Disponible en Sistemas Operativos Microsoft. |
-| **IBM DB2** | Sistema de gestión de base de datos de IBM. Disponible en múltiples plataformas. Conocido por su robustez en entornos empresariales de gran escala. |
-
----
-
-## SGBD Relacionales Open Source
-
-| SGBD | Tipo | Descripción |
-| ---- | ---- | ----------- |
-| **MongoDB** | Documental | Base de datos Open Source de alto rendimiento, esquema-libre que usa documentos (pares JSON). Drivers preparados para lenguajes como Python, Ruby, JavaScript, C++. |
-| **Hypertable** | Columnar | Sistema de almacenamiento distribuido de alto rendimiento diseñado para su uso en un clúster. Basado en el paper de Google BigTable. |
-| **Apache CouchDB** | Documental | Base de datos orientada a documentos y multiplataforma. Destaca por su accesibilidad vía HTTP RESTful API. |
-| **Neo4j** | Grafos | Motor de persistencia completamente compliant con ACID. Los datos se almacenan y consultan como grafos. Usa el lenguaje de consulta Cypher. |
-| **Riak** | Clave-valor | Base de datos ideal para aplicaciones web que combina un valor clave descentralizado con un modelo de replicación basado en Dynamo de Amazon. |
-| **Oracle Berkeley DB** | Embebida | Base de datos embebida que proporciona a los desarrolladores una forma simple y rápida de gestionar datos. Soporta propiedades ACID. |
-| **Apache Cassandra** | Columnar | Base de datos distribuida altamente escalable. Usada por gigantes como Facebook, Twitter, Cisco y más. |
-| **Memcached** | Clave-valor (memoria) | Almacén de tipo key-value para pequeñas cadenas de datos resultantes de llamadas a BD, API, etc. Muy usado para reducir la carga de la base de datos. |
-| **Firebird** | Relacional | No confundir con Firefox. Base de datos relacional que puede ser utilizada en Linux, Windows y varias plataformas Unix. Soporta procedimientos almacenados, triggers y UDFs. |
-| **Redis** | Clave-valor | Base de datos avanzada de tipo key-value escrita en C y que soporta strings, hashes, listas, sets y sets ordenados. |
-| **HyperSQL (HSQLDB)** | Relacional (Java) | Motor de base de datos relacional escrito en Java. Ofrece un pequeño, rápido motor de base de datos multithreaded e interfaz gráfica para las consultas. |
-| **MonetDB** | Columnar | Sistema de base de datos de código abierto para aplicaciones de alto rendimiento en OLAP, GIS, datamining y más. |
-| **Persevere** | Documental | Motor de almacenamiento de objetos y de consultas que facilita el desarrollo rápido de aplicaciones orientadas a objetos en JavaScript. |
-| **eXist-db** | XML | Base de datos XML nativa construida sobre tecnología XML. Se caracteriza por su procesamiento eficiente y basado en índices de XQuery. |
-| **HBase** | Columnar | Distribución del proyecto Hadoop orientado a columnas, también denominado "miles de columnas". |
-| **MariaDB** | Relacional | Fork compatible con MySQL, rama de desarrollo del proyecto MySQL Database Server. Incluye soporte del motor de almacenamiento Aria MAP / OLTP. |
-| **Drizzle** | Relacional | Fork ligero de MySQL orientado a aplicaciones web y Cloud Computing. |
-| **Scalien** | Clave-valor | Se trata de un sistema de base de datos con replicación que funciona y se escala a "miles de millones de columnas". Ofrece una gateway RESTful que soporta XML y JSON. |
-| **4store** | RDF | Motor RDF eficiente, escalable y estático para almacenamiento y consultas. |
-
-**Otras alternativas:** Gladius, CloudStore, OpenQM, ScarletDME, SmallSQL, LucidDB, HyperGraphDB, InfoGrid, Apache Derby, hamsterdb, H2 Database, EyeDB, txtSQL, db4o, Tokyo Cabinet, Project Voldemort.
-
----
-
-## SQL
-
-SQL (Structured Query Language) fue diseñado para interactuar con SGBD relacionales. El subconjunto de SQL que se usa para la definición de tablas se denomina LDD. El subconjunto de SQL que se usa para realizar consultas y actualizaciones se denomina LMD. SQL es un lenguaje de 4ª generación (4GL).
-
-| Año | Nombre | Alias | Comentarios |
-| --- | ------ | ----- | ----------- |
-| 1986 | SQL-86 | SQL-87 | Primera publicación hecha por ANSI. Confirmada por ISO en 1987. |
-| 1989 | SQL-89 | | Revisión menor. |
-| 1992 | SQL-92 | SQL2 | Revisión mayor. |
-| 1999 | SQL:1999 | SQL3 | Se agregan expresiones regulares, consultas recursivas, triggers, tipos no escalares y características básicas orientadas a objetos. |
-| 2003 | SQL:2003 | | Introduce algunas características de XML, cambios en `WINDOW`, nuevos tipos de secuencia. |
-| 2006 | SQL:2006 | | ISO/IEC 9075-14:2006 define las maneras en que SQL puede usarse conjuntamente con XML. Define maneras de importar y guardar datos XML en una BD SQL, manipulándolos dentro de la BD y publicándolos en forma XML y en forma de tablas SQL. Permite a las aplicaciones integrar el uso de XQuery. |
-| 2008 | SQL:2008 | | Permite el uso de la cláusula `ORDER BY` fuera de las definiciones de cursores. Añade la instrucción `INSTEAD OF`, el tipo `TRUNCATE`. |
+![Resumen de símbolos del modelo ER](../../../../resources/2018/u3-resumen-simbolos.png)
 
 ---
 
 ## Bibliografía
 
-1. Ramakrishnan, R. y Gehrke, J. — *Sistema de Administración de Bases de Datos*, Mc Graw Hill, 3ª edición en español, 2007. *(La mayoría de los contenidos de este apunte son extraídos de este libro, con ejemplos y gráficos incluidos.)*
-2. Elmasri y Navathe — *Fundamentos de Sistemas de Bases de Datos*, Addison Wesley, 3ª edición, Madrid, 2002.
-3. Mendelzon y Ale — *Introducción a las bases de datos relacionales*, Prentice Hall, 1ª edición, Argentina, 2000.
-4. Piattini, M. M. — *Concepto y diseño de bases de datos*, Addison-Wesley.
-5. Korth, F. H. — *Fundamentos de base de datos*, McGraw Hill, 3ª edición, 1998.
-6. Date, C. J. — *Introducción a los sistemas de base de datos*, Prentice-Hall, 7ª edición, 2001.
-7. Elmasri y Navathe — *Sistemas de Bases de Datos – Conceptos fundamentales*, Addison Wesley, 2ª edición, Madrid, 1994.
+1. Ramakrishnan, R. y Gehrke, J. — _Sistema de Administración de Bases de Datos_, Mc Graw Hill, 3ª
+   edición en español, 2007.
+2. Elmasri y Navathe — _Fundamentos de Sistemas de Bases de Datos_, Addison Wesley, 3ª edición,
+   Madrid, 2002.
+3. Mendelzon y Ale — _Introducción a las bases de datos relacionales_, Prentice Hall, 1ª edición,
+   Argentina, 2000.
+4. Piattini, M. M. — _Concepto y diseño de bases de datos_, Addison-Wesley.
+5. Korth, F. H. — _Fundamentos de base de datos_, McGraw Hill, 3ª edición, 1998.
+6. Date, C. J. — _Introducción a los sistemas de base de datos_, Prentice-Hall, 7ª edición, 2001.
+7. Elmasri y Navathe — _Sistemas de Bases de Datos – Conceptos fundamentales_, Addison Wesley, 2ª
+   edición, Madrid, 1994.
