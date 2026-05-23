@@ -153,11 +153,11 @@ flowchart BT
     EE2["Esquema Externo 2"]
     EE3["Esquema Externo 3"]
 
-    D   --> EF
-    EF  --> EC
-    EC  --> EE1
-    EC  --> EE2
-    EC  --> EE3
+    D   <--> EF
+    EF  <--> EC
+    EC  <--> EE1
+    EC  <--> EE2
+    EC  <--> EE3
 ```
 
 ### Independencia de datos
