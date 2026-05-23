@@ -130,6 +130,8 @@ almacenamiento de bajo nivel. La mayoría de los SGBD se basan en el **Modelo Re
 El propósito principal de un SGBD es proporcionar a los usuarios una **visión abstracta de los
 datos**: el sistema esconde los detalles de cómo se mantienen y almacenan los datos.
 
+![Visión de los datos](../../../../resources/2018/u1-vision-datos.png)
+
 ### Nivel de Abstracción de SGBD
 
 Para que el sistema sea útil debe recuperar datos eficientemente. Esta preocupación condujo al
