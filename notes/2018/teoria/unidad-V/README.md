@@ -1,4 +1,4 @@
-# Unidad V: SQL
+# Unidad V: Álgebra y Cálculo Relacional
 
 > **Gestión de Datos** — Ingeniería en Sistemas de Información, UTN-FRRE
 >
@@ -12,692 +12,379 @@
 
 ## Índice
 
-- [Unidad V: SQL](#unidad-v-sql)
-  - [Índice](#índice)
-  - [Introducción](#introducción)
-  - [Consultas básicas](#consultas-básicas)
-    - [Sintaxis SELECT-FROM-WHERE](#sintaxis-select-from-where)
-    - [Expresiones y cadenas de caracteres](#expresiones-y-cadenas-de-caracteres)
-    - [Otros predicados](#otros-predicados)
-      - [BETWEEN](#between)
-      - [IN / NOT IN](#in--not-in)
-      - [IS NULL / IS NOT NULL](#is-null--is-not-null)
-      - [ALL / ANY / SOME](#all--any--some)
-      - [EXISTS / NOT EXISTS](#exists--not-exists)
-  - [Subconsultas o consultas anidadas](#subconsultas-o-consultas-anidadas)
-  - [UNION, INTERSECT y EXCEPT](#union-intersect-y-except)
-    - [UNION](#union)
-    - [INTERSECT](#intersect)
-    - [EXCEPT](#except)
-  - [Consultas anidadas correlacionadas](#consultas-anidadas-correlacionadas)
-  - [Operadores de agregación](#operadores-de-agregación)
-  - [ORDER BY, GROUP BY y HAVING](#order-by-group-by-y-having)
-    - [ORDER BY](#order-by)
-    - [GROUP BY](#group-by)
-    - [HAVING](#having)
-  - [Valores nulos](#valores-nulos)
-    - [Lógica de tres valores](#lógica-de-tres-valores)
-    - [NULL en operaciones de agregación](#null-en-operaciones-de-agregación)
-    - [Reuniones externas](#reuniones-externas)
-  - [JOINs o Reuniones](#joins-o-reuniones)
-    - [INNER JOIN](#inner-join)
-    - [LEFT JOIN / RIGHT JOIN](#left-join--right-join)
-  - [Bibliografía](#bibliografía)
+1. [Álgebra Relacional](#álgebra-relacional)
+   - [Operaciones unitarias](#operaciones-unitarias)
+   - [Operaciones de conjuntos](#operaciones-de-conjuntos)
+   - [Reunión, División y Renombramiento](#reunión-división-y-renombramiento)
+   - [Consultas de ejemplo](#consultas-de-ejemplo)
+2. [Cálculo Relacional](#cálculo-relacional)
+   - [Cálculo Relacional de Tuplas (CRT)](#cálculo-relacional-de-tuplas-crt)
+   - [Cálculo Relacional de Dominios (CRD)](#cálculo-relacional-de-dominios-crd)
+3. [Bibliografía](#bibliografía)
 
 ---
 
-## Introducción
+## Álgebra Relacional
 
-El **Lenguaje Estructurado de Consultas** (_Structured Query Language_, SQL) es el lenguaje
-comercial de bases de datos relacionales más utilizado. Sus orígenes están ligados al lenguaje
-SEQUEL, desarrollado por IBM en los años 70 como parte del proyecto System R.
+El **Álgebra Relacional (AR)** es uno de los dos lenguajes formales de consultas asociados con el modelo relacional. Es un lenguaje **procedimental**: consta de un conjunto de operaciones que manipulan relaciones enteras. El resultado de cada operación es una nueva relación.
 
-SQL es un lenguaje **no procedimental** a nivel de consultas, aunque el estándar incorpora también
-características procedimentales. Las principales características de SQL son:
+Las operaciones del AR se dividen en:
 
-- **Lenguaje de Definición de Datos (DDL)**: comandos para crear, modificar y eliminar esquemas de
-  relaciones.
-- **Lenguaje de Manipulación de Datos (DML)**: comandos para insertar, eliminar, modificar y
-  consultar tuplas.
-- **Restricciones de integridad**: especificación de restricciones que deben cumplir los datos.
-- **Definición de vistas**: creación de vistas sobre las relaciones base.
-- **Control de transacciones**: inicio y fin de transacciones.
-- **SQL incorporado y SQL dinámico**: llamadas a código SQL desde lenguajes anfitriones como C o
-  COBOL.
-- **Control de acceso**: especificación de privilegios de acceso a relaciones y vistas.
-
-SQL se basa en el **álgebra relacional y el cálculo relacional**. Los planes de ejecución de
-consultas SQL se presentan como variaciones de expresiones del álgebra relacional.
+- **Operaciones unitarias** (sobre una sola relación): Selección (σ), Proyección (π), Renombramiento (ρ)
+- **Operaciones de conjuntos** (sobre dos relaciones): Unión (∪), Diferencia (−), Intersección (∩), Producto Cartesiano (×)
+- **Operaciones adicionales**: Reunión (⋈), División (/)
 
 ---
 
-## Consultas básicas
+### Operaciones unitarias
 
-### Sintaxis SELECT-FROM-WHERE
+#### Selección (σ)
 
-La forma básica de una consulta SQL es:
+La operación de **selección** devuelve las tuplas de una relación que satisfacen una condición dada.
 
-```sql
-SELECT [DISTINCT] lista-de-selección
-FROM   lista-de-tablas
-WHERE  condición
+```text
+σ<condición>(R)
 ```
 
-- **`lista-de-tablas`**: lista de nombres de tabla. Cada nombre puede ir seguido de una variable de
-  rango (alias).
-- **`lista-de-selección`**: columnas o expresiones que se desea recuperar. Se pueden prefijar con la
-  variable de rango.
-- **`condición`**: combinación booleana (`AND`, `OR`, `NOT`) de comparaciones (`<`, `<=`, `=`, `<>`,
-  `>=`, `>`).
-- **`DISTINCT`**: opcional; elimina filas duplicadas del resultado. Sin él, el resultado es un
-  **multiconjunto**.
+La condición puede usar: `=`, `≠`, `<`, `>`, `≤`, `≥`, y conectores lógicos `∧` (AND), `∨` (OR), `¬` (NOT).
 
-**Estrategia de evaluación conceptual:**
+**Ejemplo:** Recuperar los marineros con `categoría > 8` del ejemplar M2:
 
-1. Calcular el producto cartesiano de las tablas en `FROM`.
-2. Eliminar filas que no cumplan la condición `WHERE`.
-3. Eliminar columnas que no aparezcan en `SELECT`.
-4. Si se especifica `DISTINCT`, eliminar filas repetidas.
-
-**Ejemplo — (C15)** Averiguar el nombre y la edad de todos los marineros:
-
-```sql
-SELECT DISTINCT M.nombrem, M.edad
-FROM   Marineros M
+```text
+σ_categoría > 8 (M2)
 ```
 
-**Ejemplo — (C11)** Averiguar todos los marineros con categoría superior a 7:
+![Selección sobre ejemplar M2](../../../../resources/2018/u5-seleccion-ejemplar-m2.png)
 
-```sql
-SELECT M.idm, M.nombrem, M.categoría, M.edad
-FROM   Marineros AS M
-WHERE  M.categoría > 7
+#### Proyección (π)
+
+La operación de **proyección** devuelve ciertas columnas de una relación, eliminando duplicados.
+
+```text
+π<lista de atributos>(R)
 ```
 
-> La cláusula `SELECT` realiza **proyecciones**; las **selecciones** del álgebra relacional se
-> expresan con `WHERE`. Este desajuste en la nomenclatura es un accidente histórico.
+**Ejemplo:** Obtener el nombre y categoría de los marineros con `categoría > 8`:
 
-**Ejemplo — (C1)** Averiguar el nombre de los marineros que han reservado el barco 103:
-
-```sql
-SELECT M.nombrem
-FROM   Marineros M, Reservas R
-WHERE  M.idm = R.idm AND R.idb = 103
+```text
+π_nombre,categoría (σ_categoría > 8 (M2))
 ```
 
-**Ejemplo — (C2)** Averiguar el nombre de los marineros que han reservado barcos rojos:
+![Proyección sobre marineros](../../../../resources/2018/u5-proyeccion-marineros.png)
 
-```sql
-SELECT M.nombrem
-FROM   Marineros M, Reservas R, Barcos B
-WHERE  M.idm = R.idm AND R.idb = B.idb AND B.color = 'rojo'
-```
+#### Renombramiento (ρ)
 
-**Ejemplo — (C4)** Averiguar el nombre de los marineros que han reservado, como mínimo, un barco:
+La operación de **renombramiento** permite cambiar el nombre de una relación o de sus atributos.
 
-```sql
-SELECT M.nombrem
-FROM   Marineros M, Reservas R
-WHERE  M.idm = R.idm
+```text
+ρ(NuevoNombre, R)
+ρ(NuevoNombre(1→nuevo_atrib1, 2→nuevo_atrib2), R)
 ```
 
 ---
 
-### Expresiones y cadenas de caracteres
+### Operaciones de conjuntos
 
-Cada elemento de la lista `SELECT` puede tener la forma `expresión AS nombre-columna`:
+Para aplicar Unión, Diferencia e Intersección, las relaciones deben ser **compatibles en unión**: mismo número de campos y dominios compatibles en cada posición.
 
-**Ejemplo — (C17)** Calcular el incremento de categoría de quienes navegaron en dos barcos distintos
-el mismo día:
+#### Unión (∪)
 
-```sql
-SELECT M.nombrem, M.categoría + 1 AS categoría
-FROM   Marineros M, Reservas R1, Reservas R2
-WHERE  M.idm = R1.idm AND M.idm = R2.idm
-  AND  R1.fecha = R2.fecha AND R1.idb <> R2.idb
+Devuelve todas las tuplas que aparecen en R **o** en S (sin duplicados).
+
+```text
+R ∪ S
 ```
 
-**Operador LIKE**: permite comparar cadenas con patrones usando `%` (cero o más caracteres) y `_`
-(un carácter exacto).
+#### Diferencia (−)
 
-**Ejemplo — (C18)** Averiguar la edad de los marineros cuyo nombre comienza con B, acaba con O y
-tiene al menos seis caracteres:
+Devuelve las tuplas que aparecen en R pero **no** en S.
 
-```sql
-SELECT M.edad
-FROM   Marineros M
-WHERE  M.nombrem LIKE 'B_%___O'
+```text
+R − S
+```
+
+#### Intersección (∩)
+
+Devuelve las tuplas que aparecen en R **y** en S.
+
+```text
+R ∩ S
+```
+
+**Nota:** `R ∩ S = R − (R − S)`
+
+![Unión M1 ∪ M2](../../../../resources/2018/u5-union-m1-m2.png)
+
+#### Producto Cartesiano (×)
+
+Devuelve todas las combinaciones posibles de tuplas de R y S.
+
+```text
+R × S
+```
+
+El esquema resultante tiene todos los campos de R seguidos de todos los de S. Si R tiene n tuplas y S tiene m tuplas, R × S tiene n×m tuplas. Generalmente se combina con selección y proyección.
+
+![Producto cartesiano](../../../../resources/2018/u5-producto-cartesiano.png)
+
+---
+
+### Reunión, División y Renombramiento
+
+#### Reunión condicional (⋈_c)
+
+La versión más general acepta una condición `c`:
+
+```text
+R ⋈_c S = σ_c (R × S)
+```
+
+Es más eficiente que el producto cartesiano cuando la condición filtra muchas tuplas.
+
+![Reunión condicional](../../../../resources/2018/u5-reunion-condicional.png)
+
+#### Equirreunión
+
+Reunión condicional donde la condición es una igualdad entre atributos. El resultado contiene columnas duplicadas para los atributos de reunión.
+
+#### Reunión natural (⋈)
+
+Reunión donde la condición iguala **todos** los campos con el mismo nombre. Elimina las columnas duplicadas del resultado.
+
+```text
+R ⋈ S
+```
+
+**Ejemplo:** Reunión natural entre PROFESORES y DEPARTAMENTOS usando DPTO = CODDPTO. Primero se renombra:
+
+```text
+ρ(DEPARTA(1→DPTO, 2→NOMDPTO), DEPARTAMENTOS)
+PROFESORES ⋈ DEPARTA
+```
+
+![Reunión natural PROFESORES-DEPARTAMENTOS](../../../../resources/2018/u5-reunion-natural-profesores.png)
+
+#### División (/)
+
+Dadas relaciones R(x, y) y S(y), `R / S` devuelve todas las x tales que para **toda** tupla y en S, existe una tupla (x, y) en R.
+
+```text
+R / S
+```
+
+Es útil para consultas del tipo "todos los…" o "para todos los…".
+
+![División — ejemplar](../../../../resources/2018/u5-division-ejemplar.png)
+
+**Expresión de la división con operadores básicos:**
+
+```text
+T1 ← π_x(R)
+T2 ← π_x((T1 × S) − R)
+R / S = T1 − T2
 ```
 
 ---
 
-### Otros predicados
+### Consultas de ejemplo
 
-#### BETWEEN
+Las consultas se formulan sobre las relaciones **Marineros(idm, nombrem, categoría, edad)**, **Barcos(idb, nombreb, color)** y **Reservas(idm, idb, día)**.
 
-```sql
-SELECT columnas
-FROM   tabla
-WHERE  columna BETWEEN límite1 AND límite2
+**(C1)** Averiguar los nombres e identificadores de todos los marineros con categoría superior a 7:
+
+```text
+π_idm,nombrem (σ_categoría>7 (Marineros))
 ```
 
-Ejemplo: marineros con edad entre 20 y 35:
+**(C2)** Averiguar los nombres de los marineros que han reservado el barco 103:
 
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  M.edad BETWEEN 20 AND 35
+```text
+π_nombrem (σ_idb=103 (Reservas ⋈ Marineros))
 ```
 
-#### IN / NOT IN
+**(C3)** Averiguar los colores de los barcos reservados por Lubito:
 
-```sql
-SELECT columnas
-FROM   tabla
-WHERE  columna [NOT] IN (valor1, valor2, …, valorN)
+```text
+π_color (σ_nombrem='Lubito' (Marineros ⋈ Reservas ⋈ Barcos))
 ```
 
-Ejemplo: marineros con edad 15, 20 o 35:
+**(C4)** Averiguar el nombre de los marineros que han reservado, como mínimo, un barco:
 
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  M.edad IN (15, 20, 35)
+```text
+π_nombrem (Marineros ⋈ Reservas)
 ```
 
-#### IS NULL / IS NOT NULL
+![Consultas C4-C5-C6](../../../../resources/2018/u5-consultas-c4-c5-c6.png)
 
-```sql
-SELECT columnas
-FROM   tabla
-WHERE  columna IS [NOT] NULL
+**(C5)** Averiguar los idm de los marineros que han reservado un barco rojo **o** uno verde:
+
+```text
+ρ(Rojotemp, π_idm (σ_color='rojo' (Barcos) ⋈ Reservas))
+ρ(Verdetemp, π_idm (σ_color='verde' (Barcos) ⋈ Reservas))
+Rojotemp ∪ Verdetemp
 ```
 
-Ejemplo: marineros sin hijos registrados:
+**(C6)** Averiguar los idm de los marineros que han reservado un barco rojo **y** uno verde:
 
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  M.hijos IS NULL
+```text
+ρ(Rojotemp, π_idm (σ_color='rojo' (Barcos) ⋈ Reservas))
+ρ(Verdetemp, π_idm (σ_color='verde' (Barcos) ⋈ Reservas))
+Rojotemp ∩ Verdetemp
 ```
 
-#### ALL / ANY / SOME
+**(C7)** Averiguar los nombres de los marineros que han reservado, como mínimo, un barco rojo:
 
-```sql
-SELECT columnas
-FROM   tabla
-WHERE  columna operador {ALL | ANY | SOME} subconsulta
+```text
+π_nombrem ((σ_color='rojo' (Barcos)) ⋈ Reservas ⋈ Marineros)
 ```
 
-Ejemplo — barcos reservados **solo** por marineros mayores de 18:
+**(C8)** Averiguar los nombres de los marineros que han reservado, como mínimo, un barco rojo o uno verde:
 
-```sql
-SELECT R.idb
-FROM   Reservas R
-WHERE  R.idm = ALL (SELECT M.idm
-                    FROM   Marineros M
-                    WHERE  M.edad >= 18)
+```text
+ρ(Temp, π_nombrem ((σ_color='rojo'∨color='verde' (Barcos)) ⋈ Reservas ⋈ Marineros))
+π_nombrem (Temp)
 ```
 
-Ejemplo — barcos reservados por **al menos un** marinero mayor de 18:
+![Consultas C7-C8-C9](../../../../resources/2018/u5-consultas-c7-c8-c9.png)
 
-```sql
-SELECT R.idb
-FROM   Reservas R
-WHERE  R.idm = ANY (SELECT M.idm
-                    FROM   Marineros M
-                    WHERE  M.edad >= 18)
+**(C9)** Averiguar los nombres de los marineros que han reservado, como mínimo, dos barcos distintos:
+
+```text
+ρ(Reservas1(1→idm1, 2→idb1, 3→día1), Reservas)
+ρ(Reservas2(1→idm2, 2→idb2, 3→día2), Reservas)
+π_nombrem (σ_idm1=idm2 ∧ idb1≠idb2 (Reservas1 × Reservas2) ⋈ Marineros)
 ```
 
-#### EXISTS / NOT EXISTS
+**(C10)** Averiguar el nombre de los marineros que han reservado **todos** los barcos llamados Intrépido:
 
-```sql
-SELECT columnas
-FROM   tabla
-WHERE  [NOT] EXISTS subconsulta
+```text
+ρ(Idmstemp, π_idm,idb (Reservas) / π_idb (σ_nombreb='Intrépido' (Barcos)))
+π_nombrem (Idmstemp ⋈ Marineros)
 ```
 
-Ejemplo: marineros que reservaron el barco 103:
+![Consulta C10](../../../../resources/2018/u5-consulta-c10.png)
 
-```sql
-SELECT M.idm, M.nombrem
-FROM   Marineros M
-WHERE  EXISTS (SELECT R.idm
-               FROM   Reservas R
-               WHERE  R.idb = 103)
+**(C11)** Averiguar el nombre de los marineros que han reservado **todos** los barcos:
+
+```text
+ρ(Idmstemp, π_idm,idb (Reservas) / π_idb (Barcos))
+π_nombrem (Idmstemp ⋈ Marineros)
+```
+
+**(C12)** Calcular el marinero de mayor categoría:
+
+```text
+ρ(M1, Marineros)
+ρ(M2, Marineros)
+π_nombrem (Marineros) − π_M1.nombrem (σ_M1.categoría < M2.categoría (M1 × M2))
 ```
 
 ---
 
-## Subconsultas o consultas anidadas
+## Cálculo Relacional
 
-Una **subconsulta** es una consulta incluida en la cláusula `WHERE` o `HAVING` de otra consulta. Se
-usa cuando la condición requiere calcular un valor intermedio.
+El **Cálculo Relacional** es un lenguaje de consultas **no procedimental**: describe la información deseada sin dar un procedimiento específico para obtenerla. Se basa en el cálculo de predicados de primer orden.
 
-**Ejemplo**: nombre de los marineros con la categoría máxima:
+Hay dos variantes:
 
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  M.categoría = (SELECT MAX(M2.categoría)
-                      FROM   Marineros M2)
+| Variante | Variable sobre… |
+|---|---|
+| Cálculo Relacional de Tuplas (CRT) | tuplas completas |
+| Cálculo Relacional de Dominios (CRD) | valores de dominio (campos) |
+
+Ambos son equivalentes en poder expresivo al Álgebra Relacional (**completitud relacional**).
+
+---
+
+### Cálculo Relacional de Tuplas (CRT)
+
+Una consulta en CRT tiene la forma:
+
+```text
+{ T | p(T) }
 ```
 
-**Ejemplo — (C1) con IN anidado**: marineros que reservaron el barco 103:
+donde `T` es una **variable tupla** y `p(T)` es una **fórmula** que describe las propiedades de las tuplas buscadas. El resultado es el conjunto de todas las tuplas T para las cuales la fórmula se evalúa como verdadera.
 
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  M.idm IN (SELECT R.idm
-                 FROM   Reservas R
-                 WHERE  R.idb = 103)
+#### Átomos
+
+Una fórmula está compuesta por átomos:
+
+1. `R(T)` — T es una tupla de la relación R
+2. `T.a op S.b` — comparación entre atributos de variables tupla
+3. `T.a op constante` — comparación con un valor fijo
+
+donde `op` ∈ `{=, ≠, <, >, ≤, ≥}`.
+
+#### Fórmulas
+
+Las fórmulas se construyen con:
+
+- Átomos atómicos
+- `¬f`, `f₁ ∧ f₂`, `f₁ ∨ f₂` (negación, conjunción, disyunción)
+- `∃T(f)` — existe una tupla T tal que f es verdadera
+- `∀T(f)` — para toda tupla T, f es verdadera
+
+#### Ejemplos CRT
+
+**(C11)** Averiguar todos los marineros con categoría superior a 7:
+
+```text
+{ M | M ∈ Marineros ∧ M.categoría > 7 }
 ```
 
-**Ejemplo — (C2) con varios niveles de anidamiento**: nombre de los marineros que reservaron barcos
-rojos:
+**(C2)** Nombre de los marineros que han reservado el barco 103:
 
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  M.idm IN (SELECT R.idm
-                 FROM   Reservas R
-                 WHERE  R.idb IN (SELECT B.idb
-                                  FROM   Barcos B
-                                  WHERE  B.color = 'rojo'))
+```text
+{ M.nombrem | M ∈ Marineros ∧ ∃R ∈ Reservas (R.idm = M.idm ∧ R.idb = 103) }
+```
+
+**(C6)** Idm de los marineros que han reservado un barco rojo y uno verde:
+
+```text
+{ M.idm | M ∈ Marineros
+  ∧ ∃R1 ∈ Reservas (R1.idm = M.idm ∧ ∃B1 ∈ Barcos (B1.idb = R1.idb ∧ B1.color = 'rojo'))
+  ∧ ∃R2 ∈ Reservas (R2.idm = M.idm ∧ ∃B2 ∈ Barcos (B2.idb = R2.idb ∧ B2.color = 'verde')) }
+```
+
+**(C11)** Marineros que han reservado todos los barcos:
+
+```text
+{ M.nombrem | M ∈ Marineros
+  ∧ ∀B ∈ Barcos (∃R ∈ Reservas (R.idm = M.idm ∧ R.idb = B.idb)) }
 ```
 
 ---
 
-## UNION, INTERSECT y EXCEPT
+### Cálculo Relacional de Dominios (CRD)
 
-SQL soporta operaciones de conjuntos entre resultados compatibles en unión (mismo número de columnas
-con dominios compatibles).
+Una consulta en CRD tiene la forma:
 
-Por defecto, estas operaciones **eliminan duplicados**; usar `ALL` para conservarlos.
-
-### UNION
-
-```sql
-SELECT columna FROM tabla [WHERE condiciones]
-UNION [ALL]
-SELECT columna FROM tabla [WHERE condiciones]
+```text
+{ ⟨x₁, x₂, …, xₙ⟩ | p(x₁, x₂, …, xₙ) }
 ```
 
-**Ejemplo — (C5)** Marineros que reservaron barcos rojos **o** verdes:
+donde `x₁, …, xₙ` son **variables de dominio** (representan valores de atributos individuales) y `p` es una fórmula. El resultado es el conjunto de las n-uplas de valores de dominio para los cuales la fórmula es verdadera.
 
-```sql
-SELECT M.nombrem
-FROM   Marineros M, Reservas R, Barcos B
-WHERE  M.idm = R.idm AND R.idb = B.idb AND B.color = 'rojo'
-UNION
-SELECT M2.nombrem
-FROM   Marineros M2, Reservas R2, Barcos B2
-WHERE  M2.idm = R2.idm AND R2.idb = B2.idb AND B2.color = 'verde'
+#### Ejemplos CRD
+
+**(C1)** Averiguar los idm y nombres de los marineros con categoría superior a 7:
+
+```text
+{ ⟨I, N⟩ | ∃C ∃E (⟨I, N, C, E⟩ ∈ Marineros ∧ C > 7) }
 ```
 
-### INTERSECT
+**(C2)** Nombre de los marineros que han reservado el barco 103:
 
-```sql
-SELECT columna FROM tabla [WHERE condiciones]
-INTERSECT [ALL]
-SELECT columna FROM tabla [WHERE condiciones]
+```text
+{ ⟨N⟩ | ∃I ∃C ∃E (⟨I, N, C, E⟩ ∈ Marineros
+         ∧ ∃Id ∃D (⟨I, Id, D⟩ ∈ Reservas ∧ Id = 103)) }
 ```
-
-**Ejemplo — (C6)** Marineros que reservaron barcos rojos **y** verdes:
-
-```sql
-SELECT M.nombrem
-FROM   Marineros M, Reservas R, Barcos B
-WHERE  M.idm = R.idm AND R.idb = B.idb AND B.color = 'rojo'
-INTERSECT
-SELECT M2.nombrem
-FROM   Marineros M2, Reservas R2, Barcos B2
-WHERE  M2.idm = R2.idm AND R2.idb = B2.idb AND B2.color = 'verde'
-```
-
-También se puede expresar con `IN`:
-
-```sql
-SELECT M.nombrem
-FROM   Marineros M, Reservas R, Barcos B
-WHERE  M.idm = R.idm AND R.idb = B.idb AND B.color = 'rojo'
-  AND  M.idm IN (SELECT M2.idm
-                 FROM   Marineros M2, Reservas R2, Barcos B2
-                 WHERE  M2.idm = R2.idm AND R2.idb = B2.idb AND B2.color = 'verde')
-```
-
-### EXCEPT
-
-```sql
-SELECT columna FROM tabla [WHERE condiciones]
-EXCEPT [ALL]
-SELECT columna FROM tabla [WHERE condiciones]
-```
-
-**Ejemplo — (C19)** Marineros que reservaron barcos rojos pero **no** verdes:
-
-```sql
-SELECT R.idm
-FROM   Reservas R, Barcos B
-WHERE  R.idb = B.idb AND B.color = 'rojo'
-EXCEPT
-SELECT R2.idm
-FROM   Reservas R2, Barcos B2
-WHERE  R2.idb = B2.idb AND B2.color = 'verde'
-```
-
-**Ejemplo — (C20)** Marineros con categoría 10 o que reservaron el barco 104:
-
-```sql
-SELECT M.idm
-FROM   Marineros M
-WHERE  M.categoría = 10
-UNION
-SELECT R.idm
-FROM   Reservas R
-WHERE  R.idb = 104
-```
-
----
-
-## Consultas anidadas correlacionadas
-
-En una **consulta correlacionada**, la subconsulta interior depende de la fila que se examina en la
-consulta exterior.
-
-**Ejemplo — (C1) con EXISTS correlacionado**:
-
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  EXISTS (SELECT *
-               FROM   Reservas R
-               WHERE  R.idb = 103 AND R.idm = M.idm)
-```
-
-Para cada fila `M` de Marineros, se evalúa si existe alguna reserva del barco 103 hecha por ese
-marinero.
-
-**Ejemplo — (C9)** Marineros que han reservado **todos** los barcos (división con NOT EXISTS):
-
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  NOT EXISTS (SELECT B.idb
-                   FROM   Barcos B
-                   EXCEPT
-                   SELECT R.idb
-                   FROM   Reservas R
-                   WHERE  R.idm = M.idm)
-```
-
-Versión alternativa sin EXCEPT:
-
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  NOT EXISTS (SELECT B.idb
-                   FROM   Barcos B
-                   WHERE  NOT EXISTS (SELECT R.idb
-                                      FROM   Reservas R
-                                      WHERE  R.idb = B.idb AND R.idm = M.idm))
-```
-
----
-
-## Operadores de agregación
-
-SQL soporta cinco operadores de agregación aplicables a cualquier columna:
-
-| Operador                | Descripción                  |
-| ----------------------- | ---------------------------- |
-| `COUNT([DISTINCT] col)` | Número de valores (únicos)   |
-| `SUM([DISTINCT] col)`   | Suma de valores (únicos)     |
-| `AVG([DISTINCT] col)`   | Promedio de valores (únicos) |
-| `MAX(col)`              | Valor máximo                 |
-| `MIN(col)`              | Valor mínimo                 |
-
-**Ejemplo — (C25)** Promedio de edad de los marineros:
-
-```sql
-SELECT AVG(M.edad)
-FROM   Marineros M
-```
-
-**Ejemplo — (C26)** Promedio de edad de marineros con categoría 10:
-
-```sql
-SELECT AVG(M.edad)
-FROM   Marineros M
-WHERE  M.categoría = 10
-```
-
-**Ejemplo** — marinero más joven con su nombre (requiere subconsulta):
-
-```sql
-SELECT M.nombrem, M.edad
-FROM   Marineros M
-WHERE  M.edad = (SELECT MIN(M2.edad)
-                 FROM   Marineros M2)
-```
-
-**Ejemplo — (C28)** Contar el número de marineros:
-
-```sql
-SELECT COUNT(*)
-FROM   Marineros M
-```
-
-**Ejemplo — (C29)** Contar nombres distintos:
-
-```sql
-SELECT COUNT(DISTINCT M.nombrem)
-FROM   Marineros M
-```
-
-**Ejemplo — (C30)** Marineros de más edad que el marinero más viejo de categoría 10:
-
-```sql
-SELECT M.nombrem
-FROM   Marineros M
-WHERE  M.edad > (SELECT MAX(M2.edad)
-                 FROM   Marineros M2
-                 WHERE  M2.categoría = 10)
-```
-
----
-
-## ORDER BY, GROUP BY y HAVING
-
-### ORDER BY
-
-Ordena el resultado por una o más columnas. Por defecto el orden es ascendente; `DESC` para
-descendente.
-
-```sql
-SELECT [DISTINCT] columnas
-FROM   tablas
-[WHERE condiciones]
-[ORDER BY columna [DESC] [, columna2 [DESC] …]]
-```
-
-### GROUP BY
-
-Permite aplicar operaciones de agregación a **grupos** de filas. Las columnas en `SELECT` deben
-aparecer también en `GROUP BY` (salvo que estén dentro de un agregado).
-
-```sql
-SELECT [DISTINCT] columnas
-FROM   tablas
-[WHERE condiciones]
-GROUP BY columnas-de-agrupación
-[HAVING condición-sobre-grupos]
-[ORDER BY columna [DESC] …]
-```
-
-**Ejemplo — (C31)** Edad del marinero más joven de cada categoría:
-
-```sql
-SELECT M.categoría, MIN(M.edad)
-FROM   Marineros M
-GROUP BY M.categoría
-```
-
-### HAVING
-
-Filtra **grupos** (funciona como `WHERE` pero para grupos formados por `GROUP BY`). Siempre va
-después de `GROUP BY`.
-
-**Ejemplo — (C32)** Edad del marinero más joven con derecho a voto (>18) para cada categoría con al
-menos dos marineros con derecho a voto:
-
-```sql
-SELECT M.categoría, MIN(M.edad) AS edadmín
-FROM   Marineros M
-WHERE  M.edad >= 18
-GROUP BY M.categoría
-HAVING COUNT(*) > 1
-```
-
-**Pasos de evaluación:**
-
-1. Calcular producto cartesiano (solo Marineros aquí).
-1. Aplicar `WHERE M.edad >= 18`.
-1. Eliminar columnas innecesarias.
-1. Ordenar por `GROUP BY M.categoría`.
-1. Aplicar `HAVING COUNT(*) > 1`.
-1. Generar una fila por grupo restante.
-
-**Ejemplo — (C33)** Para cada barco rojo, número de reservas:
-
-```sql
-SELECT B.idb, COUNT(*) AS numreservas
-FROM   Barcos B, Reservas R
-WHERE  B.idb = R.idb AND B.color = 'rojo'
-GROUP BY B.idb
-```
-
-**Ejemplo — (C34)** Edad media de marineros por categoría con al menos dos marineros:
-
-```sql
-SELECT M.categoría, AVG(M.edad) AS edadmedia
-FROM   Marineros M
-GROUP BY M.categoría
-HAVING COUNT(*) > 1
-```
-
-**Ejemplo — (C37)** Categorías con la edad media mínima (con tabla temporal en `FROM`):
-
-```sql
-SELECT Temp.categoría, Temp.edadmedia
-FROM   (SELECT M.categoría, AVG(M.edad) AS edadmedia
-        FROM   Marineros M
-        GROUP BY M.categoría) AS Temp
-WHERE  Temp.edadmedia = (SELECT MIN(Temp2.edadmedia)
-                         FROM   (SELECT AVG(M2.edad) AS edadmedia
-                                 FROM   Marineros M2
-                                 GROUP BY M2.categoría) AS Temp2)
-```
-
-> Las operaciones de agregación **no se pueden anidar directamente** (`MIN(AVG(...))` es ilegal).
-> Hay que usar subconsultas con tablas temporales.
-
----
-
-## Valores nulos
-
-SQL usa el valor especial **NULL** para representar valores desconocidos o inaplicables.
-
-### Lógica de tres valores
-
-Las comparaciones con NULL producen un tercer valor: **desconocido** (además de verdadero y falso).
-
-| Expresión                       | Resultado   |
-| ------------------------------- | ----------- |
-| `NULL = NULL`                   | desconocido |
-| `NOT NULL`                      | NULL        |
-| `Verdadero OR Verdadero`        | Verdadero   |
-| `Falso/NULL OR NULL`            | NULL        |
-| `Verdadero AND Verdadero`       | Verdadero   |
-| `Verdadero/Falso/NULL AND NULL` | NULL        |
-| `Verdadero/Falso AND Falso`     | Falso       |
-
-La cláusula `WHERE` elimina filas cuya condición sea **falsa o NULL** (no solo falsa).
-
-### NULL en operaciones de agregación
-
-- `COUNT(*)` cuenta filas NULL igual que las demás.
-- `SUM`, `AVG`, `MIN`, `MAX`, `COUNT(col)` **descartan** los valores NULL.
-- Si se aplican solo a valores NULL, devuelven NULL (excepto `COUNT` que devuelve 0).
-
-### Reuniones externas
-
-Las **reuniones externas** incluyen en el resultado filas sin correspondencia, rellenando con NULL
-las columnas de la tabla sin pareja.
-
-| Tipo                 | Descripción                                   |
-| -------------------- | --------------------------------------------- |
-| `LEFT [OUTER] JOIN`  | Incluye todas las filas de la tabla izquierda |
-| `RIGHT [OUTER] JOIN` | Incluye todas las filas de la tabla derecha   |
-| `FULL OUTER JOIN`    | Incluye todas las filas de ambas tablas       |
-
-**Ejemplo**: pares [idm, idb] de marineros y los barcos que reservaron (incluyendo marineros sin
-reservas):
-
-```sql
-SELECT M.idm, R.idb
-FROM   Marineros M NATURAL LEFT OUTER JOIN Reservas R
-```
-
-`NATURAL` especifica que la condición de reunión es la igualdad en todos los atributos comunes.
-
-Para prevenir valores NULL en una columna: `nombrem CHAR(20) NOT NULL`. Los campos de clave primaria
-nunca admiten NULL.
-
----
-
-## JOINs o Reuniones
-
-Existe una sintaxis explícita para reuniones donde la cláusula `WHERE` se usa únicamente para
-filtrar (no para reunir).
-
-![JOINs — diagramas de Venn](../../../../resources/2018/u5-joins-diagramas.png)
-
-### INNER JOIN
-
-```sql
-SELECT <select_list>
-FROM   Table_A A INNER JOIN Table_B B
-       ON A.Key = B.Key
-```
-
-Devuelve solo las filas con correspondencia en ambas tablas.
-
-### LEFT JOIN / RIGHT JOIN
-
-```sql
-SELECT <select_list>
-FROM   Table_A A LEFT JOIN Table_B B
-       ON A.Key = B.Key
-```
-
-```sql
-SELECT <select_list>
-FROM   Table_A A RIGHT JOIN Table_B B
-       ON A.Key = B.Key
-```
-
-La reunión externa incluye todos los registros de la tabla indicada (izquierda o derecha) aunque no
-tengan correspondencia en la otra; los campos sin pareja toman valor NULL.
-
-![JOINs — sintaxis y ejemplos](../../../../resources/2018/u5-joins-sintaxis.png)
 
 ---
 
 ## Bibliografía
 
-1. _"Sistema de Administración de Bases de Datos"_; Raghu Ramakrishnan / Johannes Gehrke; Mc Graw
-   Hill, 3ª Edición, edición en español — 2007
-2. _"Fundamentos de Sistemas de Bases de Datos"_; Elmasri y Navathe; Addison Wesley; 3ª Edición;
-   Madrid; 2002
-3. _"Introduction to Database Systems"_; C. J. Date; Addison Wesley; 8ª Edición; 2004
+1. *"Sistema de Administración de Bases de Datos"*; Raghu Ramakrishnan / Johannes Gehrke; Mc Graw Hill, 3ª Edición, edición en español — 2007
+2. *"Fundamentos de Sistemas de Bases de Datos"*; Elmasri y Navathe; Addison Wesley; 3ª Edición; Madrid; 2002
+3. *"Introduction to Database Systems"*; C. J. Date; Addison Wesley; 8ª Edición; 2004
