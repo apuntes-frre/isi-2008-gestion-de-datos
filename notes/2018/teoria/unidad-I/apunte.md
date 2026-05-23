@@ -158,6 +158,8 @@ flowchart BT
     EC  <--> EE1
     EC  <--> EE2
     EC  <--> EE3
+
+    style EF fill:#dbeafe,stroke:#1d4ed8,color:#1d4ed8,font-weight:bold
 ```
 
 ### Independencia de datos
