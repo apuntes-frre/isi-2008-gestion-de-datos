@@ -1,7 +1,8 @@
 # Unidad I: Introducción a las Bases de Datos
 
-> **Gestión de Datos** — Ingeniería en Sistemas de Información, UTN-FRRE Profesora: Ing. Carolina
-> Orcola · Jefe de T.P.: Ing. Luis Eiman · Auxiliar: Juan Carlos Fernández
+> **Gestión de Datos** — Ingeniería en Sistemas de Información, UTN-FRRE
+>
+> Profesora: Ing. Carolina Orcola · Jefe de T.P.: Ing. Luis Eiman · Auxiliar: Juan Carlos Fernández
 
 ---
 
