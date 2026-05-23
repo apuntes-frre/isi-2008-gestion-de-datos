@@ -1,4 +1,4 @@
-# Unidad II: Modelado de Datos
+# Unidad II: Almacenamiento de Registros y Organización de Ficheros
 
 > **Gestión de Datos** — Ingeniería en Sistemas de Información, UTN-FRRE
 >
@@ -12,551 +12,286 @@
 
 ## Índice
 
-- [Unidad II: Modelado de Datos](#unidad-ii-modelado-de-datos)
+- [Unidad VI: Almacenamiento de Registros y Organización de Ficheros](#unidad-vi-almacenamiento-de-registros-y-organización-de-ficheros)
   - [Índice](#índice)
   - [Introducción](#introducción)
-  - [Proceso de diseño de la Base de Datos](#proceso-de-diseño-de-la-base-de-datos)
-  - [Diseño de base de datos y diagramas ER](#diseño-de-base-de-datos-y-diagramas-er)
-  - [Entidades, atributos y conjuntos de entidades](#entidades-atributos-y-conjuntos-de-entidades)
-  - [Las relaciones y los conjuntos de relaciones](#las-relaciones-y-los-conjuntos-de-relaciones)
-  - [Otras características del modelo ER](#otras-características-del-modelo-er)
-    - [Restricciones de clave en relaciones](#restricciones-de-clave-en-relaciones)
-    - [Restricciones de clave en relaciones ternarias](#restricciones-de-clave-en-relaciones-ternarias)
-    - [Restricciones de participación](#restricciones-de-participación)
-    - [Entidades débiles](#entidades-débiles)
-    - [Jerarquías de clases](#jerarquías-de-clases)
-    - [Agregación](#agregación)
-  - [Diseño conceptual del modelo ER](#diseño-conceptual-del-modelo-er)
-    - [Entidades y atributos](#entidades-y-atributos)
-    - [Entidades y relaciones](#entidades-y-relaciones)
-    - [Relaciones binarias y ternarias](#relaciones-binarias-y-ternarias)
-    - [Agregación y relaciones ternarias](#agregación-y-relaciones-ternarias)
-  - [Resumen de símbolos](#resumen-de-símbolos)
+    - [Jerarquías de memoria y dispositivos de almacenamiento](#jerarquías-de-memoria-y-dispositivos-de-almacenamiento)
+    - [Almacenamiento de base de datos](#almacenamiento-de-base-de-datos)
+  - [Dispositivos de almacenamiento secundario](#dispositivos-de-almacenamiento-secundario)
+  - [Almacenamiento intermedio de bloques](#almacenamiento-intermedio-de-bloques)
+  - [Grabación de registros en disco](#grabación-de-registros-en-disco)
+    - [Registros y tipos de registros](#registros-y-tipos-de-registros)
+    - [Ficheros de longitud fija y variable](#ficheros-de-longitud-fija-y-variable)
+    - [Grabación de registros en bloques](#grabación-de-registros-en-bloques)
+    - [Asignación en disco de bloques](#asignación-en-disco-de-bloques)
+  - [Operaciones con ficheros](#operaciones-con-ficheros)
+  - [Estructuras de índice para ficheros](#estructuras-de-índice-para-ficheros)
+    - [Alternativas para entradas de datos](#alternativas-para-entradas-de-datos)
+    - [Índices de un solo nivel](#índices-de-un-solo-nivel)
+      - [Índices agrupados versus no agrupados](#índices-agrupados-versus-no-agrupados)
+      - [Índices densos versus dispersos](#índices-densos-versus-dispersos)
+      - [Índices primarios y secundarios](#índices-primarios-y-secundarios)
+    - [Índices multinivel — ISAM](#índices-multinivel--isam)
+    - [Índices multinivel dinámicos — Árbol B+](#índices-multinivel-dinámicos--árbol-b)
+    - [Índices sobre claves múltiples](#índices-sobre-claves-múltiples)
   - [Bibliografía](#bibliografía)
 
 ---
 
 ## Introducción
 
-El modelado conceptual es una fase importante del diseño de una aplicación fructífera de base de
-datos. Una de las características fundamentales de los SGBD es que proporciona cierto nivel de
-abstracción de los datos, al ocultar detalles de almacenamiento que la mayoría de los usuarios no
-necesita conocer. Un **modelo de datos** (colección de conceptos que sirven para describir la
-estructura de una base de datos) proporciona los medios necesarios para conseguir dicha abstracción.
-Cuando hablamos de estructura de la base de datos nos referimos a los tipos de datos, los vínculos y
-las restricciones que deben cumplirse para esos datos.
+La colección de datos que conforma una base de datos debe almacenarse físicamente en algún medio de
+almacenamiento de la computadora. Estos medios forman una jerarquía con dos categorías principales:
 
-Se han propuesto muchos modelos de datos y se pueden clasificar dependiendo de los tipos de
-conceptos que ofrecen para describir la estructura de la base de datos. Los **modelos de datos de
-alto nivel** o **conceptuales** disponen de conceptos muy cercanos al modo como la mayoría de los
-usuarios percibe los datos, mientras que los **modelos de bajo nivel** o **físicos** proporcionan
-conceptos que describen los detalles sobre cómo se almacenan los datos en el ordenador.
+- **Almacenamiento primario**: incluye medios sobre los cuales la CPU puede operar directamente
+  (memoria principal y caché). Ofrece acceso rápido pero capacidad limitada.
+- **Almacenamiento secundario**: incluye discos magnéticos, discos ópticos y cintas. Mayor capacidad
+  y menor costo, pero acceso más lento. La CPU debe copiar los datos al almacenamiento primario
+  antes de operar.
 
-El **modelo de datos Entidad-Relación (ER)** permite describir los datos implicados en una empresa
-real en términos de objetos y de sus relaciones, y se emplea mucho para desarrollar el diseño
-preliminar de la base de datos. Aporta conceptos útiles que permiten pasar de una descripción
-informal de lo que los usuarios desean de su base de datos a otra más detallada y precisa que se
-pueda implementar en un SGBD.
+### Jerarquías de memoria y dispositivos de almacenamiento
 
----
+Los medios de almacenamiento presentan una relación inversa entre precio/velocidad y capacidad.
 
-## Proceso de diseño de la Base de Datos
+**Almacenamiento primario** (de mayor a menor costo):
 
-![Proceso de diseño de la Base de Datos](../../../../resources/2018/u2-proceso-diseno-bd.png)
+- **Memorias caché**: RAM estática utilizada por la CPU para aumentar la velocidad de ejecución.
+- **DRAM (memoria principal)**: proporciona el área de trabajo principal de la CPU. Bajo costo pero
+  volátil y más lenta que la caché.
 
-El primer paso es la **obtención y análisis de requisitos**. Durante este paso los diseñadores
-entrevistan a los futuros usuarios de la base de datos para entender y documentar sus requisitos de
-datos. El resultado es un conjunto de requisitos del usuario redactado de forma concisa. Estos
-requisitos deben especificarse de la forma más detallada y completa posible.
+**Almacenamiento secundario**:
 
-En paralelo con la especificación de los requisitos de datos, conviene especificar los **requisitos
-funcionales** de la aplicación. Éstos consisten en las transacciones definidas por el usuario que se
-aplicarán a las bases de datos, e incluyen la obtención de datos y la actualización.
+- **Discos magnéticos**
+- **Dispositivos CD-ROM / DVD**: almacenamiento óptico, capacidad de ~500 MB (CD) a 4–15 GB (DVD).
+- **Cintas**: el nivel más barato. Los juke-box de cintas pueden contener varios terabytes; acceso
+  off-line.
 
-Una vez recogidos y analizados todos los requisitos, el siguiente paso es crear un **esquema
-conceptual** para la base de datos mediante un modelo conceptual de datos de alto nivel. Este paso
-se denomina **diseño conceptual**. El esquema conceptual es una descripción concisa de los
-requisitos de información de los usuarios, y contiene descripciones detalladas de los tipos de
-entidad, vínculos y restricciones representados según el modelo conceptual de datos usado. Puesto
-que estos conceptos no incluyen detalles de implementación, suelen ser fáciles de entender y pueden
-servir para comunicarse con usuarios no técnicos.
+### Almacenamiento de base de datos
 
-A partir de allí se debe usar un SGBD para implementar la base de datos. Esto se logra transformando
-el esquema conceptual del modelo usado al modelo de datos de implementación. Este paso se llama
-**diseño lógico** o **transformación del modelo de datos**, y su resultado es un esquema de la base
-de datos en el modelo de datos que se usará para la implementación.
+La mayoría de las bases de datos se almacenan en disco magnético porque:
 
-El paso final es la fase de **diseño físico**, durante la cual se especifican las estructuras de
-almacenamiento internas, los caminos de acceso y la organización de ficheros de la base de datos. En
-paralelo con estas actividades, se diseñan e implementan programas de aplicación en forma de
-transacciones de la base de datos.
+- Son demasiado grandes para caber completas en memoria principal.
+- El almacenamiento secundario es **no volátil** (menor riesgo de pérdida permanente de datos).
+- El costo de almacenamiento por unidad de datos es menor que en el primario.
+
+Las cintas se usan para respaldo (backup) por su menor costo, aunque su velocidad de acceso es mucho
+más lenta y son off-line.
+
+Hay varias **organizaciones primarias de ficheros**:
+
+- **Ficheros de montículo** (no ordenados): registros sin orden específico, nuevos registros al
+  final.
+- **Ficheros ordenados** (secuenciales): registros ordenados por un campo clave.
+- **Ficheros de direccionamiento calculado** (hashing): función hash sobre un campo clave determina
+  la ubicación del registro en disco.
+- **Árboles B**: otra organización primaria basada en estructuras de árbol.
+
+La **organización secundaria** (estructura de acceso auxiliar) permite accesos eficientes por campos
+alternativos al de la organización primaria.
 
 ---
 
-## Diseño de base de datos y diagramas ER
+## Dispositivos de almacenamiento secundario
 
-El proceso de diseño de base de datos puede dividirse en seis etapas, de las cuales el Modelo ER es
-muy relevante para los tres primeros pasos:
+Los discos magnéticos son el medio principal para bases de datos. Características relevantes:
 
-1. **Análisis de Requisitos.** Comprender los datos que se deben guardar en la base de datos, las
-   aplicaciones que se deben construir sobre ellos y las operaciones que son más frecuentes e
-   imponen requisitos de rendimiento.
+- Acceso aleatorio (a diferencia de las cintas que son secuenciales).
+- El sistema operativo transfiere datos en unidades llamadas **bloques** o **páginas**.
 
-2. **Diseño conceptual de base de datos.** La información reunida en el análisis de requerimientos
-   se emplea para desarrollar una descripción de alto nivel de los datos que se van a guardar en la
-   base de datos, junto con las restricciones que se sabe que se impondrán sobre esos datos. Este
-   paso se suele llevar a cabo empleando el modelo ER.
-
-3. **Diseño lógico de la base de datos.** Hay que escoger un SGBD que implemente nuestro diseño de
-   la base de datos y transformar el diseño conceptual en un esquema del modelo de datos del SGBD
-   elegido. Para nosotros, la transformación será de ER a Relacional.
-
-4. **Refinamiento de los esquemas:** análisis del conjunto de relaciones del esquema relacional para
-   identificar posibles problemas y refinarlo. Este paso puede guiarse por la teoría de la
-   normalización de relaciones.
-
-5. **Diseño físico de la base de datos:** se toman en consideración las cargas de trabajo típicas
-   esperadas que deberá soportar la base de datos y se refinará aún más el diseño para garantizar
-   que cumpla con los criterios de rendimiento deseados.
-
-6. **Diseño de aplicaciones y de la seguridad:** identificar las entidades y los procesos
-   relacionados con la aplicación, describir el papel de cada entidad en cada proceso, e identificar
-   las partes de la base de datos que debe tener accesibles cada entidad.
+**RAID** (Redundant Array of Independent Disks): tecnología para acceso paralelo al disco que mejora
+rendimiento y/o tolerancia a fallos mediante múltiples discos trabajando en conjunto.
 
 ---
 
-## Entidades, atributos y conjuntos de entidades
+## Almacenamiento intermedio de bloques
 
-Una **entidad** es un objeto del mundo real que puede distinguirse de otros objetos. Puede ser un
-objeto con existencia física (una persona, un automóvil, un empleado) o un objeto con existencia
-conceptual (una empresa, un puesto de trabajo, un curso universitario).
+Cuando es preciso transferir varios bloques del disco a memoria principal y se conocen todas las
+direcciones de bloque, es posible reservar varios **búferes** en memoria para agilizar la
+transferencia.
 
-Cada entidad tiene propiedades específicas llamadas **atributos** que la describen. En el modelo ER
-se manejan distintos tipos de atributos:
-
-- **Atributos compuestos o simples:** los compuestos se pueden dividir en componentes más pequeños
-  (ej.: Dirección → Calle, Número, Piso); los simples no son divisibles.
-- **Atributos monovaluados o multivaluados:** los monovaluados tienen un único valor por entidad
-  (ej.: Edad); los multivaluados pueden tener un conjunto de valores (ej.: Título de la entidad
-  Persona).
-- **Atributos almacenados o derivados:** el atributo Fecha de Nacimiento es almacenado, pero Edad es
-  derivado (se calcula según la fecha actual cada vez que se consulta la entidad).
-
-Resulta útil identificar conjuntos de entidades similares (**conjunto de entidades**). Estas
-entidades comparten los mismos atributos. Cada atributo está asociado a un **dominio** de valores
-posibles.
-
-Además, para cada conjunto de entidades se escoge una **clave**: un conjunto mínimo de atributos
-cuyos valores identifican de manera unívoca a cada entidad del conjunto. Puede haber más de una
-clave candidata; en ese caso, se escoge una como **clave principal**.
-
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-```
+- El controlador de disco (procesador de E/S independiente) puede transferir un bloque entre memoria
+  y disco en paralelo con la CPU.
+- **Doble búfer**: mientras la CPU procesa un bloque ya en memoria, el controlador lee y transfiere
+  el siguiente bloque a un búfer diferente. Esto permite solapar lectura y procesamiento.
 
 ---
 
-## Las relaciones y los conjuntos de relaciones
+## Grabación de registros en disco
 
-Una **relación** es una asociación entre dos o más entidades. Se puede considerar a los conjuntos de
-relaciones como conjuntos de n-tuplas:
+### Registros y tipos de registros
 
-> { (e₁, …, eₙ) | e₁ ∈ E₁, …, eₙ ∈ Eₙ }
+Los datos se almacenan en **registros**, cada uno compuesto de valores o elementos de datos
+relacionados. Cada valor corresponde a un **campo** del registro y describe entidades y sus
+atributos.
 
-Cada n-tupla denota una relación que implica a n entidades, donde la entidad eᵢ se halla en el
-conjunto de entidades Eᵢ.
+Una colección de nombres de campos y sus tipos constituye una **definición de tipo de registro**
+(formato de registro).
 
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    DEPARTAMENTO {
-        string idd PK
-        string nomb
-        string presup
-    }
-    EMPLEADO }o--o{ DEPARTAMENTO : "Trabaja_en (desde)"
-```
+### Ficheros de longitud fija y variable
 
-Las **relaciones también pueden tener atributos descriptivos**, empleados para registrar información
-sobre la relación (no sobre las entidades participantes). Por ejemplo, el atributo `desde` en
-Trabaja_en registra la fecha en que el empleado comenzó a trabajar en ese departamento.
+Un **fichero** es una secuencia de registros.
 
-Cada relación debe identificarse de manera unívoca por sus entidades participantes, sin necesidad de
-referencia alguna a los atributos descriptivos.
+- **Longitud fija**: todos los registros tienen exactamente el mismo tamaño.
+- **Longitud variable**: registros de tamaños distintos. Puede deberse a:
+  - Uno o más campos de tamaño variable.
+  - Uno o más campos con múltiples valores en registros individuales.
+  - Uno o más campos opcionales.
+  - Registros de diferentes tipos en el mismo fichero.
 
-El siguiente diagrama muestra un **ejemplar del conjunto de relaciones Trabaja_en**, donde la
-participación de ambos conjuntos es total:
+### Grabación de registros en bloques
 
-![Ejemplar del conjunto de relaciones Trabaja_en](../../../../resources/2018/u2-instancia-trabaja-en.png)
+Los registros se asignan a **bloques de disco** porque el bloque es la unidad de transferencia entre
+disco y memoria. Si el tamaño del bloque es mayor que el del registro, cada bloque contendrá varios
+registros.
 
-Como ejemplo adicional, cuando cada departamento tiene oficinas en varias ubicaciones y se desea
-registrar las ubicaciones en las que trabaja cada empleado, la relación es **ternaria**:
+### Asignación en disco de bloques
 
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    DEPARTAMENTO {
-        string idd PK
-        string nomb
-        string presup
-    }
-    UBICACIONES {
-        string direccion PK
-        string capacidad
-    }
-    EMPLEADO }o--o{ DEPARTAMENTO : "Trabaja_en2 (desde)"
-    EMPLEADO }o--o{ UBICACIONES : "Trabaja_en2"
-    DEPARTAMENTO }o--o{ UBICACIONES : "Trabaja_en2"
-```
+Técnicas estándar para asignar bloques en disco:
 
-Cuando un conjunto de entidades desempeña más de un papel en una relación (ej.: Informa_a entre
-empleados), se usan **indicadores de roles**:
-
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    EMPLEADO ||--o{ EMPLEADO : "Informa_a (supervisor / subordinado)"
-```
+- **Asignación contigua**: bloques consecutivos del disco. Lectura de todo el fichero ágil con doble
+  búfer, pero dificulta la expansión.
+- **Asignación enlazada**: cada bloque contiene un puntero al siguiente. Facilita la expansión pero
+  vuelve más lenta la lectura.
+- **Segmentos de fichero**: grupos de bloques consecutivos enlazados entre sí.
+- **Asignación indexada**: uno o más bloques de índice contienen punteros a los bloques del fichero.
 
 ---
 
-## Otras características del modelo ER
+## Operaciones con ficheros
 
-### Restricciones de clave en relaciones
+**Modelo de costo** (para estimar el costo en tiempo de ejecución):
 
-Considerando el conjunto de relaciones **Dirige** entre Empleados y Departamentos, con la
-restricción de que cada departamento tiene como máximo un encargado (aunque un empleado puede
-dirigir más de un departamento): esta es una **restricción de clave**, indicada en el diagrama ER
-mediante una flecha de Departamento a Dirige.
+- `B`: número de bloques con `R` registros por bloque.
+- `D`: tiempo promedio para leer o escribir un bloque a disco.
+- `C`: tiempo promedio para procesar un registro (comparación, etc.).
+- `H`: tiempo para aplicar la función hash a un registro (en organización hash).
 
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    DEPARTAMENTO {
-        string idd PK
-        string nomb
-        string presup
-    }
-    EMPLEADO |o--o{ DEPARTAMENTO : "Dirige 1..N (desde)"
-```
+Valores típicos: `D = 25 ms`, `C` y `H` entre 1 y 10 µs. El costo de E/S de bloques de disco domina
+ampliamente.
 
-Se dice que este conjunto de relaciones es **de una a varias (1…N)**. El conjunto Trabaja_en, en el
-que cada empleado puede trabajar en varios departamentos y cada departamento puede tener varios
-empleados, es **de varias a varias (N…N)**. Si se añade la restricción de que cada empleado puede
-dirigir como máximo un departamento, se tendría una relación **de una a una (1…1)**.
+**Operaciones básicas**:
 
-### Restricciones de clave en relaciones ternarias
+- **Scan**: recorre todos los registros del fichero llevando cada bloque del disco al búfer.
+- **Búsqueda con selección de igualdad**: localiza registros que satisfacen `campo = valor`.
+- **Búsqueda con selección de rango**: localiza registros que satisfacen `campo ∈ [a, b]`.
+- **Inserción**: identifica el bloque destino, lo trae a memoria, lo modifica y lo escribe de
+  vuelta.
+- **Borrado**: identifica el bloque que contiene el registro, lo modifica y lo escribe de vuelta.
 
-Si el conjunto de entidades E tiene una restricción de clave en el conjunto de relaciones R, cada
-entidad de un ejemplar concreto de E aparecerá, como máximo, en una relación de R. Por ejemplo, si
-cada empleado trabaja como máximo en un departamento y en una única ubicación:
+**Comparación de organizaciones de ficheros**:
 
-![Ejemplar de Trabaja_en3 con restricción de clave](../../../../resources/2018/u2-instancia-trabaja-en3.png)
+![Tabla comparación de organizaciones de ficheros](../../../../resources/2018/u2-tabla-comparacion-ficheros.png)
 
-### Restricciones de participación
-
-La **restricción de participación** determina si todos los elementos de un conjunto de entidades
-participan en una relación:
-
-- **Participación total:** todas las entidades del conjunto participan en al menos una relación (se
-  indica con línea gruesa).
-- **Participación parcial:** algunas entidades pueden no participar.
-
-Por ejemplo, la participación de Departamentos en Dirige es **total** (todo departamento tiene un
-encargado), mientras que la participación de Empleados en Dirige es **parcial** (no todos los
-empleados dirigen un departamento).
-
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    DEPARTAMENTO {
-        string idd PK
-        string nomb
-        string presup
-    }
-    EMPLEADO |o--|| DEPARTAMENTO : "Dirige (desde)"
-    EMPLEADO }|--|{ DEPARTAMENTO : "Trabaja_en (desde)"
-```
-
-### Entidades débiles
-
-Un **conjunto de entidades débiles** es aquel cuyos atributos no permiten identificar de manera
-unívoca a sus entidades sin tomar en consideración la clave principal de otra entidad (**propietaria
-identificadora**).
-
-Restricciones que deben cumplirse:
-
-- El conjunto propietario y el débil deben participar en una relación **de uno a varias** (cada
-  propietaria se asocia con una o varias entidades débiles, pero cada entidad débil solo tiene una
-  propietaria). Este conjunto se denomina **conjunto de relaciones identificadoras**.
-- El conjunto de entidades débiles debe tener **participación total** en el conjunto de relaciones
-  identificadoras.
-
-El conjunto de atributos de un conjunto de entidades débiles que identifica de manera unívoca a una
-entidad débil para una entidad propietaria dada se denomina **clave parcial** (subrayada con línea
-punteada en el diagrama).
-
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    POLIZA {
-        string costo
-    }
-    BENEFICIARIOS {
-        string nombrep
-        string edad
-    }
-    EMPLEADO ||--o{ POLIZA : "tiene"
-    POLIZA ||--|{ BENEFICIARIOS : "cubre (identificadora)"
-```
-
-### Jerarquías de clases
-
-A veces resulta natural clasificar las entidades en un conjunto de entidades en **subclases**. Por
-ejemplo, `Empleados_temp` y `Empleados_fijos` son subclases de `Empleados`. Todos los atributos de
-`Empleados` se **heredan** por los conjuntos de entidades derivados.
-
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    EMPLEADO_TEMP {
-        float sueldo_hora
-        int horas_trab
-    }
-    EMPLEADO_FIJO {
-        string idcontrato
-    }
-    EMPLEADO ||--o| EMPLEADO_TEMP : "ES"
-    EMPLEADO ||--o| EMPLEADO_FIJO : "ES"
-```
-
-Las jerarquías de clases se pueden considerar desde dos puntos de vista:
-
-- **Especialización:** `Empleados` está especializado en subclases. La superclase se define primero,
-  luego las subclases con sus atributos específicos.
-- **Generalización:** `Empleados_temp` y `Empleados_fijos` se generalizan en `Empleados`. Las
-  subclases se definen primero, luego la superclase.
-
-Se pueden especificar dos tipos de restricciones:
-
-- **Restricciones de solapamiento:** determinan si se permite que dos clases contengan la misma
-  entidad (ej.: un empleado puede ser tanto `Empleados_fijos` como `Empleados_veteranos` → se denota
-  "SOLAPA A").
-- **Restricciones de cobertura:** determinan si las entidades de las subclases incluyen de manera
-  colectiva a todas las entidades de la superclase (ej.: "Motos Y Coches CUBREN
-  Vehículos_motorizados").
-
-### Agregación
-
-La **agregación** permite indicar que un conjunto de relaciones (identificado mediante un cuadro
-discontinuo) participa en otro conjunto de relaciones. Se usa cuando hace falta expresar una
-relación entre relaciones.
-
-Por ejemplo, si cada proyecto es financiado por uno o varios departamentos (relación Financia), y el
-departamento que financia un proyecto puede asignar empleados para que lo controlen (relación
-Controla), Controla debería asociar relaciones de Financia con entidades de Empleados. Esto se
-modela mediante agregación:
-
-![Diagrama de Agregación](../../../../resources/2018/u2-agregacion.png)
-
-¿Cuándo emplear la agregación en lugar de una relación ternaria? Cuando existen **dos relaciones
-diferentes** con sus propios atributos (en el ejemplo, `hasta` de Controla vs. `desde` de Financia),
-o cuando se quieren expresar restricciones de integridad que no pueden expresarse con una relación
-ternaria.
+| Tipo de fichero | Scan   | Búsqueda igualdad | Búsqueda rango      | Inserción     | Borrado       |
+| --------------- | ------ | ----------------- | ------------------- | ------------- | ------------- |
+| Montículo       | BD     | 0.5BD             | BD                  | 2D            | Búsqueda + D  |
+| Ordenado        | BD     | D·log₂B           | D·log₂B + #coincid. | Búsqueda + BD | Búsqueda + BD |
+| Hash            | 1.25BD | D                 | 1.25BD              | 2D            | Búsqueda + D  |
 
 ---
 
-## Diseño conceptual del modelo ER
+## Estructuras de índice para ficheros
 
-El desarrollo de diagramas ER supone escoger entre varias opciones:
+Un **índice** es una estructura auxiliar diseñada para realizar más rápidamente las operaciones que
+no son soportadas eficientemente por la organización básica del fichero. Se puede ver como una
+colección de **entradas de datos** con una manera eficiente de localizar todas las entradas con
+clave de búsqueda `k`. Cada entrada `k*` contiene información suficiente para recuperar registros de
+datos con valor `k`.
 
-- ¿Un concepto dado se debe modelar como entidad o como atributo?
-- ¿Un determinado concepto se debe modelar como entidad o como relación?
-- ¿Se deben emplear relaciones binarias o ternarias?
-- ¿Se debe emplear la agregación?
+### Alternativas para entradas de datos
 
-### Entidades y atributos
+1. **Alternativa 1**: la entrada de datos `k*` es el registro de datos completo (con clave `k`). No
+   es necesario almacenar los registros por separado.
+2. **Alternativa 2**: la entrada de datos es un par `(k, rid)`, donde `rid` es el identificador del
+   registro de datos con clave `k`.
+3. **Alternativa 3**: la entrada de datos es un par `(k, rid-list)`, donde `rid-list` es una lista
+   de identificadores de registros con clave `k`. Mejor utilización de espacio que la Alternativa 2,
+   pero entradas de longitud variable.
 
-Cuando se identifican los atributos de un conjunto de entidades no resulta a veces evidente si una
-determinada propiedad se debe modelar como atributo o como conjunto de entidades. Por ejemplo, para
-añadir información sobre el domicilio al conjunto Empleados:
+Las Alternativas 2 y 3 son independientes de la organización del fichero indexado. A lo sumo uno de
+los índices sobre un fichero puede usar la Alternativa 1.
 
-- **Como atributo:** resulta adecuado si solo hace falta registrar un domicilio por empleado y basta
-  con pensar en el domicilio como una cadena de caracteres.
-- **Como entidad Domicilios** (con relación Tiene_domicilio): necesario cuando hay que registrar más
-  de una dirección por empleado, o cuando se desea capturar la estructura del domicilio (ciudad,
-  provincia, país, código postal) para soportar consultas como "Buscar todos los empleados con
-  domicilio en Madrid".
+### Índices de un solo nivel
 
-Otro caso: si cada empleado puede trabajar en un departamento dado en **más de un período**, no se
-puede usar un atributo `desde`/`hasta` en la relación (cada relación se identifica únicamente por
-sus entidades participantes). La solución es introducir un conjunto de entidades `Duración` con
-atributos `desde` y `hasta`:
+#### Índices agrupados versus no agrupados
 
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    DEPARTAMENTO {
-        string idd PK
-        string nomb
-        string presup
-    }
-    DURACION {
-        date desde
-        date hasta
-    }
-    EMPLEADO }o--o{ DEPARTAMENTO : "Trabaja_en4"
-    EMPLEADO }o--o{ DURACION : ""
-    DEPARTAMENTO }o--o{ DURACION : ""
-```
+- **Índice agrupado**: el ordenamiento de los registros de datos coincide con el ordenamiento de las
+  entradas del índice. Un fichero puede estar agrupado por a lo sumo una clave de búsqueda.
+- **Índice no agrupado**: el ordenamiento de datos no coincide con el del índice. Se pueden tener
+  varios índices no agrupados sobre un mismo fichero.
 
-### Entidades y relaciones
+![Índice agrupado y no agrupado (Alternativa 2)](../../../../resources/2018/u2-indices-agrupado-no-agrupado.png)
 
-Si el presupuesto discrecional es una suma que abarca a todos los departamentos dirigidos por un
-empleado, asociarlo como atributo de la relación Dirige llevaría a **almacenamiento redundante**. La
-solución es introducir un nuevo conjunto de entidades `Encargados` (como subclase de Empleados):
+#### Índices densos versus dispersos
 
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    ENCARGADO {
-        string idencarg PK
-        float presupuestod
-    }
-    DEPARTAMENTO {
-        string idd PK
-        string nomb
-        string presup
-    }
-    EMPLEADO ||--o| ENCARGADO : "ES"
-    ENCARGADO |o--o{ DEPARTAMENTO : "Dirige3 (desde)"
-```
+- **Índice denso**: contiene al menos una entrada de datos por cada valor de la clave de búsqueda
+  que aparece en algún registro.
+- **Índice disperso** (no denso): contiene una entrada por cada **bloque** de registros del fichero
+  de datos.
 
-### Relaciones binarias y ternarias
+![Índice disperso sobre nombre e índice denso sobre edad](../../../../resources/2018/u2-indices-disperso-denso.png)
 
-Hay situaciones en que intentar emplear una sola relación ternaria resulta inadecuado y es mejor
-usar dos relaciones binarias. Por ejemplo, si se tienen los requisitos de que dos empleados no
-pueden poseer conjuntamente una póliza, y cada póliza debe ser propiedad de algún empleado:
+#### Índices primarios y secundarios
 
-```mermaid
-erDiagram
-    EMPLEADO {
-        string dni PK
-        string nombre
-        string plaza
-    }
-    POLIZAS {
-        string idpoliza PK
-        float costo
-    }
-    BENEFICIARIO {
-        string nombrep
-        string edad
-    }
-    EMPLEADO ||--|{ POLIZAS : "Dependen"
-    POLIZAS ||--|{ BENEFICIARIO : "Cubre"
-```
+- **Índice primario**: índice sobre un conjunto de campos que incluyen la clave primaria.
+  Garantizado sin duplicados.
+- **Índice secundario**: cualquier índice que no es primario. Puede contener duplicados.
+- **Índice único**: índice sin duplicados (aunque no sea primario).
 
-Hay situaciones, no obstante, en las que una relación asocia de manera inherente a más de dos
-entidades. Como ejemplo típico de relación ternaria: los conjuntos Repuestos, Proveedores y
-Departamentos, y el conjunto de relaciones Contratos (con el atributo `cant`). Un contrato
-especifica que un determinado proveedor suministrará una cierta cantidad de un repuesto concreto a
-un cierto departamento. Esta relación no puede capturarse de manera adecuada mediante relaciones
-binarias, por dos razones:
+### Índices multinivel — ISAM
 
-- El hecho de que el proveedor P pueda suministrar el repuesto R, que D necesite R, y que D compre a
-  P, no implica necesariamente que D compre realmente R a P.
-- No se puede representar adecuadamente el atributo `cant` de los contratos.
+**ISAM** (Indexed Sequential Access Method): se construye un segundo fichero índice con un registro
+por cada bloque del fichero original, de la forma `(primera clave del bloque, puntero a bloque)`,
+ordenado por la clave. Esto permite búsqueda binaria sobre el fichero índice (más pequeño) en lugar
+del fichero de datos.
 
-```mermaid
-erDiagram
-    REPUESTOS {
-        string idrep PK
-        string nombre
-        string otrodato
-    }
-    PROVEEDORES {
-        string idprov PK
-        string otrosdatos
-    }
-    DEPARTAMENTO {
-        string idd PK
-        string otrosdatos
-    }
-    REPUESTOS }o--o{ PROVEEDORES : "Contratos (cant)"
-    REPUESTOS }o--o{ DEPARTAMENTO : "Contratos"
-    PROVEEDORES }o--o{ DEPARTAMENTO : "Contratos"
-```
+Si el fichero índice sigue siendo grande, el proceso se repite recursivamente hasta que el fichero
+auxiliar quepa en un bloque. Esto produce una **estructura arbórea**. Cada nodo del árbol ISAM es un
+bloque de disco; todos los datos residen en los **bloques hoja**.
 
-### Agregación y relaciones ternarias
+La estructura ISAM es completamente **estática**, lo que facilita optimizaciones de bajo nivel pero
+dificulta las inserciones y borrados.
 
-La decisión de emplear la agregación o una relación ternaria viene determinada principalmente por la
-existencia de una relación que vincule un conjunto de relaciones con un conjunto de entidades, o por
-determinadas restricciones de integridad que se deseen expresar. Por ejemplo, si se quiere expresar
-la restricción de que cada financiamiento (de un proyecto por un departamento) esté controlado como
-máximo por un empleado, esa restricción **no puede expresarse** con una relación ternaria Financia2,
-pero **sí puede expresarse** fácilmente con la agregación, trazando una flecha desde la relación
-agregada Financia a la relación Controla.
+![Estructura de índice de un nivel](../../../../resources/2018/u2-indice-un-nivel.png)
 
----
+### Índices multinivel dinámicos — Árbol B+
 
-## Resumen de símbolos
+El **árbol B+** es un árbol balanceado ampliamente usado en la práctica:
 
-![Resumen de símbolos del modelo ER](../../../../resources/2018/u2-resumen-simbolos.png)
+- Los **nodos internos** dirigen la búsqueda.
+- Los **nodos hoja** contienen las entradas de datos, enlazados en una **lista doblemente enlazada**
+  (conjunto secuencia) para recorrido eficiente en ambas direcciones.
+
+Características principales:
+
+- Las operaciones de inserción y borrado mantienen el árbol **balanceado**.
+- Se garantiza una **ocupación mínima del 50%** en cada nodo excepto la raíz.
+- La búsqueda requiere recorrer el árbol desde la raíz hasta la hoja apropiada. El costo es
+  proporcional a la **altura del árbol**.
+
+A diferencia de ISAM, el árbol B+ crece y decrece **dinámicamente**, lo que lo hace adecuado para
+ficheros con muchas inserciones y borrados.
+
+### Índices sobre claves múltiples
+
+La clave de búsqueda puede contener varios campos; tales claves se llaman **claves múltiples**,
+**compuestas** o **concatenadas**.
+
+Se pueden crear índices separados para distintas combinaciones de campos o para campos individuales:
+
+- Índice sobre `<edad, sal>`
+- Índice sobre `<sal, edad>`
+- Índice sobre `<edad>`
+- Índice sobre `<sal>`
+
+![Índices de clave compuesta](../../../../resources/2018/u2-indices-clave-compuesta.png)
 
 ---
 
 ## Bibliografía
 
-1. Ramakrishnan, R. y Gehrke, J. — _Sistema de Administración de Bases de Datos_, Mc Graw Hill, 3ª
-   edición en español, 2007.
-2. Elmasri y Navathe — _Fundamentos de Sistemas de Bases de Datos_, Addison Wesley, 3ª edición,
-   Madrid, 2002.
-3. Mendelzon y Ale — _Introducción a las bases de datos relacionales_, Prentice Hall, 1ª edición,
-   Argentina, 2000.
-4. Piattini, M. M. — _Concepto y diseño de bases de datos_, Addison-Wesley.
-5. Korth, F. H. — _Fundamentos de base de datos_, McGraw Hill, 3ª edición, 1998.
-6. Date, C. J. — _Introducción a los sistemas de base de datos_, Prentice-Hall, 7ª edición, 2001.
-7. Elmasri y Navathe — _Sistemas de Bases de Datos – Conceptos fundamentales_, Addison Wesley, 2ª
-   edición, Madrid, 1994.
+1. _"Sistema de Administración de Bases de Datos"_; Raghu Ramakrishnan / Johannes Gehrke; Mc Graw
+   Hill, 3ª Edición, edición en español — 2007
+2. _"Fundamentos de Sistemas de Bases de Datos"_; Elmasri y Navathe; Addison Wesley; 3ª Edición;
+   Madrid; 2002
+3. _"Introduction to Database Systems"_; C. J. Date; Addison Wesley; 8ª Edición; 2004
