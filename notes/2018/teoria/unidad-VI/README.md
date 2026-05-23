@@ -1,4 +1,4 @@
-# Unidad VI: Almacenamiento de Registros y Organización de Ficheros
+# Unidad VI: SQL
 
 > **Gestión de Datos** — Ingeniería en Sistemas de Información, UTN-FRRE
 >
@@ -12,279 +12,685 @@
 
 ## Índice
 
-- [Unidad VI: Almacenamiento de Registros y Organización de Ficheros](#unidad-vi-almacenamiento-de-registros-y-organización-de-ficheros)
+- [Unidad V: SQL](#unidad-v-sql)
   - [Índice](#índice)
   - [Introducción](#introducción)
-    - [Jerarquías de memoria y dispositivos de almacenamiento](#jerarquías-de-memoria-y-dispositivos-de-almacenamiento)
-    - [Almacenamiento de base de datos](#almacenamiento-de-base-de-datos)
-  - [Dispositivos de almacenamiento secundario](#dispositivos-de-almacenamiento-secundario)
-  - [Almacenamiento intermedio de bloques](#almacenamiento-intermedio-de-bloques)
-  - [Grabación de registros en disco](#grabación-de-registros-en-disco)
-    - [Registros y tipos de registros](#registros-y-tipos-de-registros)
-    - [Ficheros de longitud fija y variable](#ficheros-de-longitud-fija-y-variable)
-    - [Grabación de registros en bloques](#grabación-de-registros-en-bloques)
-    - [Asignación en disco de bloques](#asignación-en-disco-de-bloques)
-  - [Operaciones con ficheros](#operaciones-con-ficheros)
-  - [Estructuras de índice para ficheros](#estructuras-de-índice-para-ficheros)
-    - [Alternativas para entradas de datos](#alternativas-para-entradas-de-datos)
-    - [Índices de un solo nivel](#índices-de-un-solo-nivel)
-      - [Índices agrupados versus no agrupados](#índices-agrupados-versus-no-agrupados)
-      - [Índices densos versus dispersos](#índices-densos-versus-dispersos)
-      - [Índices primarios y secundarios](#índices-primarios-y-secundarios)
-    - [Índices multinivel — ISAM](#índices-multinivel--isam)
-    - [Índices multinivel dinámicos — Árbol B+](#índices-multinivel-dinámicos--árbol-b)
-    - [Índices sobre claves múltiples](#índices-sobre-claves-múltiples)
+  - [Consultas básicas](#consultas-básicas)
+    - [Sintaxis SELECT-FROM-WHERE](#sintaxis-select-from-where)
+    - [Expresiones y cadenas de caracteres](#expresiones-y-cadenas-de-caracteres)
+    - [Otros predicados](#otros-predicados)
+      - [BETWEEN](#between)
+      - [IN / NOT IN](#in--not-in)
+      - [IS NULL / IS NOT NULL](#is-null--is-not-null)
+      - [ALL / ANY / SOME](#all--any--some)
+      - [EXISTS / NOT EXISTS](#exists--not-exists)
+  - [Subconsultas o consultas anidadas](#subconsultas-o-consultas-anidadas)
+  - [UNION, INTERSECT y EXCEPT](#union-intersect-y-except)
+    - [UNION](#union)
+    - [INTERSECT](#intersect)
+    - [EXCEPT](#except)
+  - [Consultas anidadas correlacionadas](#consultas-anidadas-correlacionadas)
+  - [Operadores de agregación](#operadores-de-agregación)
+  - [ORDER BY, GROUP BY y HAVING](#order-by-group-by-y-having)
+    - [ORDER BY](#order-by)
+    - [GROUP BY](#group-by)
+    - [HAVING](#having)
+  - [Valores nulos](#valores-nulos)
+    - [Lógica de tres valores](#lógica-de-tres-valores)
+    - [NULL en operaciones de agregación](#null-en-operaciones-de-agregación)
+    - [Reuniones externas](#reuniones-externas)
+  - [JOINs o Reuniones](#joins-o-reuniones)
+    - [INNER JOIN](#inner-join)
+    - [LEFT JOIN / RIGHT JOIN](#left-join--right-join)
   - [Bibliografía](#bibliografía)
 
 ---
 
 ## Introducción
 
-La colección de datos que conforma una base de datos debe almacenarse físicamente en algún medio de
-almacenamiento de la computadora. Estos medios forman una jerarquía con dos categorías principales:
+El **Lenguaje Estructurado de Consultas** (_Structured Query Language_, SQL) es el lenguaje
+comercial de bases de datos relacionales más utilizado. Sus orígenes están ligados al lenguaje
+SEQUEL, desarrollado por IBM en los años 70 como parte del proyecto System R.
 
-- **Almacenamiento primario**: incluye medios sobre los cuales la CPU puede operar directamente
-  (memoria principal y caché). Ofrece acceso rápido pero capacidad limitada.
-- **Almacenamiento secundario**: incluye discos magnéticos, discos ópticos y cintas. Mayor capacidad
-  y menor costo, pero acceso más lento. La CPU debe copiar los datos al almacenamiento primario
-  antes de operar.
+SQL es un lenguaje **no procedimental** a nivel de consultas, aunque el estándar incorpora también
+características procedimentales. Las principales características de SQL son:
 
-### Jerarquías de memoria y dispositivos de almacenamiento
+- **Lenguaje de Definición de Datos (DDL)**: comandos para crear, modificar y eliminar esquemas de
+  relaciones.
+- **Lenguaje de Manipulación de Datos (DML)**: comandos para insertar, eliminar, modificar y
+  consultar tuplas.
+- **Restricciones de integridad**: especificación de restricciones que deben cumplir los datos.
+- **Definición de vistas**: creación de vistas sobre las relaciones base.
+- **Control de transacciones**: inicio y fin de transacciones.
+- **SQL incorporado y SQL dinámico**: llamadas a código SQL desde lenguajes anfitriones como C o
+  COBOL.
+- **Control de acceso**: especificación de privilegios de acceso a relaciones y vistas.
 
-Los medios de almacenamiento presentan una relación inversa entre precio/velocidad y capacidad.
-
-**Almacenamiento primario** (de mayor a menor costo):
-
-- **Memorias caché**: RAM estática utilizada por la CPU para aumentar la velocidad de ejecución.
-- **DRAM (memoria principal)**: proporciona el área de trabajo principal de la CPU. Bajo costo pero
-  volátil y más lenta que la caché.
-
-**Almacenamiento secundario**:
-
-- **Discos magnéticos**
-- **Dispositivos CD-ROM / DVD**: almacenamiento óptico, capacidad de ~500 MB (CD) a 4–15 GB (DVD).
-- **Cintas**: el nivel más barato. Los juke-box de cintas pueden contener varios terabytes; acceso
-  off-line.
-
-### Almacenamiento de base de datos
-
-La mayoría de las bases de datos se almacenan en disco magnético porque:
-
-- Son demasiado grandes para caber completas en memoria principal.
-- El almacenamiento secundario es **no volátil** (menor riesgo de pérdida permanente de datos).
-- El costo de almacenamiento por unidad de datos es menor que en el primario.
-
-Las cintas se usan para respaldo (backup) por su menor costo, aunque su velocidad de acceso es mucho
-más lenta y son off-line.
-
-Hay varias **organizaciones primarias de ficheros**:
-
-- **Ficheros de montículo** (no ordenados): registros sin orden específico, nuevos registros al
-  final.
-- **Ficheros ordenados** (secuenciales): registros ordenados por un campo clave.
-- **Ficheros de direccionamiento calculado** (hashing): función hash sobre un campo clave determina
-  la ubicación del registro en disco.
-- **Árboles B**: otra organización primaria basada en estructuras de árbol.
-
-La **organización secundaria** (estructura de acceso auxiliar) permite accesos eficientes por campos
-alternativos al de la organización primaria.
+SQL se basa en el **álgebra relacional y el cálculo relacional**. Los planes de ejecución de
+consultas SQL se presentan como variaciones de expresiones del álgebra relacional.
 
 ---
 
-## Dispositivos de almacenamiento secundario
+## Consultas básicas
 
-Los discos magnéticos son el medio principal para bases de datos. Características relevantes:
+### Sintaxis SELECT-FROM-WHERE
 
-- Acceso aleatorio (a diferencia de las cintas que son secuenciales).
-- El sistema operativo transfiere datos en unidades llamadas **bloques** o **páginas**.
+La forma básica de una consulta SQL es:
 
-**RAID** (Redundant Array of Independent Disks): tecnología para acceso paralelo al disco que mejora
-rendimiento y/o tolerancia a fallos mediante múltiples discos trabajando en conjunto.
+```sql
+SELECT [DISTINCT] lista-de-selección
+FROM   lista-de-tablas
+WHERE  condición
+```
 
----
+- **`lista-de-tablas`**: lista de nombres de tabla. Cada nombre puede ir seguido de una variable de
+  rango (alias).
+- **`lista-de-selección`**: columnas o expresiones que se desea recuperar. Se pueden prefijar con la
+  variable de rango.
+- **`condición`**: combinación booleana (`AND`, `OR`, `NOT`) de comparaciones (`<`, `<=`, `=`, `<>`,
+  `>=`, `>`).
+- **`DISTINCT`**: opcional; elimina filas duplicadas del resultado. Sin él, el resultado es un
+  **multiconjunto**.
 
-## Almacenamiento intermedio de bloques
+**Estrategia de evaluación conceptual:**
 
-Cuando es preciso transferir varios bloques del disco a memoria principal y se conocen todas las
-direcciones de bloque, es posible reservar varios **búferes** en memoria para agilizar la
-transferencia.
+1. Calcular el producto cartesiano de las tablas en `FROM`.
+2. Eliminar filas que no cumplan la condición `WHERE`.
+3. Eliminar columnas que no aparezcan en `SELECT`.
+4. Si se especifica `DISTINCT`, eliminar filas repetidas.
 
-- El controlador de disco (procesador de E/S independiente) puede transferir un bloque entre memoria
-  y disco en paralelo con la CPU.
-- **Doble búfer**: mientras la CPU procesa un bloque ya en memoria, el controlador lee y transfiere
-  el siguiente bloque a un búfer diferente. Esto permite solapar lectura y procesamiento.
+**Ejemplo — (C15)** Averiguar el nombre y la edad de todos los marineros:
 
----
+```sql
+SELECT DISTINCT M.nombrem, M.edad
+FROM   Marineros M
+```
 
-## Grabación de registros en disco
+**Ejemplo — (C11)** Averiguar todos los marineros con categoría superior a 7:
 
-### Registros y tipos de registros
+```sql
+SELECT M.idm, M.nombrem, M.categoría, M.edad
+FROM   Marineros AS M
+WHERE  M.categoría > 7
+```
 
-Los datos se almacenan en **registros**, cada uno compuesto de valores o elementos de datos
-relacionados. Cada valor corresponde a un **campo** del registro y describe entidades y sus
-atributos.
+> La cláusula `SELECT` realiza **proyecciones**; las **selecciones** del álgebra relacional se
+> expresan con `WHERE`. Este desajuste en la nomenclatura es un accidente histórico.
 
-Una colección de nombres de campos y sus tipos constituye una **definición de tipo de registro**
-(formato de registro).
+**Ejemplo — (C1)** Averiguar el nombre de los marineros que han reservado el barco 103:
 
-### Ficheros de longitud fija y variable
+```sql
+SELECT M.nombrem
+FROM   Marineros M, Reservas R
+WHERE  M.idm = R.idm AND R.idb = 103
+```
 
-Un **fichero** es una secuencia de registros.
+**Ejemplo — (C2)** Averiguar el nombre de los marineros que han reservado barcos rojos:
 
-- **Longitud fija**: todos los registros tienen exactamente el mismo tamaño.
-- **Longitud variable**: registros de tamaños distintos. Puede deberse a:
-  - Uno o más campos de tamaño variable.
-  - Uno o más campos con múltiples valores en registros individuales.
-  - Uno o más campos opcionales.
-  - Registros de diferentes tipos en el mismo fichero.
+```sql
+SELECT M.nombrem
+FROM   Marineros M, Reservas R, Barcos B
+WHERE  M.idm = R.idm AND R.idb = B.idb AND B.color = 'rojo'
+```
 
-### Grabación de registros en bloques
+**Ejemplo — (C4)** Averiguar el nombre de los marineros que han reservado, como mínimo, un barco:
 
-Los registros se asignan a **bloques de disco** porque el bloque es la unidad de transferencia entre
-disco y memoria. Si el tamaño del bloque es mayor que el del registro, cada bloque contendrá varios
-registros.
-
-### Asignación en disco de bloques
-
-Técnicas estándar para asignar bloques en disco:
-
-- **Asignación contigua**: bloques consecutivos del disco. Lectura de todo el fichero ágil con doble
-  búfer, pero dificulta la expansión.
-- **Asignación enlazada**: cada bloque contiene un puntero al siguiente. Facilita la expansión pero
-  vuelve más lenta la lectura.
-- **Segmentos de fichero**: grupos de bloques consecutivos enlazados entre sí.
-- **Asignación indexada**: uno o más bloques de índice contienen punteros a los bloques del fichero.
-
----
-
-## Operaciones con ficheros
-
-**Modelo de costo** (para estimar el costo en tiempo de ejecución):
-
-- `B`: número de bloques con `R` registros por bloque.
-- `D`: tiempo promedio para leer o escribir un bloque a disco.
-- `C`: tiempo promedio para procesar un registro (comparación, etc.).
-- `H`: tiempo para aplicar la función hash a un registro (en organización hash).
-
-Valores típicos: `D = 25 ms`, `C` y `H` entre 1 y 10 µs. El costo de E/S de bloques de disco domina
-ampliamente.
-
-**Operaciones básicas**:
-
-- **Scan**: recorre todos los registros del fichero llevando cada bloque del disco al búfer.
-- **Búsqueda con selección de igualdad**: localiza registros que satisfacen `campo = valor`.
-- **Búsqueda con selección de rango**: localiza registros que satisfacen `campo ∈ [a, b]`.
-- **Inserción**: identifica el bloque destino, lo trae a memoria, lo modifica y lo escribe de
-  vuelta.
-- **Borrado**: identifica el bloque que contiene el registro, lo modifica y lo escribe de vuelta.
-
-**Comparación de organizaciones de ficheros**:
-
-![Tabla comparación de organizaciones de ficheros](../../../../resources/2018/u6-tabla-comparacion-ficheros.png)
-
-| Tipo de fichero | Scan   | Búsqueda igualdad | Búsqueda rango      | Inserción     | Borrado       |
-| --------------- | ------ | ----------------- | ------------------- | ------------- | ------------- |
-| Montículo       | BD     | 0.5BD             | BD                  | 2D            | Búsqueda + D  |
-| Ordenado        | BD     | D·log₂B           | D·log₂B + #coincid. | Búsqueda + BD | Búsqueda + BD |
-| Hash            | 1.25BD | D                 | 1.25BD              | 2D            | Búsqueda + D  |
+```sql
+SELECT M.nombrem
+FROM   Marineros M, Reservas R
+WHERE  M.idm = R.idm
+```
 
 ---
 
-## Estructuras de índice para ficheros
+### Expresiones y cadenas de caracteres
 
-Un **índice** es una estructura auxiliar diseñada para realizar más rápidamente las operaciones que
-no son soportadas eficientemente por la organización básica del fichero. Se puede ver como una
-colección de **entradas de datos** con una manera eficiente de localizar todas las entradas con
-clave de búsqueda `k`. Cada entrada `k*` contiene información suficiente para recuperar registros de
-datos con valor `k`.
+Cada elemento de la lista `SELECT` puede tener la forma `expresión AS nombre-columna`:
 
-### Alternativas para entradas de datos
+**Ejemplo — (C17)** Calcular el incremento de categoría de quienes navegaron en dos barcos distintos
+el mismo día:
 
-1. **Alternativa 1**: la entrada de datos `k*` es el registro de datos completo (con clave `k`). No
-   es necesario almacenar los registros por separado.
-2. **Alternativa 2**: la entrada de datos es un par `(k, rid)`, donde `rid` es el identificador del
-   registro de datos con clave `k`.
-3. **Alternativa 3**: la entrada de datos es un par `(k, rid-list)`, donde `rid-list` es una lista
-   de identificadores de registros con clave `k`. Mejor utilización de espacio que la Alternativa 2,
-   pero entradas de longitud variable.
+```sql
+SELECT M.nombrem, M.categoría + 1 AS categoría
+FROM   Marineros M, Reservas R1, Reservas R2
+WHERE  M.idm = R1.idm AND M.idm = R2.idm
+  AND  R1.fecha = R2.fecha AND R1.idb <> R2.idb
+```
 
-Las Alternativas 2 y 3 son independientes de la organización del fichero indexado. A lo sumo uno de
-los índices sobre un fichero puede usar la Alternativa 1.
+**Operador LIKE**: permite comparar cadenas con patrones usando `%` (cero o más caracteres) y `_`
+(un carácter exacto).
 
-### Índices de un solo nivel
+**Ejemplo — (C18)** Averiguar la edad de los marineros cuyo nombre comienza con B, acaba con O y
+tiene al menos seis caracteres:
 
-#### Índices agrupados versus no agrupados
+```sql
+SELECT M.edad
+FROM   Marineros M
+WHERE  M.nombrem LIKE 'B_%___O'
+```
 
-- **Índice agrupado**: el ordenamiento de los registros de datos coincide con el ordenamiento de las
-  entradas del índice. Un fichero puede estar agrupado por a lo sumo una clave de búsqueda.
-- **Índice no agrupado**: el ordenamiento de datos no coincide con el del índice. Se pueden tener
-  varios índices no agrupados sobre un mismo fichero.
+---
 
-![Índice agrupado y no agrupado (Alternativa 2)](../../../../resources/2018/u6-indices-agrupado-no-agrupado.png)
+### Otros predicados
 
-#### Índices densos versus dispersos
+#### BETWEEN
 
-- **Índice denso**: contiene al menos una entrada de datos por cada valor de la clave de búsqueda
-  que aparece en algún registro.
-- **Índice disperso** (no denso): contiene una entrada por cada **bloque** de registros del fichero
-  de datos.
+```sql
+SELECT columnas
+FROM   tabla
+WHERE  columna BETWEEN límite1 AND límite2
+```
 
-![Índice disperso sobre nombre e índice denso sobre edad](../../../../resources/2018/u6-indices-disperso-denso.png)
+Ejemplo: marineros con edad entre 20 y 35:
 
-#### Índices primarios y secundarios
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  M.edad BETWEEN 20 AND 35
+```
 
-- **Índice primario**: índice sobre un conjunto de campos que incluyen la clave primaria.
-  Garantizado sin duplicados.
-- **Índice secundario**: cualquier índice que no es primario. Puede contener duplicados.
-- **Índice único**: índice sin duplicados (aunque no sea primario).
+#### IN / NOT IN
 
-### Índices multinivel — ISAM
+```sql
+SELECT columnas
+FROM   tabla
+WHERE  columna [NOT] IN (valor1, valor2, …, valorN)
+```
 
-**ISAM** (Indexed Sequential Access Method): se construye un segundo fichero índice con un registro
-por cada bloque del fichero original, de la forma `(primera clave del bloque, puntero a bloque)`,
-ordenado por la clave. Esto permite búsqueda binaria sobre el fichero índice (más pequeño) en lugar
-del fichero de datos.
+Ejemplo: marineros con edad 15, 20 o 35:
 
-Si el fichero índice sigue siendo grande, el proceso se repite recursivamente hasta que el fichero
-auxiliar quepa en un bloque. Esto produce una **estructura arbórea**. Cada nodo del árbol ISAM es un
-bloque de disco; todos los datos residen en los **bloques hoja**.
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  M.edad IN (15, 20, 35)
+```
 
-La estructura ISAM es completamente **estática**, lo que facilita optimizaciones de bajo nivel pero
-dificulta las inserciones y borrados.
+#### IS NULL / IS NOT NULL
 
-![Estructura de índice de un nivel](../../../../resources/2018/u6-indice-un-nivel.png)
+```sql
+SELECT columnas
+FROM   tabla
+WHERE  columna IS [NOT] NULL
+```
 
-### Índices multinivel dinámicos — Árbol B+
+Ejemplo: marineros sin hijos registrados:
 
-El **árbol B+** es un árbol balanceado ampliamente usado en la práctica:
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  M.hijos IS NULL
+```
 
-- Los **nodos internos** dirigen la búsqueda.
-- Los **nodos hoja** contienen las entradas de datos, enlazados en una **lista doblemente enlazada**
-  (conjunto secuencia) para recorrido eficiente en ambas direcciones.
+#### ALL / ANY / SOME
 
-Características principales:
+```sql
+SELECT columnas
+FROM   tabla
+WHERE  columna operador {ALL | ANY | SOME} subconsulta
+```
 
-- Las operaciones de inserción y borrado mantienen el árbol **balanceado**.
-- Se garantiza una **ocupación mínima del 50%** en cada nodo excepto la raíz.
-- La búsqueda requiere recorrer el árbol desde la raíz hasta la hoja apropiada. El costo es
-  proporcional a la **altura del árbol**.
+Ejemplo — barcos reservados **solo** por marineros mayores de 18:
 
-A diferencia de ISAM, el árbol B+ crece y decrece **dinámicamente**, lo que lo hace adecuado para
-ficheros con muchas inserciones y borrados.
+```sql
+SELECT R.idb
+FROM   Reservas R
+WHERE  R.idm = ALL (SELECT M.idm
+                    FROM   Marineros M
+                    WHERE  M.edad >= 18)
+```
 
-### Índices sobre claves múltiples
+Ejemplo — barcos reservados por **al menos un** marinero mayor de 18:
 
-La clave de búsqueda puede contener varios campos; tales claves se llaman **claves múltiples**,
-**compuestas** o **concatenadas**.
+```sql
+SELECT R.idb
+FROM   Reservas R
+WHERE  R.idm = ANY (SELECT M.idm
+                    FROM   Marineros M
+                    WHERE  M.edad >= 18)
+```
 
-Se pueden crear índices separados para distintas combinaciones de campos o para campos individuales:
+#### EXISTS / NOT EXISTS
 
-- Índice sobre `<edad, sal>`
-- Índice sobre `<sal, edad>`
-- Índice sobre `<edad>`
-- Índice sobre `<sal>`
+```sql
+SELECT columnas
+FROM   tabla
+WHERE  [NOT] EXISTS subconsulta
+```
 
-![Índices de clave compuesta](../../../../resources/2018/u6-indices-clave-compuesta.png)
+Ejemplo: marineros que reservaron el barco 103:
+
+```sql
+SELECT M.idm, M.nombrem
+FROM   Marineros M
+WHERE  EXISTS (SELECT R.idm
+               FROM   Reservas R
+               WHERE  R.idb = 103)
+```
+
+---
+
+## Subconsultas o consultas anidadas
+
+Una **subconsulta** es una consulta incluida en la cláusula `WHERE` o `HAVING` de otra consulta. Se
+usa cuando la condición requiere calcular un valor intermedio.
+
+**Ejemplo**: nombre de los marineros con la categoría máxima:
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  M.categoría = (SELECT MAX(M2.categoría)
+                      FROM   Marineros M2)
+```
+
+**Ejemplo — (C1) con IN anidado**: marineros que reservaron el barco 103:
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  M.idm IN (SELECT R.idm
+                 FROM   Reservas R
+                 WHERE  R.idb = 103)
+```
+
+**Ejemplo — (C2) con varios niveles de anidamiento**: nombre de los marineros que reservaron barcos
+rojos:
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  M.idm IN (SELECT R.idm
+                 FROM   Reservas R
+                 WHERE  R.idb IN (SELECT B.idb
+                                  FROM   Barcos B
+                                  WHERE  B.color = 'rojo'))
+```
+
+---
+
+## UNION, INTERSECT y EXCEPT
+
+SQL soporta operaciones de conjuntos entre resultados compatibles en unión (mismo número de columnas
+con dominios compatibles).
+
+Por defecto, estas operaciones **eliminan duplicados**; usar `ALL` para conservarlos.
+
+### UNION
+
+```sql
+SELECT columna FROM tabla [WHERE condiciones]
+UNION [ALL]
+SELECT columna FROM tabla [WHERE condiciones]
+```
+
+**Ejemplo — (C5)** Marineros que reservaron barcos rojos **o** verdes:
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M, Reservas R, Barcos B
+WHERE  M.idm = R.idm AND R.idb = B.idb AND B.color = 'rojo'
+UNION
+SELECT M2.nombrem
+FROM   Marineros M2, Reservas R2, Barcos B2
+WHERE  M2.idm = R2.idm AND R2.idb = B2.idb AND B2.color = 'verde'
+```
+
+### INTERSECT
+
+```sql
+SELECT columna FROM tabla [WHERE condiciones]
+INTERSECT [ALL]
+SELECT columna FROM tabla [WHERE condiciones]
+```
+
+**Ejemplo — (C6)** Marineros que reservaron barcos rojos **y** verdes:
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M, Reservas R, Barcos B
+WHERE  M.idm = R.idm AND R.idb = B.idb AND B.color = 'rojo'
+INTERSECT
+SELECT M2.nombrem
+FROM   Marineros M2, Reservas R2, Barcos B2
+WHERE  M2.idm = R2.idm AND R2.idb = B2.idb AND B2.color = 'verde'
+```
+
+También se puede expresar con `IN`:
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M, Reservas R, Barcos B
+WHERE  M.idm = R.idm AND R.idb = B.idb AND B.color = 'rojo'
+  AND  M.idm IN (SELECT M2.idm
+                 FROM   Marineros M2, Reservas R2, Barcos B2
+                 WHERE  M2.idm = R2.idm AND R2.idb = B2.idb AND B2.color = 'verde')
+```
+
+### EXCEPT
+
+```sql
+SELECT columna FROM tabla [WHERE condiciones]
+EXCEPT [ALL]
+SELECT columna FROM tabla [WHERE condiciones]
+```
+
+**Ejemplo — (C19)** Marineros que reservaron barcos rojos pero **no** verdes:
+
+```sql
+SELECT R.idm
+FROM   Reservas R, Barcos B
+WHERE  R.idb = B.idb AND B.color = 'rojo'
+EXCEPT
+SELECT R2.idm
+FROM   Reservas R2, Barcos B2
+WHERE  R2.idb = B2.idb AND B2.color = 'verde'
+```
+
+**Ejemplo — (C20)** Marineros con categoría 10 o que reservaron el barco 104:
+
+```sql
+SELECT M.idm
+FROM   Marineros M
+WHERE  M.categoría = 10
+UNION
+SELECT R.idm
+FROM   Reservas R
+WHERE  R.idb = 104
+```
+
+---
+
+## Consultas anidadas correlacionadas
+
+En una **consulta correlacionada**, la subconsulta interior depende de la fila que se examina en la
+consulta exterior.
+
+**Ejemplo — (C1) con EXISTS correlacionado**:
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  EXISTS (SELECT *
+               FROM   Reservas R
+               WHERE  R.idb = 103 AND R.idm = M.idm)
+```
+
+Para cada fila `M` de Marineros, se evalúa si existe alguna reserva del barco 103 hecha por ese
+marinero.
+
+**Ejemplo — (C9)** Marineros que han reservado **todos** los barcos (división con NOT EXISTS):
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  NOT EXISTS (SELECT B.idb
+                   FROM   Barcos B
+                   EXCEPT
+                   SELECT R.idb
+                   FROM   Reservas R
+                   WHERE  R.idm = M.idm)
+```
+
+Versión alternativa sin EXCEPT:
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  NOT EXISTS (SELECT B.idb
+                   FROM   Barcos B
+                   WHERE  NOT EXISTS (SELECT R.idb
+                                      FROM   Reservas R
+                                      WHERE  R.idb = B.idb AND R.idm = M.idm))
+```
+
+---
+
+## Operadores de agregación
+
+SQL soporta cinco operadores de agregación aplicables a cualquier columna:
+
+| Operador                | Descripción                  |
+| ----------------------- | ---------------------------- |
+| `COUNT([DISTINCT] col)` | Número de valores (únicos)   |
+| `SUM([DISTINCT] col)`   | Suma de valores (únicos)     |
+| `AVG([DISTINCT] col)`   | Promedio de valores (únicos) |
+| `MAX(col)`              | Valor máximo                 |
+| `MIN(col)`              | Valor mínimo                 |
+
+**Ejemplo — (C25)** Promedio de edad de los marineros:
+
+```sql
+SELECT AVG(M.edad)
+FROM   Marineros M
+```
+
+**Ejemplo — (C26)** Promedio de edad de marineros con categoría 10:
+
+```sql
+SELECT AVG(M.edad)
+FROM   Marineros M
+WHERE  M.categoría = 10
+```
+
+**Ejemplo** — marinero más joven con su nombre (requiere subconsulta):
+
+```sql
+SELECT M.nombrem, M.edad
+FROM   Marineros M
+WHERE  M.edad = (SELECT MIN(M2.edad)
+                 FROM   Marineros M2)
+```
+
+**Ejemplo — (C28)** Contar el número de marineros:
+
+```sql
+SELECT COUNT(*)
+FROM   Marineros M
+```
+
+**Ejemplo — (C29)** Contar nombres distintos:
+
+```sql
+SELECT COUNT(DISTINCT M.nombrem)
+FROM   Marineros M
+```
+
+**Ejemplo — (C30)** Marineros de más edad que el marinero más viejo de categoría 10:
+
+```sql
+SELECT M.nombrem
+FROM   Marineros M
+WHERE  M.edad > (SELECT MAX(M2.edad)
+                 FROM   Marineros M2
+                 WHERE  M2.categoría = 10)
+```
+
+---
+
+## ORDER BY, GROUP BY y HAVING
+
+### ORDER BY
+
+Ordena el resultado por una o más columnas. Por defecto el orden es ascendente; `DESC` para
+descendente.
+
+```sql
+SELECT [DISTINCT] columnas
+FROM   tablas
+[WHERE condiciones]
+[ORDER BY columna [DESC] [, columna2 [DESC] …]]
+```
+
+### GROUP BY
+
+Permite aplicar operaciones de agregación a **grupos** de filas. Las columnas en `SELECT` deben
+aparecer también en `GROUP BY` (salvo que estén dentro de un agregado).
+
+```sql
+SELECT [DISTINCT] columnas
+FROM   tablas
+[WHERE condiciones]
+GROUP BY columnas-de-agrupación
+[HAVING condición-sobre-grupos]
+[ORDER BY columna [DESC] …]
+```
+
+**Ejemplo — (C31)** Edad del marinero más joven de cada categoría:
+
+```sql
+SELECT M.categoría, MIN(M.edad)
+FROM   Marineros M
+GROUP BY M.categoría
+```
+
+### HAVING
+
+Filtra **grupos** (funciona como `WHERE` pero para grupos formados por `GROUP BY`). Siempre va
+después de `GROUP BY`.
+
+**Ejemplo — (C32)** Edad del marinero más joven con derecho a voto (>18) para cada categoría con al
+menos dos marineros con derecho a voto:
+
+```sql
+SELECT M.categoría, MIN(M.edad) AS edadmín
+FROM   Marineros M
+WHERE  M.edad >= 18
+GROUP BY M.categoría
+HAVING COUNT(*) > 1
+```
+
+**Pasos de evaluación:**
+
+1. Calcular producto cartesiano (solo Marineros aquí).
+1. Aplicar `WHERE M.edad >= 18`.
+1. Eliminar columnas innecesarias.
+1. Ordenar por `GROUP BY M.categoría`.
+1. Aplicar `HAVING COUNT(*) > 1`.
+1. Generar una fila por grupo restante.
+
+**Ejemplo — (C33)** Para cada barco rojo, número de reservas:
+
+```sql
+SELECT B.idb, COUNT(*) AS numreservas
+FROM   Barcos B, Reservas R
+WHERE  B.idb = R.idb AND B.color = 'rojo'
+GROUP BY B.idb
+```
+
+**Ejemplo — (C34)** Edad media de marineros por categoría con al menos dos marineros:
+
+```sql
+SELECT M.categoría, AVG(M.edad) AS edadmedia
+FROM   Marineros M
+GROUP BY M.categoría
+HAVING COUNT(*) > 1
+```
+
+**Ejemplo — (C37)** Categorías con la edad media mínima (con tabla temporal en `FROM`):
+
+```sql
+SELECT Temp.categoría, Temp.edadmedia
+FROM   (SELECT M.categoría, AVG(M.edad) AS edadmedia
+        FROM   Marineros M
+        GROUP BY M.categoría) AS Temp
+WHERE  Temp.edadmedia = (SELECT MIN(Temp2.edadmedia)
+                         FROM   (SELECT AVG(M2.edad) AS edadmedia
+                                 FROM   Marineros M2
+                                 GROUP BY M2.categoría) AS Temp2)
+```
+
+> Las operaciones de agregación **no se pueden anidar directamente** (`MIN(AVG(...))` es ilegal).
+> Hay que usar subconsultas con tablas temporales.
+
+---
+
+## Valores nulos
+
+SQL usa el valor especial **NULL** para representar valores desconocidos o inaplicables.
+
+### Lógica de tres valores
+
+Las comparaciones con NULL producen un tercer valor: **desconocido** (además de verdadero y falso).
+
+| Expresión                       | Resultado   |
+| ------------------------------- | ----------- |
+| `NULL = NULL`                   | desconocido |
+| `NOT NULL`                      | NULL        |
+| `Verdadero OR Verdadero`        | Verdadero   |
+| `Falso/NULL OR NULL`            | NULL        |
+| `Verdadero AND Verdadero`       | Verdadero   |
+| `Verdadero/Falso/NULL AND NULL` | NULL        |
+| `Verdadero/Falso AND Falso`     | Falso       |
+
+La cláusula `WHERE` elimina filas cuya condición sea **falsa o NULL** (no solo falsa).
+
+### NULL en operaciones de agregación
+
+- `COUNT(*)` cuenta filas NULL igual que las demás.
+- `SUM`, `AVG`, `MIN`, `MAX`, `COUNT(col)` **descartan** los valores NULL.
+- Si se aplican solo a valores NULL, devuelven NULL (excepto `COUNT` que devuelve 0).
+
+### Reuniones externas
+
+Las **reuniones externas** incluyen en el resultado filas sin correspondencia, rellenando con NULL
+las columnas de la tabla sin pareja.
+
+| Tipo                 | Descripción                                   |
+| -------------------- | --------------------------------------------- |
+| `LEFT [OUTER] JOIN`  | Incluye todas las filas de la tabla izquierda |
+| `RIGHT [OUTER] JOIN` | Incluye todas las filas de la tabla derecha   |
+| `FULL OUTER JOIN`    | Incluye todas las filas de ambas tablas       |
+
+**Ejemplo**: pares [idm, idb] de marineros y los barcos que reservaron (incluyendo marineros sin
+reservas):
+
+```sql
+SELECT M.idm, R.idb
+FROM   Marineros M NATURAL LEFT OUTER JOIN Reservas R
+```
+
+`NATURAL` especifica que la condición de reunión es la igualdad en todos los atributos comunes.
+
+Para prevenir valores NULL en una columna: `nombrem CHAR(20) NOT NULL`. Los campos de clave primaria
+nunca admiten NULL.
+
+---
+
+## JOINs o Reuniones
+
+Existe una sintaxis explícita para reuniones donde la cláusula `WHERE` se usa únicamente para
+filtrar (no para reunir).
+
+![JOINs — diagramas de Venn](../../../../resources/2018/u6-joins-diagramas.png)
+
+### INNER JOIN
+
+```sql
+SELECT <select_list>
+FROM   Table_A A INNER JOIN Table_B B
+       ON A.Key = B.Key
+```
+
+Devuelve solo las filas con correspondencia en ambas tablas.
+
+### LEFT JOIN / RIGHT JOIN
+
+```sql
+SELECT <select_list>
+FROM   Table_A A LEFT JOIN Table_B B
+       ON A.Key = B.Key
+```
+
+```sql
+SELECT <select_list>
+FROM   Table_A A RIGHT JOIN Table_B B
+       ON A.Key = B.Key
+```
+
+La reunión externa incluye todos los registros de la tabla indicada (izquierda o derecha) aunque no
+tengan correspondencia en la otra; los campos sin pareja toman valor NULL.
+
+![JOINs — sintaxis y ejemplos](../../../../resources/2018/u6-joins-sintaxis.png)
 
 ---
 
