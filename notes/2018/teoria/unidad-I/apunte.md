@@ -2,7 +2,11 @@
 
 > **Gestión de Datos** — Ingeniería en Sistemas de Información, UTN-FRRE
 >
-> Profesora: Ing. Carolina Orcola · Jefe de T.P.: Ing. Luis Eiman · Auxiliar: Juan Carlos Fernández
+> Profesora: Ing. Carolina Orcola
+>
+> Jefe de T.P.: Ing. Luis Eiman
+>
+> Auxiliar: Juan Carlos Fernández
 
 ---
 
