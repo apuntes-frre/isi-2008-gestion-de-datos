@@ -12,26 +12,47 @@
 
 ## Índice
 
-1. [Álgebra Relacional](#álgebra-relacional)
-   - [Operaciones unitarias](#operaciones-unitarias)
-   - [Operaciones de conjuntos](#operaciones-de-conjuntos)
-   - [Reunión, División y Renombramiento](#reunión-división-y-renombramiento)
-   - [Consultas de ejemplo](#consultas-de-ejemplo)
-2. [Cálculo Relacional](#cálculo-relacional)
-   - [Cálculo Relacional de Tuplas (CRT)](#cálculo-relacional-de-tuplas-crt)
-   - [Cálculo Relacional de Dominios (CRD)](#cálculo-relacional-de-dominios-crd)
-3. [Bibliografía](#bibliografía)
+- [Unidad V: Álgebra y Cálculo Relacional](#unidad-v-álgebra-y-cálculo-relacional)
+  - [Índice](#índice)
+  - [Álgebra Relacional](#álgebra-relacional)
+    - [Operaciones unitarias](#operaciones-unitarias)
+      - [Selección (σ)](#selección-σ)
+      - [Proyección (π)](#proyección-π)
+      - [Renombramiento (ρ)](#renombramiento-ρ)
+    - [Operaciones de conjuntos](#operaciones-de-conjuntos)
+      - [Unión (∪)](#unión-)
+      - [Diferencia (−)](#diferencia-)
+      - [Intersección (∩)](#intersección-)
+      - [Producto Cartesiano (×)](#producto-cartesiano-)
+    - [Reunión, División y Renombramiento](#reunión-división-y-renombramiento)
+      - [Reunión condicional (⋈\_c)](#reunión-condicional-_c)
+      - [Equirreunión](#equirreunión)
+      - [Reunión natural (⋈)](#reunión-natural-)
+      - [División (/)](#división-)
+    - [Consultas de ejemplo](#consultas-de-ejemplo)
+  - [Cálculo Relacional](#cálculo-relacional)
+    - [Cálculo Relacional de Tuplas (CRT)](#cálculo-relacional-de-tuplas-crt)
+      - [Átomos](#átomos)
+      - [Fórmulas](#fórmulas)
+      - [Ejemplos CRT](#ejemplos-crt)
+    - [Cálculo Relacional de Dominios (CRD)](#cálculo-relacional-de-dominios-crd)
+      - [Ejemplos CRD](#ejemplos-crd)
+  - [Bibliografía](#bibliografía)
 
 ---
 
 ## Álgebra Relacional
 
-El **Álgebra Relacional (AR)** es uno de los dos lenguajes formales de consultas asociados con el modelo relacional. Es un lenguaje **procedimental**: consta de un conjunto de operaciones que manipulan relaciones enteras. El resultado de cada operación es una nueva relación.
+El **Álgebra Relacional (AR)** es uno de los dos lenguajes formales de consultas asociados con el
+modelo relacional. Es un lenguaje **procedimental**: consta de un conjunto de operaciones que
+manipulan relaciones enteras. El resultado de cada operación es una nueva relación.
 
 Las operaciones del AR se dividen en:
 
-- **Operaciones unitarias** (sobre una sola relación): Selección (σ), Proyección (π), Renombramiento (ρ)
-- **Operaciones de conjuntos** (sobre dos relaciones): Unión (∪), Diferencia (−), Intersección (∩), Producto Cartesiano (×)
+- **Operaciones unitarias** (sobre una sola relación): Selección (σ), Proyección (π), Renombramiento
+  (ρ)
+- **Operaciones de conjuntos** (sobre dos relaciones): Unión (∪), Diferencia (−), Intersección (∩),
+  Producto Cartesiano (×)
 - **Operaciones adicionales**: Reunión (⋈), División (/)
 
 ---
@@ -46,7 +67,8 @@ La operación de **selección** devuelve las tuplas de una relación que satisfa
 σ<condición>(R)
 ```
 
-La condición puede usar: `=`, `≠`, `<`, `>`, `≤`, `≥`, y conectores lógicos `∧` (AND), `∨` (OR), `¬` (NOT).
+La condición puede usar: `=`, `≠`, `<`, `>`, `≤`, `≥`, y conectores lógicos `∧` (AND), `∨` (OR), `¬`
+(NOT).
 
 **Ejemplo:** Recuperar los marineros con `categoría > 8` del ejemplar M2:
 
@@ -85,7 +107,8 @@ La operación de **renombramiento** permite cambiar el nombre de una relación o
 
 ### Operaciones de conjuntos
 
-Para aplicar Unión, Diferencia e Intersección, las relaciones deben ser **compatibles en unión**: mismo número de campos y dominios compatibles en cada posición.
+Para aplicar Unión, Diferencia e Intersección, las relaciones deben ser **compatibles en unión**:
+mismo número de campos y dominios compatibles en cada posición.
 
 #### Unión (∪)
 
@@ -123,7 +146,8 @@ Devuelve todas las combinaciones posibles de tuplas de R y S.
 R × S
 ```
 
-El esquema resultante tiene todos los campos de R seguidos de todos los de S. Si R tiene n tuplas y S tiene m tuplas, R × S tiene n×m tuplas. Generalmente se combina con selección y proyección.
+El esquema resultante tiene todos los campos de R seguidos de todos los de S. Si R tiene n tuplas y
+S tiene m tuplas, R × S tiene n×m tuplas. Generalmente se combina con selección y proyección.
 
 ![Producto cartesiano](../../../../resources/2018/u5-producto-cartesiano.png)
 
@@ -145,17 +169,20 @@ Es más eficiente que el producto cartesiano cuando la condición filtra muchas 
 
 #### Equirreunión
 
-Reunión condicional donde la condición es una igualdad entre atributos. El resultado contiene columnas duplicadas para los atributos de reunión.
+Reunión condicional donde la condición es una igualdad entre atributos. El resultado contiene
+columnas duplicadas para los atributos de reunión.
 
 #### Reunión natural (⋈)
 
-Reunión donde la condición iguala **todos** los campos con el mismo nombre. Elimina las columnas duplicadas del resultado.
+Reunión donde la condición iguala **todos** los campos con el mismo nombre. Elimina las columnas
+duplicadas del resultado.
 
 ```text
 R ⋈ S
 ```
 
-**Ejemplo:** Reunión natural entre PROFESORES y DEPARTAMENTOS usando DPTO = CODDPTO. Primero se renombra:
+**Ejemplo:** Reunión natural entre PROFESORES y DEPARTAMENTOS usando DPTO = CODDPTO. Primero se
+renombra:
 
 ```text
 ρ(DEPARTA(1→DPTO, 2→NOMDPTO), DEPARTAMENTOS)
@@ -166,7 +193,8 @@ PROFESORES ⋈ DEPARTA
 
 #### División (/)
 
-Dadas relaciones R(x, y) y S(y), `R / S` devuelve todas las x tales que para **toda** tupla y en S, existe una tupla (x, y) en R.
+Dadas relaciones R(x, y) y S(y), `R / S` devuelve todas las x tales que para **toda** tupla y en S,
+existe una tupla (x, y) en R.
 
 ```text
 R / S
@@ -188,7 +216,8 @@ R / S = T1 − T2
 
 ### Consultas de ejemplo
 
-Las consultas se formulan sobre las relaciones **Marineros(idm, nombrem, categoría, edad)**, **Barcos(idb, nombreb, color)** y **Reservas(idm, idb, día)**.
+Las consultas se formulan sobre las relaciones **Marineros(idm, nombrem, categoría, edad)**,
+**Barcos(idb, nombreb, color)** y **Reservas(idm, idb, día)**.
 
 **(C1)** Averiguar los nombres e identificadores de todos los marineros con categoría superior a 7:
 
@@ -238,7 +267,8 @@ Rojotemp ∩ Verdetemp
 π_nombrem ((σ_color='rojo' (Barcos)) ⋈ Reservas ⋈ Marineros)
 ```
 
-**(C8)** Averiguar los nombres de los marineros que han reservado, como mínimo, un barco rojo o uno verde:
+**(C8)** Averiguar los nombres de los marineros que han reservado, como mínimo, un barco rojo o uno
+verde:
 
 ```text
 ρ(Temp, π_nombrem ((σ_color='rojo'∨color='verde' (Barcos)) ⋈ Reservas ⋈ Marineros))
@@ -247,7 +277,8 @@ Rojotemp ∩ Verdetemp
 
 ![Consultas C7-C8-C9](../../../../resources/2018/u5-consultas-c7-c8-c9.png)
 
-**(C9)** Averiguar los nombres de los marineros que han reservado, como mínimo, dos barcos distintos:
+**(C9)** Averiguar los nombres de los marineros que han reservado, como mínimo, dos barcos
+distintos:
 
 ```text
 ρ(Reservas1(1→idm1, 2→idb1, 3→día1), Reservas)
@@ -255,7 +286,8 @@ Rojotemp ∩ Verdetemp
 π_nombrem (σ_idm1=idm2 ∧ idb1≠idb2 (Reservas1 × Reservas2) ⋈ Marineros)
 ```
 
-**(C10)** Averiguar el nombre de los marineros que han reservado **todos** los barcos llamados Intrépido:
+**(C10)** Averiguar el nombre de los marineros que han reservado **todos** los barcos llamados
+Intrépido:
 
 ```text
 ρ(Idmstemp, π_idm,idb (Reservas) / π_idb (σ_nombreb='Intrépido' (Barcos)))
@@ -283,13 +315,15 @@ Rojotemp ∩ Verdetemp
 
 ## Cálculo Relacional
 
-El **Cálculo Relacional** es un lenguaje de consultas **no procedimental**: describe la información deseada sin dar un procedimiento específico para obtenerla. Se basa en el cálculo de predicados de primer orden.
+El **Cálculo Relacional** es un lenguaje de consultas **no procedimental**: describe la información
+deseada sin dar un procedimiento específico para obtenerla. Se basa en el cálculo de predicados de
+primer orden.
 
 Hay dos variantes:
 
-| Variante | Variable sobre… |
-|---|---|
-| Cálculo Relacional de Tuplas (CRT) | tuplas completas |
+| Variante                             | Variable sobre…             |
+| ------------------------------------ | --------------------------- |
+| Cálculo Relacional de Tuplas (CRT)   | tuplas completas            |
 | Cálculo Relacional de Dominios (CRD) | valores de dominio (campos) |
 
 Ambos son equivalentes en poder expresivo al Álgebra Relacional (**completitud relacional**).
@@ -304,7 +338,9 @@ Una consulta en CRT tiene la forma:
 { T | p(T) }
 ```
 
-donde `T` es una **variable tupla** y `p(T)` es una **fórmula** que describe las propiedades de las tuplas buscadas. El resultado es el conjunto de todas las tuplas T para las cuales la fórmula se evalúa como verdadera.
+donde `T` es una **variable tupla** y `p(T)` es una **fórmula** que describe las propiedades de las
+tuplas buscadas. El resultado es el conjunto de todas las tuplas T para las cuales la fórmula se
+evalúa como verdadera.
 
 #### Átomos
 
@@ -364,7 +400,9 @@ Una consulta en CRD tiene la forma:
 { ⟨x₁, x₂, …, xₙ⟩ | p(x₁, x₂, …, xₙ) }
 ```
 
-donde `x₁, …, xₙ` son **variables de dominio** (representan valores de atributos individuales) y `p` es una fórmula. El resultado es el conjunto de las n-uplas de valores de dominio para los cuales la fórmula es verdadera.
+donde `x₁, …, xₙ` son **variables de dominio** (representan valores de atributos individuales) y `p`
+es una fórmula. El resultado es el conjunto de las n-uplas de valores de dominio para los cuales la
+fórmula es verdadera.
 
 #### Ejemplos CRD
 
@@ -385,6 +423,8 @@ donde `x₁, …, xₙ` son **variables de dominio** (representan valores de atr
 
 ## Bibliografía
 
-1. *"Sistema de Administración de Bases de Datos"*; Raghu Ramakrishnan / Johannes Gehrke; Mc Graw Hill, 3ª Edición, edición en español — 2007
-2. *"Fundamentos de Sistemas de Bases de Datos"*; Elmasri y Navathe; Addison Wesley; 3ª Edición; Madrid; 2002
-3. *"Introduction to Database Systems"*; C. J. Date; Addison Wesley; 8ª Edición; 2004
+1. _"Sistema de Administración de Bases de Datos"_; Raghu Ramakrishnan / Johannes Gehrke; Mc Graw
+   Hill, 3ª Edición, edición en español — 2007
+2. _"Fundamentos de Sistemas de Bases de Datos"_; Elmasri y Navathe; Addison Wesley; 3ª Edición;
+   Madrid; 2002
+3. _"Introduction to Database Systems"_; C. J. Date; Addison Wesley; 8ª Edición; 2004
