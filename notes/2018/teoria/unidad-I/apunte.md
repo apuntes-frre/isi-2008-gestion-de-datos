@@ -267,7 +267,7 @@ movimiento.
 El SGBD acepta órdenes SQL generadas por diversas interfaces de usuario, produce planes de
 evaluación de consultas, los ejecuta contra la base de datos y devuelve las respuestas.
 
-![Arquitectura del SGBD](../../../resources/2018/u1-arquitectura-sgbd.png)
+![Arquitectura del SGBD](../../../../resources/2018/u1-arquitectura-sgbd.png)
 
 Cuando un usuario formula una consulta:
 
