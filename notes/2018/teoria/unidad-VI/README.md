@@ -12,7 +12,7 @@
 
 ## Índice
 
-- [Unidad V: SQL](#unidad-v-sql)
+- [Unidad VI: SQL](#unidad-vi-sql)
   - [Índice](#índice)
   - [Introducción](#introducción)
   - [Consultas básicas](#consultas-básicas)
