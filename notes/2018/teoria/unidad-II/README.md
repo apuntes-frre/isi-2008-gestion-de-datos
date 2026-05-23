@@ -12,7 +12,7 @@
 
 ## Índice
 
-- [Unidad VI: Almacenamiento de Registros y Organización de Ficheros](#unidad-vi-almacenamiento-de-registros-y-organización-de-ficheros)
+- [Unidad II: Almacenamiento de Registros y Organización de Ficheros](#unidad-ii-almacenamiento-de-registros-y-organización-de-ficheros)
   - [Índice](#índice)
   - [Introducción](#introducción)
     - [Jerarquías de memoria y dispositivos de almacenamiento](#jerarquías-de-memoria-y-dispositivos-de-almacenamiento)
