@@ -1,5 +1,5 @@
 <!-- AUTOGENERADO desde apuntes-frre/.github (data/isi.toml).
-     No editar a mano: los cambios se sobrescriben en el próximo run de CI. -->
+     No editar a mano: los cambios se sobrescriben en la próxima sincronización manual. -->
 # 📚 Gestión de Datos
 
 > Materia de **Ingeniería en Sistemas de Información** — Plan 2008.
