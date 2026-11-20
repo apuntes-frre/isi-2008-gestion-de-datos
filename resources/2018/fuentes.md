@@ -223,3 +223,198 @@ como imágenes y también se transcriben sus cifras legibles en tablas.
 Las seis transcripciones cubren el contenido legible de sus archivos completos.
 El video ausente impide declarar recuperados todos los recursos externos de la
 Unidad I. El resto de la materia requiere su propio inventario y revisión.
+
+## Lote 2026-11-20: Modelado de Datos (Entidad-Relación)
+
+Revisión realizada el 2026-11-20 en la rama
+`claude/transcribir-gestion-de-datos-unidad-ii`. Fuente canónica local: la misma
+carpeta de OneDrive de la sección anterior. Alcance: el apunte de Modelado de
+Datos, su guía de trabajos prácticos y las resoluciones en Lucidchart. Los
+originales se materializaron con el preflight en un directorio temporal nuevo,
+con SHA-256 y lectura completa verificados. No se modificó ni se incorporó
+ningún original a Git.
+
+### Numeración de la fuente
+
+El archivo `Unidad_II.pdf` imprime «Unidad 3: Modelado de datos» en la portada y
+«Unidad III: Modelado de Datos» en el índice; el programa 2018 del curso
+(`PROGRAMA 2018.pdf`) lo numera como «Unidad II – Modelado de Datos», igual que
+la guía de TP («Unidad 2: Modelo Entidad Relación»). El README recuperado
+`notes/2018/teoria/unidad-III/README.md` ya tenía el título «Unidad III:
+Modelado de Datos» y corresponde a este mismo apunte; se reemplaza por el texto
+íntegro. Como el validador exige nombres publicados en minúsculas y en
+kebab-case (`unidad-III/README.md` no lo cumple), la nota se publica como
+`notes/2018/teoria/modelado-de-datos-apunte.md` y se elimina la carpeta
+`unidad-III`. El README `unidad-II` (Almacenamiento de registros) viene de otro
+original (`Unidad VI.pdf`, cuya portada dice «Unidad 2: Almacenamiento de
+Registros y organización de ficheros primarios») y no se toca en este lote. La
+renumeración de las demás carpetas de unidades queda como decisión pendiente.
+
+### Originales transcritos
+
+#### Unidad_II.pdf
+
+- Ruta dentro de OneDrive: `2018/Unidad_II.pdf`.
+- Paginación: 22 páginas.
+- Autoría y año: Ing. Carolina Orcola; Año 2011 en el documento. Metadatos:
+  creado con Microsoft Word 2007 el 2011-03-06; su título residual es «EL TAD
+  COLA».
+- Tamaño materializado: 821851 bytes.
+- SHA-256:
+
+```text
+abd87df3dfebf8541a842c6d3a2fedb3c51bb20baa92e68ab076b9c477c5b7e1
+```
+
+- Transcripción:
+  [notes/2018/teoria/modelado-de-datos-apunte.md](../../notes/2018/teoria/modelado-de-datos-apunte.md).
+
+#### Guia de TP 2018 - Unidad 2.pdf
+
+- Ruta dentro de OneDrive: `2018/Guia de TP 2018 - Unidad 2.pdf`.
+- Paginación: 4 páginas (portada y 3 páginas de enunciados, 2 de ellas con
+  figura).
+- Autoría y año: Ing. Carolina Orcola, Ing. Luis Eiman y Juan Carlos Fernández;
+  Año 2018. Metadatos: LibreOffice 5.1; título residual «EL TAD COLA».
+- Tamaño materializado: 271782 bytes.
+- SHA-256:
+
+```text
+f5a178a483bbcf418520419a7b020bb58dd53baf39ced5dbd0989ddc4be1ae5e
+```
+
+- Transcripción:
+  [notes/2018/practica/modelo-entidad-relacion-guia-de-tp.md](../../notes/2018/practica/modelo-entidad-relacion-guia-de-tp.md).
+
+#### Guia TP Hecha(borrador).pdf
+
+- Ruta dentro de OneDrive: `2018/Guia TP Hecha(borrador).pdf`.
+- Paginación: 6 páginas A3 apaisadas, una exportación vectorial de Lucidchart.
+- Autoría y año: creador en los metadatos Carlos Eduardo Ferreyra, con Lucid
+  Software Inc. como productor; creado el 2018-04-10. Es una resolución de
+  estudiante, no material docente.
+- Tamaño materializado: 114700 bytes.
+- SHA-256:
+
+```text
+99787b002c017045d47072a6d598cb449b2211df542a63f02e19a8251433806f
+```
+
+- Pertenencia: la cola solo asignaba a la Unidad II la carpeta
+  `TP II LUCIDCHART/`; este PDF no figuraba en ningún lote. Se incluye aquí
+  porque sus ejercicios 1–11 son los de la guía de TP «Unidad 2: Modelo Entidad
+  Relación» y comparte herramienta y fecha con el PNG de esa carpeta.
+- Transcripción:
+  [notes/2018/practica/modelo-entidad-relacion-guia-de-tp-borrador.md](../../notes/2018/practica/modelo-entidad-relacion-guia-de-tp-borrador.md).
+
+#### TP II LUCIDCHART/Ejercicio 4 y 4-b).png
+
+- Ruta dentro de OneDrive: `2018/TP II LUCIDCHART/Ejercicio 4 y 4-b).png`.
+- Paginación: una imagen PNG de 2550 × 3900 píxeles, sin capa de texto.
+- Autoría y año: no constan; Lucidchart por su aspecto.
+- Tamaño materializado: 363344 bytes.
+- SHA-256:
+
+```text
+b0acf0abd9a41703fa70aa42c9d0444c6965ae5b5055fa39365073a7c35de950
+```
+
+- Transcripción:
+  [notes/2018/practica/modelo-entidad-relacion-ejercicio-4-diagramas.md](../../notes/2018/practica/modelo-entidad-relacion-ejercicio-4-diagramas.md).
+  La imagen original se conserva sin cambios en
+  `resources/2018/er-tp-ejercicio-4-diagramas.png`.
+
+### Duplicados y relacionados no incluidos
+
+- `2018/Apunte Teorico Gestion de Datos/Unidad_II.pdf` es un duplicado exacto de
+  `2018/Unidad_II.pdf`: 821851 bytes y el mismo SHA-256 de arriba. Se transcribe
+  una sola vez.
+- `Unidad_III_ppt.pdf` (68 diapositivas) es una presentación de «Unidad III:
+  Modelo de Entidad Relación» que pertenece a este mismo tema, pero la cola la
+  asigna al lote siguiente; no se transcribió aquí.
+- `Unidad VI.pdf` y `PPT Unidad VI.pdf` (Almacenamiento de registros) no figuran
+  en ningún ítem de la cola; no se transcribieron.
+
+### Método y cobertura de la revisión
+
+- PDF: PyMuPDF4LLM 1.28.2 sin OCR, con medios referenciados, encabezados y pies;
+  contraste con Poppler 26.11.0 (`pdftotext -layout`, `pdftotext -raw`,
+  `pdftoppm`, `pdfimages`). Se revisaron visualmente las **22 páginas del
+  apunte**, las **4 de la guía**, las **6 del borrador** y la **imagen PNG**: 32
+  páginas originales más la imagen.
+- El texto de la capa PDF se contrastó con la nota página por página, palabra
+  por palabra. En las páginas 4, 5, 13 y 22 del apunte no hay diferencias salvo
+  las viñetas ✓. En el resto, las únicas diferencias son las etiquetas de las
+  figuras (dentro de las imágenes), la matemática reescrita en LaTeX y las
+  descripciones de la tabla de símbolos. En la guía, las palabras de la capa de
+  texto de sus 4 páginas coinciden con la nota; las únicas diferencias son las
+  viñetas «•» del PDF, convertidas en listas.
+- Reparaciones demostradas con las páginas renderizadas: la extracción asignó
+  caracteres de fuentes privadas a las 10 marcas ✓ de las viñetas (U+F0FC) y a
+  los 2 signos ∈ de la notación de conjuntos de la página 6 (U+F0CE); se
+  restauraron. Dos fragmentos de texto quedaron dentro de las figuras extraídas:
+  la última viñeta de la página 17 y el párrafo de Studio CASE de la página 21;
+  se repusieron. La extracción también unió «Entidad-» y «Relación» al cortar la
+  línea en la página 20; se restauró el guion.
+- Los subrayados de títulos y de las cabeceras de lista de la página 5 no se
+  conservan; los enlaces de las páginas 20 y 21 se transcriben como enlaces o
+  texto. Los títulos de herramientas (GNU Ferret, DBDesigner4, LEFT CASE, Studio
+  CASE, ER CASE) son líneas de texto en el original y se mantienen como
+  párrafos.
+- Figuras: los 23 diagramas vectoriales se recortaron de las páginas con
+  PyMuPDF4LLM a 150 dpi, más la tabla de símbolos; el diagrama de Contratos se
+  recortó de nuevo con `pdftoppm` para excluir una línea de texto contigua. Las
+  cinco capturas de herramientas de las páginas 20 y 21 son los JPEG incrustados
+  extraídos sin recomprimir con `pdfimages`. Las cinco figuras de página
+  completa anteriores (`u3-agregacion`, `u3-instancia-trabaja-en`,
+  `u3-instancia-trabaja-en3`, `u3-proceso-diseno-bd` y `u3-resumen-simbolos`) se
+  reemplazan, con el mismo nombre, por recortes de cada diagrama. Los emblemas
+  de la UTN reutilizan `u1-utn-portada.png` y `u1-utn-encabezado.png`; el
+  emblema de la portada del apunte es idéntico byte a byte.
+- Las 6 páginas del borrador se renderizaron a 110 dpi como PNG completos. Su
+  capa de texto vectorial confirmó la ortografía de cada nota amarilla, que se
+  transcribe sin cambios; las etiquetas de los diagramas quedan en las imágenes.
+  Las etiquetas de la imagen PNG, que no tiene capa de texto, se leyeron sobre
+  la imagen y se contrastaron con una vista ampliada.
+
+### Controles de fidelidad y formato
+
+- Los cuatro archivos Markdown pasaron `mdformat` con las extensiones `gfm` y
+  `myst`, y `markdownlint-cli2` con la configuración compartida de
+  transcripción. KaTeX 0.19.0 renderizó las 10 expresiones matemáticas del
+  apunte (1 bloque `math` y 9 en línea). Se verificaron los enlaces y medios
+  relativos.
+
+### Conteo de contenido
+
+| Fuente | Ejercicios o preguntas | Tablas | Figuras y anexos |
+| -- | -- | -- | -- |
+| Apunte `Unidad_II.pdf` | 0 ejercicios | 1 índice de 19 entradas adaptado a tabla y 1 tabla de símbolos de 14 filas, conservada como imagen y con su significado transcrito | 23 diagramas vectoriales, 1 imagen de la tabla de símbolos, 5 capturas de herramientas y 2 emblemas; 7 referencias bibliográficas; 0 anexos |
+| Guía `Guia de TP 2018 - Unidad 2.pdf` | 11 ejercicios y 11 subítems con letra, sin resolver | 0 | 2 figuras (ejercicios 9 y 10); 0 anexos |
+| Borrador `Guia TP Hecha(borrador).pdf` | 14 notas amarillas: 8 con texto y 6 vacías o sin texto | 0 | 12 diagramas E-R en 6 páginas; 0 anexos |
+| `Ejercicio 4 y 4-b).png` | 0 | 0 | 2 diagramas E-R; 0 anexos |
+
+## Erratas conservadas y pendientes del lote de Modelado de Datos
+
+- La portada del apunte dice «Unidad 3», su índice «Unidad III» y el programa
+  2018 «Unidad II». Los metadatos del apunte y de la guía conservan el título
+  residual «EL TAD COLA».
+- Se conservan, entre otras, «cuanta de cliente», «Puestos que estos conceptos»
+  y «pude servir» (apunte, páginas 4–5), «Navate» (nota de la página 4),
+  «etributo» (página 12), «SOLASPA» y «lengan» (página 13), «sume» (página 16),
+  «puede financiar puede financiar» (página 18) y «Prentice may» (bibliografía).
+  El apunte usa `Trabaja_en`, «Trabaja-en» y, en una leyenda de figura,
+  «Trabajo_en4»; también «idpóliza» en el texto y `idpoliza` en las figuras.
+  Falta el paréntesis de cierre en el ejemplo de atributos compuestos de la
+  página 5.
+- La figura «Ejemplar de conjunto de relaciones Dirige» (página 9) es idéntica a
+  la del ejemplar de Trabaja_en de la página 7: sus rótulos dicen TRABAJA_EN y
+  «Varias a Varias», aunque la leyenda dice Dirige. Se conserva tal cual; su
+  corrección sería un cambio de contenido.
+- Borrador y PNG: se conservan «fotmato», «direcció», «nombr_cliente»,
+  «dirrección_cliente» y «aidentificación». No se verificó la corrección
+  conceptual de los diagramas, que son una resolución de estudiante, y las notas
+  vacías no se completan.
+- Ninguna parte quedó ilegible. Queda por decidir la renumeración de las
+  carpetas de unidades; se registró como decisión pendiente en la cola de
+  transcripción del espacio de trabajo.
