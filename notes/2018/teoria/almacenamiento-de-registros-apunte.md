@@ -445,6 +445,8 @@ datos.
 > Universidad Tecnológica Nacional — Facultad Regional Resistencia Ingeniería en
 > Sistemas de Información — GESTIÓN DE DATOS
 
+![Emblema de la UTN del encabezado](../../../resources/2018/u2-utn-encabezado.png)
+
 ![Índice disperso sobre nombre (Ayala, Cáceres, Sánchez) e índice denso sobre edad (22, 25, 30, 33, 40, 44, 44, 50) apuntando a los registros de DATOS](../../../resources/2018/u2-indices-disperso-denso.png)
 
 ##### Índices primarios y secundarios
@@ -480,6 +482,8 @@ también ordenado por el atributo clave (_promedio_).
 
 > Universidad Tecnológica Nacional — Facultad Regional Resistencia Ingeniería en
 > Sistemas de Información — GESTIÓN DE DATOS
+
+![Emblema de la UTN del encabezado](../../../resources/2018/u2-utn-encabezado.png)
 
 ![Formato de un bloque de índice: P0 K1 P1 K2 P2 ... Km Pm, con punteros desde P0, P1, P2 y Pm; la entrada de índice es K1 P1](../../../resources/2018/u2-formato-bloque-indice.png)
 
