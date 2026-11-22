@@ -418,3 +418,167 @@ b0acf0abd9a41703fa70aa42c9d0444c6965ae5b5055fa39365073a7c35de950
 - Ninguna parte quedó ilegible. Queda por decidir la renumeración de las
   carpetas de unidades; se registró como decisión pendiente en la cola de
   transcripción del espacio de trabajo.
+
+## Lote 2026-11-21: Almacenamiento de registros
+
+Revisión realizada el 2026-11-21 en la rama
+`claude/transcribir-gestion-de-datos-almacenamiento-de-registros`. Fuente
+canónica local: la misma carpeta de OneDrive de las secciones anteriores.
+Alcance: el apunte y la presentación de «Unidad 2: Almacenamiento de Registros y
+organización de ficheros primarios». Los originales se materializaron con el
+preflight en un directorio temporal nuevo, con SHA-256 y lectura completa
+verificados. No se modificó ni se incorporó ningún original a Git.
+
+### Numeración de la fuente
+
+La portada del apunte y la primera diapositiva dicen «Unidad 2». El programa
+2018 del curso (`PROGRAMA 2018.pdf`) y los nombres de archivo dicen «Unidad VI –
+Almacenamiento de Registros y organización de ficheros Primarios», y el README
+recuperado se llamaba `unidad-II`. Se conserva cada rótulo como está impreso. El
+README `unidad-II/README.md` era una versión previa no verificada y se reemplaza
+por el texto íntegro; como el validador exige nombres publicados en minúsculas y
+en kebab-case, la nota se publica como
+`notes/2018/teoria/almacenamiento-de-registros-apunte.md` y se elimina la
+carpeta `unidad-II`. La renumeración de las carpetas de unidades sigue como
+decisión pendiente en la cola de transcripción.
+
+### Originales transcritos
+
+#### Unidad VI.pdf
+
+- Ruta dentro de OneDrive: `2018/Unidad VI.pdf`.
+- Paginación: 11 páginas A4 (portada, índice y 9 de contenido).
+- Autoría y año: Ing. Carolina Orcola en los metadatos; los pies de página dicen
+  «Ing. Juan Carlos Fernandez — Año 2010». Metadatos: creado el 2010-03-09 con
+  freepdfconvert.com; su título residual es «Introducción a TAD».
+- Tamaño materializado: 372712 bytes.
+- SHA-256:
+
+```text
+a339024b9393f61d7761035c24cbc9a77a07ac73d281d7cb699cdf6b7bfe5c93
+```
+
+- Transcripción:
+  [notes/2018/teoria/almacenamiento-de-registros-apunte.md](../../notes/2018/teoria/almacenamiento-de-registros-apunte.md).
+
+#### PPT Unidad VI.pdf
+
+- Ruta dentro de OneDrive: `2018/PPT Unidad VI.pdf`.
+- Paginación: 36 diapositivas de 720 × 540 pt.
+- Autoría y año: Carolina en los metadatos; creado el 2011-06-27 y modificado el
+  2012-03-05 con OpenOffice.org Impress 3.2. Su título residual es «Unidad I:
+  Introducción».
+- Tamaño materializado: 369583 bytes.
+- SHA-256:
+
+```text
+8f8d2aa592b0aa8250762638956773dd60046bc6f752436a45da403f41ea2b2e
+```
+
+- Transcripción:
+  [notes/2018/teoria/almacenamiento-de-registros-presentacion.md](../../notes/2018/teoria/almacenamiento-de-registros-presentacion.md).
+
+### Duplicados y relacionados no incluidos
+
+- `2018/Apunte Teorico Gestion de Datos/Unidad_VI.pdf` es un duplicado exacto de
+  `2018/Unidad VI.pdf`: 372712 bytes y el mismo SHA-256 de arriba. Se transcribe
+  una sola vez.
+- La presentación y el apunte tratan los mismos temas, pero no son copias: el
+  apunte desarrolla en texto continuo lo que la presentación resume (valores
+  típicos de D, C y H, las alternativas 2 y 3 de entradas de datos, la búsqueda
+  binaria sobre el fichero índice) y la presentación agrega cinco figuras de un
+  libro (7.1 a 7.5), el diagrama del fichero hasheado (diapositiva 20) y los
+  diagramas de la estructura y la ubicación de bloques de ISAM y del árbol B+.
+  Se conservan como documentos separados.
+
+### Contenido del README anterior que no figura en los originales
+
+El README `unidad-II` reemplazado resumía el apunte y agregaba material ausente
+de `Unidad VI.pdf` y de su presentación. No se conservó nada de eso en la nueva
+transcripción:
+
+- Párrafos propios sobre discos magnéticos («acceso aleatorio», «bloques o
+  páginas») y sobre RAID. El apunte solo incluye los títulos «Dispositivos de
+  almacenamiento secundario» y «Acceso paralelo al disco mediante el uso de
+  tecnologías RAID», sin texto; así queda indicado en la nota.
+- Una sección «Bibliografía» de tres entradas. El apunte no tiene bibliografía.
+- Aclaraciones ajenas al texto («el costo es proporcional a la altura del
+  árbol», «a diferencia de ISAM…», el desarrollo de
+  `Búsqueda con selección de rango` como `campo ∈ [a, b]` y la lista de índices
+  sobre `<edad, sal>`, `<sal, edad>`, `<edad>` y `<sal>`).
+- Las cinco imágenes `u2-*` anteriores eran páginas completas; se reemplazaron
+  por recortes de cada figura.
+
+### Método y cobertura de la revisión
+
+- PDF: PyMuPDF4LLM 1.28.2 sin OCR, con medios referenciados, encabezados y pies;
+  contraste con Poppler 26.11.0 (`pdftotext`, `pdftoppm`, `pdfimages`). Se
+  revisaron visualmente las **11 páginas del apunte** y las **36 diapositivas**:
+  47 páginas originales.
+- El texto de la capa PDF se contrastó con cada nota mediante una comparación
+  palabra por palabra de todo el documento. Las únicas diferencias son los
+  títulos y notas editoriales de la transcripción, las etiquetas de las figuras
+  (que están dentro de las imágenes), la numeración de la lista de alternativas
+  (1–3 en el original, normalizada por Markdown) y la matemática reescrita en
+  LaTeX. No faltan palabras en el apunte ni en la presentación.
+- La extracción automática del apunte no perdió texto. En las diapositivas dejó
+  viñetas duplicadas («•» además de la viñeta del original), títulos de
+  diapositiva convertidos en viñetas y las etiquetas de los diagramas como
+  «picture text»; se repararon con evidencia de las páginas renderizadas.
+- Figuras del apunte: los 6 diagramas vectoriales se recortaron de las páginas
+  con `pdftoppm` a 150 dpi, uno por archivo. El emblema de la portada y el del
+  encabezado están formados por tiras de 1 píxel de alto incrustadas en línea
+  (el PDF se generó con freepdfconvert.com), de modo que no existe una imagen
+  original que extraer: se recortaron de la página renderizada y reemplazan a
+  `u1-utn-portada.png` y `u1-utn-encabezado.png` en esta nota.
+- Figuras de la presentación: las 5 figuras de las diapositivas 4, 11, 12, 14 y
+  15 son JPEG incrustados y se extrajeron sin recomprimir con `pdfimages -j`
+  (`diapositiva-04.jpg`, `-11`, `-12`, `-14`, `-15`; están en inglés y llevan su
+  numeración «Figure 7.1» a «Figure 7.5»). Los 10 diagramas vectoriales de las
+  diapositivas 20, 23, 24, 26, 29, 30, 31, 33, 35 y 36 se recortaron con
+  `pdftoppm` a 150 dpi, y el encabezado institucional se recortó de la primera
+  diapositiva.
+
+### Controles de fidelidad y formato
+
+- Las dos notas pasaron `mdformat` con las extensiones `gfm` y `myst`,
+  `markdownlint-cli2` con la configuración compartida de transcripción y
+  `check.py --base origin/main`. KaTeX 0.19.0 renderizó las 4 expresiones
+  matemáticas (2 en el apunte y 2 en la presentación, todas de la tabla de
+  costos). Se verificaron los enlaces y medios relativos.
+
+### Conteo de contenido
+
+| Fuente | Ejercicios o preguntas | Tablas | Figuras y anexos |
+| -- | -- | -- | -- |
+| Apunte `Unidad VI.pdf` | 0 ejercicios | 1 índice de 17 entradas adaptado a tabla y 1 tabla de costos de 3 filas × 6 columnas | 6 diagramas vectoriales, 1 emblema de portada y 1 emblema repetido en el encabezado de las páginas 2–11; 0 referencias bibliográficas; 0 anexos |
+| Presentación `PPT Unidad VI.pdf` | 0 ejercicios | 1 tabla de costos (diapositiva 18) | 15 diapositivas con figura (5 JPEG de libro y 10 diagramas vectoriales) y 1 encabezado institucional repetido; 0 anexos |
+
+## Erratas conservadas y pendientes del lote de Almacenamiento de registros
+
+- Apunte, página 3: el apunte dice que el almacenamiento secundario ofrece
+  «acceso más lento a los datos que los dispositivos de almacenamiento
+  secundario» (la diapositiva 3 repite la frase). Se conserva sin corregir.
+- Se conservan «gigabaytes» y «mas barato» (apunte página 3 y diapositiva 6),
+  «comprar el valor de un campo» (apunte página 6; la diapositiva 16 dice
+  «comparar») y «deben ser llevadas del disco al búfer» (apunte página 6 y
+  diapositiva 17).
+- Figuras: «dentradas de datos» (apunte página 8 y diapositivas 23 y 24),
+  «Sáchez» en el índice disperso de la diapositiva 26 (el apunte dice «Sánchez»
+  en la misma figura), «Conjujnto secuencia» (diapositiva 35), «desboradamiento»
+  (diapositiva 33; la diapositiva 31 dice «desbordamiento») y «Indice» sin tilde
+  en las figuras de claves compuestas.
+- Los títulos «Dispositivos de almacenamiento secundario» y «Acceso paralelo al
+  disco mediante el uso de tecnologías RAID» no tienen texto en el apunte
+  (página 4); la presentación tampoco los desarrolla. Se señala sin
+  completarlos.
+- La tabla de costos del apunte empieza en la página 7, pero su introducción
+  está al final de la página 6; se conserva en la página donde figura la tabla.
+- En la diapositiva 9, el título de tres líneas se superpone con la primera
+  viñeta; en la diapositiva 4 el título está separado de su figura. Se conservan
+  los rótulos tal cual.
+- Pendiente externo: las figuras de las diapositivas 4, 11, 12, 14 y 15 llevan
+  la numeración «Figure 7.1» a «Figure 7.5» de un libro sin cita en la
+  diapositiva; se registró como decisión pendiente en la cola de transcripción
+  del espacio de trabajo, junto con el origen de la bibliografía del README
+  anterior.
