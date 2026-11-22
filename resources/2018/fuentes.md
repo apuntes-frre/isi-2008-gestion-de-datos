@@ -582,3 +582,229 @@ transcripción:
   diapositiva; se registró como decisión pendiente en la cola de transcripción
   del espacio de trabajo, junto con el origen de la bibliografía del README
   anterior.
+
+## Lote 2026-11-22: Modelo Relacional
+
+Revisión realizada el 2026-11-22 en la rama
+`claude/transcribir-gestion-de-datos-modelo-relacional`. Fuente canónica local:
+la misma carpeta de OneDrive de las secciones anteriores. Alcance: el apunte,
+las dos presentaciones y la guía de trabajos prácticos de «Unidad 3: El Modelo
+Relacional» (107 páginas). Los originales se materializaron con el preflight en
+un directorio temporal nuevo, con SHA-256 y lectura completa verificados (los
+tres DOCX y `Unidad_III_ppt.pdf`, también materializados para el inventario, no
+se transcriben en este lote). No se modificó ni se incorporó ningún original a
+Git.
+
+### Numeración de la fuente
+
+La portada del apunte y de la guía dicen «Unidad 3»; el índice del apunte y el
+título de su primera sección dicen «Unidad IV: El Modelo Relacional», la primera
+diapositiva dice «UNIDAD 3: EL MODELO RELACIONAL» y el programa numera el tema
+según su propia secuencia. Se conserva cada rótulo como está impreso. El README
+`unidad-IV/README.md` del repo era una versión previa no verificada del apunte y
+se reemplaza por el texto íntegro; como el validador exige nombres publicados en
+minúsculas y en kebab-case, la nota se publica como
+`notes/2018/teoria/modelo-relacional-apunte.md` y se elimina la carpeta
+`unidad-IV`. La renumeración de las carpetas restantes sigue como decisión
+pendiente en la cola de transcripción.
+
+### Originales transcritos
+
+#### Unidad_III_Apunte.pdf
+
+- Ruta dentro de OneDrive: `2018/Unidad_III_Apunte.pdf`.
+- Paginación: 32 páginas.
+- Autoría y año: Ing. Carolina Orcola; Año 2012 en el pie de página. Metadatos:
+  Microsoft Word 2007, creado el 2013-04-13; su título residual es «EL TAD
+  COLA».
+- Tamaño materializado: 763543 bytes.
+- SHA-256:
+
+```text
+57da8a4bb607b48c0c2a553ff51d8d324caf9bfe0a50a7fc91282cd66976a20e
+```
+
+- Transcripción:
+  [notes/2018/teoria/modelo-relacional-apunte.md](../../notes/2018/teoria/modelo-relacional-apunte.md).
+
+#### Presentación Unidad III.pdf
+
+- Ruta dentro de OneDrive: `2018/Presentación Unidad III.pdf`.
+- Paginación: 43 diapositivas de 720 × 540 pt.
+- Autoría y año: autor «andres» en los metadatos; PowerPoint 2007, creado el
+  2016-04-12; título residual «MODELO DE ENTIDAD RELACION». La portada dice
+  «UNIDAD 3: EL MODELO RELACIONAL».
+- Tamaño materializado: 728887 bytes.
+- SHA-256:
+
+```text
+5479ce0018e2714cd299653a2185fe74b752c7ff8a306b44a110d2929a8b7ed0
+```
+
+- Transcripción:
+  [notes/2018/teoria/modelo-relacional-presentacion.md](../../notes/2018/teoria/modelo-relacional-presentacion.md).
+
+#### Presentación Unidad III - Normalización.pdf
+
+- Ruta dentro de OneDrive: `2018/Presentación Unidad III - Normalización.pdf`.
+- Paginación: 29 diapositivas de 720 × 540 pt, sin portada.
+- Autoría y año: autor «andres»; PowerPoint 2007, creado el 2016-04-12; el mismo
+  título residual «MODELO DE ENTIDAD RELACION».
+- Tamaño materializado: 440748 bytes.
+- SHA-256:
+
+```text
+a4e0b1a6012e92877526bb83b89baf673d064c5db569f27fe84d6f520fdd8bfa
+```
+
+- Transcripción:
+  [notes/2018/teoria/normalizacion-presentacion.md](../../notes/2018/teoria/normalizacion-presentacion.md).
+
+#### Guia de TP 2018 - Unidad 3.pdf
+
+- Ruta dentro de OneDrive: `2018/Guia de TP 2018 - Unidad 3.pdf`.
+- Paginación: 3 páginas (portada y 2 páginas de enunciados, una con figura).
+- Autoría y año: Ing. Carolina Orcola, Ing. Luis Eiman y Juan Carlos Fernández;
+  Año 2018. Metadatos: LibreOffice 5.1, creado el 2018-04-09; título residual
+  «EL TAD COLA».
+- Tamaño materializado: 163207 bytes.
+- SHA-256:
+
+```text
+535e16b15e6667797ecfb0e015a44b804067fc0a93ec0e9fe6d4bf8b24c5a8c9
+```
+
+- Transcripción:
+  [notes/2018/practica/modelo-relacional-guia-de-tp.md](../../notes/2018/practica/modelo-relacional-guia-de-tp.md).
+
+### Duplicados y relacionados no incluidos
+
+- `2018/Apunte Teorico Gestion de Datos/Unidad_III_Apunte.pdf` es un duplicado
+  exacto de `2018/Unidad_III_Apunte.pdf` (763543 bytes y el mismo SHA-256 de
+  arriba). Se transcribe una sola vez.
+- `Unidad_III_ppt.pdf` (68 diapositivas, SHA-256
+  `373abbb3f0234f01570811028177286cc6ceb33c67d08f8107aaf696ba2514e8`) es de
+  «Unidad III: Modelo de Entidad Relación» y va con el apunte de Modelado de
+  Datos; queda para un lote propio.
+- `Unidad 3 - ENTREGA G4.docx` (SHA-256
+  `e620b42f3ecc60a244e993b8bc0c74e919994fffb0c1326d9c23686d62e34ecb`),
+  `GUIA N° 4- ALGEBRA RELACIONAL RESUELTO .docx` (`8e2b8a72…`) y
+  `GUIA N° 4- ALGEBRA RELACIONAL RESUELTO por Vic.docx` (`121d6504…`) son
+  resoluciones de estudiantes del grupo 4; quedan para un lote propio mientras
+  se confirma su atribución.
+
+### Contenido del README anterior que no figura en los originales
+
+El README `unidad-IV` reemplazado resumía el apunte y agregaba material ausente
+de `Unidad_III_Apunte.pdf` y de las presentaciones. No se conservó nada de eso
+en la nueva transcripción:
+
+- Ejemplos propios con otro esquema (`Alumnos(nombre, edad, nota)`,
+  `Matriculados(nombre, cid, …)`, `Departamentos(…, dni_jefe, …)`,
+  `Empleados_jerarquia`, `Empleados_temp` con `dni CHAR(11)`) en lugar de los
+  esquemas del apunte (`ide`, `idalum`, `idd`, `dni CHAR(10)`).
+- Explicaciones y listas sin correspondencia en el apunte: la opción
+  `NO ACTION / RESTRICT`, la declaración de clave primaria en línea, la
+  inserción de dos tuplas con referencia mutua, la consulta de ejemplo con
+  `LIKE '%iguel'`, la consulta con `INNER_JOIN` y la descripción de LDD y LMD.
+- Dos tablas comparativas de SGBD (descripción y tipo) en lugar de los párrafos
+  del apunte, y una «Bibliografía» reescrita.
+- Las ocho imágenes `u4-*` anteriores eran páginas completas; se reemplazaron
+  por recortes de cada figura y se eliminaron.
+
+### Método y cobertura de la revisión
+
+- PDF: PyMuPDF4LLM 1.28.2 sin OCR, con medios referenciados, encabezados y pies;
+  contraste con Poppler (`pdftotext -raw` y `-layout`, `pdftoppm`) y con la
+  representación gráfica de cada página y diapositiva. Se revisaron **las 32
+  páginas del apunte**, **las 43 y las 29 diapositivas** y **las 3 páginas de la
+  guía**: 107 páginas originales.
+- El texto de la capa PDF se contrastó con cada nota mediante una comparación
+  palabra por palabra de cada página y diapositiva. Las únicas diferencias son
+  los títulos y notas editoriales de la transcripción, las etiquetas de las
+  figuras (que están dentro de las imágenes), las sentencias SQL movidas de una
+  página a la siguiente cuando el original las corta, la numeración de las
+  listas y la matemática reescrita en LaTeX. No faltan palabras en ninguna nota.
+- Reparaciones demostradas con las páginas renderizadas: la extracción asignó un
+  carácter de fuente privada al signo ∈ de la fórmula de la página 4 del apunte
+  (U+F0CE) y a las viñetas ✓ de las páginas 11 y 14 (U+F0FC); se restauraron
+  como signo y como elementos de lista. PyMuPDF4LLM unió «Transact-SQL» y
+  «MS-DOS» al cortar la línea (páginas 23 del apunte) y «sencilla-» con
+  «información» (página 31); se restauraron los guiones. En las diapositivas 16,
+  17 y 18 el texto y las figuras se superponen en el original y la extracción
+  mezcló columnas; se rehízo el orden con `pdftotext -raw`.
+- Las sentencias SQL del apunte y de las diapositivas se conservaron en bloques
+  de código con una cláusula o columna por línea, como en las páginas
+  renderizadas; solo cambian los espacios de alineación.
+- Figuras del apunte: los 9 diagramas y los 19 logotipos de las páginas 25 a 29
+  son imágenes o diagramas incrustados y se extrajeron con PyMuPDF4LLM sin
+  recomprimir; la tabla anotada de la página 4 y la entidad Empleados con su
+  ejemplar de la página 13 se recortaron de la página a 150 dpi. Los emblemas de
+  la UTN del apunte son idénticos byte a byte a `u1-utn-portada.png` y
+  `u1-utn-encabezado.png`; el de la guía es la misma imagen recodificada y
+  reutiliza esos mismos archivos.
+- Figuras de las presentaciones: las tablas y el diagrama raster de las
+  diapositivas 10, 16, 18 y 30 (presentación del Modelo Relacional) y de las 5,
+  19–21, 23–24 y 26–28 (Normalización) se extrajeron sin recomprimir; los
+  diagramas ER vectoriales y las diapositivas 4, 25, 28 y 43 se recortaron de la
+  diapositiva a 150 dpi, por lo que conservan restos de la plantilla de círculos
+  en algunos bordes. Las diapositivas 19 a 21 de Normalización son imágenes
+  completas sin capa de texto: su texto y sus tablas se transcribieron de la
+  imagen y se contrastaron con OCR de Tesseract en español (solo comprobación,
+  no fuente), y las tablas de las diapositivas 23, 24 y 26–28 se transcribieron
+  de la imagen con la misma comprobación.
+
+### Controles de fidelidad y formato
+
+- Las cuatro notas pasaron `mdformat` con las extensiones `gfm` y `myst`,
+  `markdownlint-cli2` con la configuración compartida de transcripción y
+  `check.py --base origin/main`. El apunte contiene 6 expresiones matemáticas (5
+  en línea y 1 bloque `math`), todas de la página 4; las demás notas no tienen
+  matemática. Se verificaron los enlaces y medios relativos.
+
+### Conteo de contenido
+
+| Fuente | Ejercicios o preguntas | Tablas | Figuras y anexos |
+| -- | -- | -- | -- |
+| Apunte `Unidad_III_Apunte.pdf` | 0 ejercicios | 1 índice de 25 entradas adaptado a tabla, la tabla Relación/Tabla/Archivo, el ejemplar A1 (6 filas), el ejemplar A2 (6 filas), el ejemplar de Empleados (3 filas), 2 resultados de consulta (2 filas) y la cronología de SQL (7 filas) | 9 diagramas y figuras, 2 recortes con etiquetas, 19 logotipos, 1 emblema de portada y 1 repetido en el encabezado de las páginas 2–32; 30 bloques SQL; 7 referencias bibliográficas |
+| Presentación `Presentación Unidad III.pdf` | 0 ejercicios | 5 (diapositivas 4, 5, 6, 9 y 16) | 18 figuras en 17 diapositivas; 33 bloques SQL |
+| Presentación `Presentación Unidad III - Normalización.pdf` | 0 ejercicios | 21 tablas de datos (1FN a 5FN) | 12 figuras en 11 diapositivas |
+| Guía `Guia de TP 2018 - Unidad 3.pdf` | 10 ejercicios (con 7 subapartados), sin resolver | 1 (instancia de Alumnos, 6 filas) | 1 figura raster; 0 anexos |
+
+## Erratas conservadas y pendientes del lote de Modelo Relacional
+
+- Apunte: «FoxBse» (página 3), «jumenez@inf» y «grcia@musica» en el ejemplar A1
+  (página 4; la figura de la página 8 dice «jimenez@inf» en la misma fila),
+  «usuarios es el campo 3» (página 4; el atributo es `usuario`), «Para elimina»
+  (página 6), «Trbaja_en2» (página 14), «Dept_Emp» por Dept_Enc (página 17),
+  «tota es simétrico» (página 17), «Empledos» (página 19), «Aumnos» en una
+  sentencia `CREATE TABLE` (página 12) y «JSPN», «Protobug», «OAP» y «CML» en la
+  sección de motores de bases de datos.
+- Apunte: el ejemplar A1 numera «52688» a la segunda fila Sánchez, pero el texto
+  y A2 usan «53688» (páginas 4, 5, 6); A2 cambia «53832» por «53131» (página 6);
+  el resultado de la consulta de la página 12 muestra notas 7,2 y 8,0 donde A1
+  tiene 3,6 y 4,0; el texto de la página 10 dice «Matriculados. ide» donde
+  corresponde `idalum`.
+- Apunte, página 25: el párrafo de MongoDB contiene un comentario del autor
+  entre paréntesis («creo que esto se refiere a que no es una base de datos
+  relacional convencional, aunque no estoy del todo seguro»). Se conserva sin
+  corregir.
+- Apunte, páginas 23 y 24: varios párrafos de los motores comerciales traen
+  espacios omitidos tras el punto (por ejemplo «Corporation.Se considera»); se
+  conservan.
+- Presentación del Modelo Relacional: «Desarrolado» y «Languaje» (diapositiva
+  8), «mas de 18 años» con `A.edad = 18` (diapositiva 9), «Estudiantes» por
+  Alumnos (diapositiva 12), «inconsistenta» (15), «restricció» (17), «calve
+  foráneo» (20), «completada la transacción» (24), «coincie» (29), «Dirije»
+  (32). Las diapositivas 4 y 6 rotulan la columna «usuari».
+- Presentación del Modelo Relacional: en las diapositivas 16, 17 y 18 el texto y
+  las figuras se superponen en el original; la diapositiva 19 escribe `ida`
+  donde corresponde `idalum`. Se conservan.
+- Normalización: «insactifactorios» (diapositiva 6), «reación» (8), «LegAl» (13)
+  y «LegAlumnos» (16 y 17).
+- Guía de TP: el ejercicio 8 usa «pct time» con espacio; el apartado 2 del
+  ejercicio 8 empieza en la página 3. Se conservan.
+- Pendiente externo: los 19 logotipos de motores de bases de datos de las
+  páginas 25 a 29 del apunte son imágenes de terceros sin cita; se registró como
+  decisión pendiente en la cola de transcripción del espacio de trabajo. La
+  atribución de las tres resoluciones de estudiantes sigue pendiente.
