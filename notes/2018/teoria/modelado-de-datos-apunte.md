@@ -8,6 +8,7 @@
 
 Material complementario de esta unidad:
 
+- [Presentación de la unidad](modelado-de-datos-presentacion.md).
 - [Guía de trabajos prácticos 2018](../practica/modelo-entidad-relacion-guia-de-tp.md).
 - [Resolución en borrador de la guía (Lucidchart)](../practica/modelo-entidad-relacion-guia-de-tp-borrador.md).
 - [Diagramas del ejercicio 4 (Lucidchart)](../practica/modelo-entidad-relacion-ejercicio-4-diagramas.md).

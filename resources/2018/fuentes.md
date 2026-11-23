@@ -808,3 +808,128 @@ en la nueva transcripción:
   páginas 25 a 29 del apunte son imágenes de terceros sin cita; se registró como
   decisión pendiente en la cola de transcripción del espacio de trabajo. La
   atribución de las tres resoluciones de estudiantes sigue pendiente.
+
+## Lote 2026-11-23: Modelado de Datos (presentación)
+
+Revisión realizada el 2026-11-23 en la rama
+`claude/transcribir-gestion-de-datos-modelado-presentacion`. Fuente canónica
+local: la misma carpeta de OneDrive de las secciones anteriores. Alcance: la
+presentación de «Unidad III: Modelo de Entidad Relación» (68 diapositivas), que
+va con el apunte de Modelado de Datos. El original se materializó con el
+preflight en un directorio temporal nuevo, con SHA-256 y lectura completa
+verificados. No se modificó ni se incorporó ningún original a Git.
+
+### Numeración de la fuente
+
+La portada dice «Unidad III: MODELO DE ENTIDAD RELACION», mientras que los
+metadatos del PDF dicen «Unidad I: Introducción»; el programa 2018 numera el
+tema como Unidad II y el apunte de la misma carpeta imprime «Unidad 3» y «Unidad
+III». Se conserva cada rótulo. La nota se publica como
+`notes/2018/teoria/modelado-de-datos-presentacion.md` y el apunte
+`modelado-de-datos-apunte.md` suma un enlace a ella en su lista de material
+complementario.
+
+### Originales transcritos
+
+#### Unidad_III_ppt.pdf
+
+- Ruta dentro de OneDrive: `2018/Unidad_III_ppt.pdf`.
+- Paginación: 68 diapositivas de 720 × 540 pt.
+- Autoría y año: autora «Carolina» en los metadatos; Microsoft PowerPoint 2007,
+  creado el 2012-03-11; título residual «Unidad I: Introducción». La última
+  diapositiva da el sitio de la cátedra (`sites.google.com/site/utnfrregd/`) y
+  un correo electrónico de contacto.
+- Tamaño materializado: 896700 bytes.
+- SHA-256:
+
+```text
+373abbb3f0234f01570811028177286cc6ceb33c67d08f8107aaf696ba2514e8
+```
+
+- Transcripción:
+  [notes/2018/teoria/modelado-de-datos-presentacion.md](../../notes/2018/teoria/modelado-de-datos-presentacion.md).
+  Las 47 figuras están en `resources/2018/modelado-de-datos-presentacion/`.
+
+### Duplicados y relacionados no incluidos
+
+- No hay copia de `Unidad_III_ppt.pdf` en
+  `2018/Apunte Teorico Gestion de Datos/` (se comprobó el SHA-256 de sus seis
+  PDF).
+- El apunte `Unidad_II.pdf` (Año 2011), la guía de TP y las resoluciones de
+  Lucidchart se transcribieron en el lote del 2026-11-20 y no cambian.
+- Las tres resoluciones DOCX del grupo 4 (`Unidad 3 - ENTREGA G4.docx` y las dos
+  `GUIA N° 4- ALGEBRA RELACIONAL RESUELTO …docx`) siguen pendientes en su propio
+  lote.
+
+### Método y cobertura de la revisión
+
+- PDF: PyMuPDF4LLM 1.28.2 sin OCR, con separadores de página y medios
+  referenciados; contraste con Poppler 26.11.0 (`pdftotext -raw` y `-layout`,
+  `pdftoppm`, `pdfimages`) y con PyMuPDF 1.28.2 para las posiciones de texto y
+  dibujos. Se revisaron visualmente las **68 diapositivas** (hojas de contacto
+  de cuatro diapositivas a 100 dpi) y cada una de las **47 figuras** recortadas.
+- El texto se contrastó palabra por palabra por diapositiva contra la capa de
+  texto del PDF. Las 22 diapositivas de solo texto coinciden sin diferencias,
+  salvo la numeración de la diapositiva 55, el guion de «*n*-arias» de la 16 y
+  el correo de la 68. En las 46 diapositivas con figura, el texto fuera de la
+  figura coincide; las únicas palabras de la capa de texto que no están en el
+  cuerpo son los rótulos de los diagramas (entidades, atributos, relaciones y
+  valores de los ejemplares), que se leen en las imágenes y se resumen en su
+  texto alternativo. Las anotaciones y pies de figura de las diapositivas 23,
+  24, 26 y 63–66 se repiten debajo de ellas.
+- Reparaciones demostradas con las páginas renderizadas: la extracción asignó
+  caracteres de fuentes privadas (U+F0FC) a las viñetas ✓ de 12 diapositivas (29
+  elementos); se restauraron como ✓ en lista. En las diapositivas 2 y 68 el
+  orden de lectura de la capa de texto no es el visual («Qué es?» y «Qué
+  conceptos?»; correo y sitio); se siguió la disposición de la diapositiva. La
+  extracción omitió los diagramas de las diapositivas 7, 11, 33 y 44, partió en
+  varios recortes los de las diapositivas 17 y 58 y entregó las diapositivas 15,
+  18, 23, 26, 39, 56, 62 y 65 completas, con el encabezado; por eso todas las
+  figuras se rehicieron con recortes uniformes.
+- Figuras: 46 recortes de las diapositivas, renderizados a 150 dpi con PyMuPDF a
+  partir de las coordenadas del propio PDF, y el JPEG incrustado de la
+  diapositiva 21, extraído sin recomprimir con `pdfimages`. Cada recorte excluye
+  el encabezado de la plantilla y el título, y conserva el fondo azul; en las
+  diapositivas 32, 36, 37, 56 y 65 se quitó, en una copia temporal del PDF, el
+  texto vecino (título o párrafo contiguo) antes de renderizar, sin tocar el
+  original. La diapositiva 32 tiene además flechas azules decorativas junto a
+  «Especialización» y «Generalización», descritas en la nota.
+- La diapositiva 68 enlaza un correo electrónico (`mailto:`) de contacto de la
+  docente. Esa dirección personal no se publicó en la nota; consta como decisión
+  pendiente en la cola de transcripción.
+
+### Controles de fidelidad y formato
+
+- Las dos notas modificadas pasaron `mdformat` con las extensiones `gfm` y
+  `myst`, `markdownlint-cli2` con la configuración compartida de transcripción y
+  `check.py --base origin/main`. La presentación no contiene matemática (0
+  expresiones). Se verificaron los enlaces y medios relativos: 47 imágenes.
+
+### Conteo de contenido
+
+| Fuente | Ejercicios o preguntas | Tablas | Figuras y anexos |
+| -- | -- | -- | -- |
+| Presentación `Unidad_III_ppt.pdf` | 2 consignas abiertas (diapositivas 12 y 54), sin resolver; 7 pasos de resolución del ejemplo en las diapositivas 55–66, transcritos como están | 0 | 47 figuras en 46 diapositivas (46 diagramas y la imagen de correspondencias de la 21); 22 diapositivas de solo texto; 0 anexos |
+
+## Erratas conservadas y pendientes del lote de la presentación de Modelado de Datos
+
+- Diapositiva 1: «RELACION» sin tilde. Diapositiva 8: «una cuanta de cliente».
+  Diapositiva 10: «Todas la entidades». Diapositiva 12: «Definir que dominio» y
+  «cual será». Diapositiva 16: «la relacionan a utilizar». Diapositiva 20:
+  «asociaciones- ciudadanos». Diapositiva 30: «ID_LNEA» y «LINEAS_FACTURAS».
+  Diapositiva 41: «lo atributos no puede ser multivaluados» y «atomicos».
+  Diapositivas 42 y 51: «mas». Diapositiva 47: «por lo meno». Diapositiva 53:
+  «Relaciones binarios vs. Ternarios». Diapositiva 55: «Pasos posible de usar».
+- Figuras: la de la diapositiva 29 rotula «Empleado» a la entidad propietaria
+  del ejemplo Préstamo–Pago y escribe «prestamo» sin tilde; las de las
+  diapositivas 36 y 37 parten «nombr»/«e» y «presu»/«p», y cortan «presupues»;
+  la de la diapositiva 45 une «desde» a Encargados, mientras que el texto lo
+  atribuye al conjunto de relaciones entre encargados y departamentos; las de
+  las diapositivas 46 y 47 llaman «Dependen» y «Dependiente» a la misma entidad.
+  Se conservan sin corregir.
+- Las diapositivas 47 y 48 repiten el mismo diagrama; la 36 y la 37, también.
+- Pendiente externo: la imagen de correspondencias de la diapositiva 21 (raster
+  de 900 × 447 píxeles) y el diagrama del proceso de diseño de las diapositivas
+  5 y 7 (el de la 5 reproduce el ya publicado `u3-proceso-diseno-bd.png` del
+  apunte) no traen cita de origen; se registró en la cola de transcripción. La
+  dirección de correo de la diapositiva 68 también queda pendiente.
