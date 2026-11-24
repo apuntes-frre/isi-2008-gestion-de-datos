@@ -933,3 +933,209 @@ complementario.
   5 y 7 (el de la 5 reproduce el ya publicado `u3-proceso-diseno-bd.png` del
   apunte) no traen cita de origen; se registró en la cola de transcripción. La
   dirección de correo de la diapositiva 68 también queda pendiente.
+
+## Lote 2026-11-24: resoluciones de estudiantes (Grupo 4)
+
+Revisión realizada el 2026-11-24 en la rama
+`claude/transcribir-gestion-de-datos-resoluciones-estudiantes`. Fuente canónica
+local: la misma carpeta de OneDrive de las secciones anteriores. Alcance: las
+tres resoluciones de estudiantes en DOCX que la cola de transcripción dejó
+pendientes: la entrega de la guía de la Unidad 3 y las dos versiones de la guía
+nº 4 de álgebra relacional. Los originales se materializaron con el preflight en
+un directorio temporal nuevo, con SHA-256 y lectura completa verificados. No se
+modificó ni se incorporó ningún original a Git.
+
+### Numeración de la fuente
+
+Los tres archivos son material de estudiantes, no material docente. La entrega
+(`Unidad 3 - ENTREGA G4.docx`) responde la guía
+[Modelo Relacional](../../notes/2018/practica/modelo-relacional-guia-de-tp.md)
+(«Unidad 3: Modelo Relacional»): sus ejercicios 1 a 8 son los de esa guía y los
+ejercicios 9 y 10 transforman en esquemas relacionales y en SQL los escenarios
+de la guía de Entidad-Relación. Las dos resoluciones de álgebra relacional
+llevan en su portada «Guía de Trabajos Prácticos nº4: Algebra Relacional»; el
+enunciado de esa guía no forma parte de estos documentos y no se transcribió en
+este lote. Se conserva cada rótulo del original.
+
+### Originales transcritos
+
+#### Unidad 3 - ENTREGA G4.docx
+
+- Ruta dentro de OneDrive: `2018/Unidad 3 - ENTREGA G4.docx`.
+- Paginación: 16 páginas según los metadatos de Word; no hay vista paginada
+  verificada (ver el método).
+- Autoría y año: no constan autores ni integrantes en el cuerpo; el nombre del
+  archivo indica «G4». Metadatos: Microsoft Office Word 16, creado el 2018-04-23
+  22:13 UTC y modificado a las 22:14 UTC por Carlos Eduardo Ferreyra.
+- Tamaño materializado: 494245 bytes.
+- SHA-256:
+
+```text
+e620b42f3ecc60a244e993b8bc0c74e919994fffb0c1326d9c23686d62e34ecb
+```
+
+- Transcripción:
+  [notes/2018/practica/modelo-relacional-guia-de-tp-entrega-grupo-4.md](../../notes/2018/practica/modelo-relacional-guia-de-tp-entrega-grupo-4.md).
+  Los tres medios incrustados están en
+  `resources/2018/modelo-relacional-entrega-grupo-4/` (bytes idénticos a los de
+  `word/media/` del DOCX):
+
+| Medio en el DOCX | Archivo publicado | SHA-256 |
+| -- | -- | -- |
+| `word/media/image1.png` (1635 × 2500) | `respuesta-9-4-diagramas-er.png` | `b956bead26334e3eb4f4ffe975544709fadce343488df929092413fe2adf32b7` |
+| `word/media/image2.jpg` (780 × 1040) | `respuesta-9-6-diagrama-er-manuscrito.jpg` | `56ab77dad67f37492684e3a061121fb6803a764bdd6c5c7d5dfdf8fe6c3156a6` |
+| `word/media/image3.png` (667 × 433) | `respuesta-9-8-diagrama-er-vehiculos.png` | `d3eb984ec7f098bdb4f136efe7fae03a6bc30ec8d4e14fb6531204eb07cd8c1f` |
+
+#### GUIA N° 4- ALGEBRA RELACIONAL RESUELTO .docx
+
+- Ruta dentro de OneDrive: `2018/GUIA N° 4- ALGEBRA RELACIONAL RESUELTO .docx`
+  (el nombre termina en un espacio antes de la extensión).
+- Paginación: 2 páginas según los metadatos de Word; sin portada.
+- Autoría y año: creador y último modificador en los metadatos Carlos Eduardo
+  Ferreyra; creado el 2018-05-12 y modificado el 2018-05-19 (revisión 145).
+- Tamaño materializado: 18252 bytes.
+- SHA-256:
+
+```text
+8e2b8a7251455ec71abab0b59ca833e33ac2f366db01d565c69d892a30da69a4
+```
+
+- Transcripción:
+  [notes/2018/practica/algebra-relacional-guia-de-tp-resuelta-grupo-4-2018-05-19.md](../../notes/2018/practica/algebra-relacional-guia-de-tp-resuelta-grupo-4-2018-05-19.md).
+
+#### GUIA N° 4- ALGEBRA RELACIONAL RESUELTO por Vic.docx
+
+- Ruta dentro de OneDrive:
+  `2018/GUIA N° 4- ALGEBRA RELACIONAL RESUELTO por Vic.docx`.
+- Paginación: 4 páginas según los metadatos de Word; portada, encabezado y pie
+  de página.
+- Autoría y año: Grupo 4, Año 2018, con cinco alumnos en la portada y en el pie
+  de página; metadatos con creador y último modificador Carlos Eduardo Ferreyra,
+  creado el 2018-05-12 y modificado el 2018-06-25 (revisión 142).
+- Tamaño materializado: 45866 bytes.
+- SHA-256:
+
+```text
+121d6504d896da6e80b7055dc301bc5f3e099ed619d086412352982b2fcdf79b
+```
+
+- Transcripción:
+  [notes/2018/practica/algebra-relacional-guia-de-tp-resuelta-grupo-4-2018-06-25.md](../../notes/2018/practica/algebra-relacional-guia-de-tp-resuelta-grupo-4-2018-06-25.md).
+  El único medio incrustado es el emblema de la UTN de la portada
+  (`word/media/image1.png`, 300 × 300, SHA-256
+  `b3668fc491d89b86ccd91db764733cbef35f294da957e811ac02f815f714a446`), publicado
+  como
+  `resources/2018/algebra-relacional-guia-resuelta-grupo-4/logo-utn-portada.png`.
+  Su texto alternativo en el DOCX es una dirección de `logotypes101.com`.
+
+### Duplicados y relacionados no incluidos
+
+- Se calculó el SHA-256 de los 86 archivos de contenido de la carpeta 2018: los
+  tres DOCX no tienen copia exacta en ninguna otra ubicación (los únicos pares
+  repetidos son los PDF de `Apunte Teorico Gestion de Datos/` ya registrados).
+- Las dos versiones de la guía de álgebra relacional comparten creación
+  (2018-05-12 19:42 UTC) y la misma estructura. La de 2018-05-19 no tiene
+  portada, deja vacío el ejercicio 1 salvo el texto «Qeipfdwod» y la tabla, y
+  termina en una fórmula incompleta del ejercicio 5.4; la de 2018-06-25 agrega
+  la portada, el texto del ejercicio 1 y las respuestas 5.4 a 5.11. Las dos se
+  publican por separado, nombradas por la fecha de última modificación que
+  consta en los metadatos y en OneDrive.
+- La figura de `respuesta-9-4-diagramas-er.png` es el mismo dibujo de Lucidchart
+  que `er-tp-ejercicio-4-diagramas.png` (lote del 2026-11-20), en menor
+  resolución (1635 × 2500 contra 2550 × 3900) y con otros bytes; se conserva la
+  copia incrustada en esta entrega.
+- El enunciado de la guía nº 4 de álgebra relacional no se identificó en este
+  lote. Los PDF de la Unidad IV (`Unidad_IV.pdf`, `EjerciciosUnidad4.pdf`, aún
+  no transcritos) son la fuente a revisar en su lote; no se comprobó que lo
+  contengan.
+
+### Método y cobertura de la revisión
+
+- DOCX: Pandoc 3.14 (ruta de `AGENTS.md`: DOCX a GFM con medios extraídos) para
+  obtener una primera conversión, y un volcado propio del XML del DOCX
+  (`word/document.xml`, `numbering.xml`, encabezado y pie), escrito con la
+  biblioteca estándar de Python y ejecutado con `python -I`, para comparar:
+  texto de cada párrafo, numeración de lista tal como la muestra Word, tablas,
+  runs subrayados o en negrita, imágenes y símbolos. Los DOCX no tienen cambios
+  rastreados, comentarios, notas ni cuadros de texto.
+- Limitación: LibreOffice no está instalado en este equipo
+  (`mise exec -- soffice` falla y no hay aplicación en `/Applications`), por lo
+  que **no se pudo renderizar el DOCX a páginas ni compararlas visualmente**; el
+  número de páginas es el de los metadatos de Word. La verificación sustituta
+  fue el volcado estructural del XML y la lectura de cada medio incrustado.
+- Comparación palabra por palabra de cada nota contra el texto del DOCX: las
+  tres notas coinciden. En la entrega, las únicas diferencias son de marcado
+  (escapes de `_` y subrayados que parten una palabra como `i`+`dd_cursado`). En
+  las dos de álgebra, el texto fuera de las fórmulas coincide, salvo el
+  encabezado y el pie editoriales y los espacios en torno a la flecha.
+- Fórmulas: el XML de las ecuaciones (OMML) se imprimió con su estructura
+  (subíndices, delimitadores, saltos) y se comparó con el LaTeX publicado: la
+  secuencia de identificadores y números y la de operadores (`π`, `σ`, `⋈`, `∪`,
+  `∨`, `∧`, `≠`, `=`, `<`, `>`, `-`, `/`, `'`) coinciden en ambas notas. Se
+  escribieron con los operadores del original y sin corregir (paréntesis
+  desbalanceados, `Catálogo)` con doble cierre y una llave literal en 3.8 de la
+  versión de 2018-06-25). `á` se escribió `\acute{a}`. Los apóstrofos de
+  `'JuanGarcia'` y `'Boeing'` son superíndices del editor de ecuaciones tras «=»
+  y la última letra, y se transcribieron como `'`. El símbolo de asignación de
+  5.5 a 5.9 es un carácter de Wingdings (`F0DF`, flecha a la izquierda) y se
+  transcribió como `←`.
+- Los esquemas, sentencias SQL y respuestas conservan los nombres, tipos y
+  restricciones tal como se escribieron. En los bloques SQL se normalizó solo la
+  alineación (tabuladores y espacios repetidos entre columna y tipo, y la
+  sangría); no se tocaron tokens, comas ni errores.
+- Los subrayados de claves primarias siguen los runs subrayados del original,
+  incluidos los irregulares (`(legajo`, `i`+`dd_cursado`). Se escriben con
+  `<ins>`: el renderizador de GitHub elimina `<u>` (se comprobó con su API) y
+  deja la clave sin subrayar, mientras que `<ins>` se conserva. Las notas
+  anteriores del repo que usan `<u>` no se modificaron.
+- Las listas numeradas del DOCX mezclan numeración automática y escrita a mano.
+  Se conservó la numeración visible: p. ej., en la guía de álgebra las
+  respuestas 3.4 a 3.12 son una lista de segundo nivel que Word numera «3.4» a
+  «3.12», y en la entrega los ejercicios 9 y 10 contienen sublistas que
+  reinician en «1.».
+- Medios: las cuatro imágenes se leyeron una por una. El dibujo manuscrito del
+  ejercicio 9.6 está girado 90° en el DOCX y se publicó sin rotar, con su texto
+  alternativo; en su esquina lleva un número encerrado en un círculo (7) que no
+  coincide con el rótulo «6.» del documento donde está insertado.
+
+### Controles de fidelidad y formato
+
+- Las tres notas pasaron `mdformat` con las extensiones `gfm` y `myst`,
+  `markdownlint-cli2` con la configuración compartida de transcripción y
+  `check.py --base origin/main`; se verificaron los enlaces y medios relativos.
+
+### Conteo de contenido
+
+| Fuente | Ejercicios o respuestas | Tablas | Figuras y anexos |
+| -- | -- | -- | -- |
+| `Unidad 3 - ENTREGA G4.docx` | Respuestas a los ejercicios 1 a 10; esquemas relacionales de los escenarios 1 a 9 y 10 (banco) en la respuesta 9; 35 sentencias `CREATE TABLE` en 6 bloques SQL (las del ejercicio 8 incluidas); 7 respuestas vacías (9.c, 10.2, 10.3, 10.5 a 10.8) | 0 | 3 imágenes; 0 anexos |
+| `GUIA N° 4- ALGEBRA RELACIONAL RESUELTO .docx` | Respuestas 1 a 5.4 (la 2 vacía; la 5.4 incompleta); 20 expresiones | 1 (7 filas de datos) | 0 imágenes |
+| `GUIA N° 4- ALGEBRA RELACIONAL RESUELTO por Vic.docx` | Respuestas 1 a 5.11 (la 2 vacía; 5.8, 5.10 y 5.11 declaradas no resolubles en álgebra relacional); 31 expresiones | 1 (7 filas de datos) | 1 emblema de la UTN |
+
+## Erratas conservadas y pendientes del lote de resoluciones de estudiantes
+
+- Entrega: en el ejercicio 1 solo se definen cardinalidad y grado (la guía pide
+  cinco términos). En 8.2, `WORKS` repite `pct` y `did`, `DEPT` referencia
+  `EMP(id)` y aparece «CASSCADE». En 9.2 los tres esquemas (`Paciente`,
+  `Médicos`, `Exámenes`) están vacíos. En 9.4.1, la clave foránea apunta a
+  `idd_legajo`; en 9.4.2, «rela», `idd_curso` por `idd_cursado` y «Estudiante»
+  por «Estudiantes». En 9.7, «stirng». En 9.8 la restricción `VNN` nombra
+  `modelo`, que no es atributo de `VEHÍCULOS`. En 9.9.b, «ISNB», «CARRO\_
+  COMPRAS» e «Id\_ carros» con un espacio, y una referencia a `CARROS_COMPRAS`
+  mientras la tabla se llama `CARRO_COMPRAS`. En el ejercicio 10: «REFERENCE»,
+  «DELATE», «FOREING», «examnes», «NOT ACTION» y un `id_empleados` que no
+  existe; «enetero» en el texto de 10).
+- Entrega, 9.6: el dibujo manuscrito dice «7» en su esquina y corresponde a las
+  entidades de la respuesta 9.7, pero el DOCX lo inserta tras el rótulo «6.». Se
+  conservó su posición.
+- Álgebra, versión 2018-05-19: el ejercicio 1 trae solo el texto «Qeipfdwod» y
+  la tabla; la respuesta 5.4 termina en `⋈` sin segundo operando.
+- Álgebra, ambas: «Catálogo)» con paréntesis de más en 3.5 a 3.7; paréntesis de
+  apertura sin cierre en 3.10 y 5.3; «mismo que el 4.1» en 4.b (no existe 4.1);
+  «Certificaos», «crusingrange» y «Boening» en las respuestas 5.4 y 5.5. Las
+  respuestas 3.9 y 3.10 escriben `P(A,Catálogo)` con la letra P; se conservó.
+- Pendiente externo (registrado en la cola de transcripción): publicación y
+  atribución de las tres resoluciones de estudiantes (la versión «por Vic» lista
+  a los cinco integrantes del Grupo 4, igual que el cuestionario de la Unidad
+  I); si la versión de 2018-06-25 reemplaza a la de 2018-05-19; el origen del
+  emblema de la UTN y del dibujo manuscrito.

@@ -11,6 +11,7 @@ Material relacionado:
 
 - [Presentación del Modelo Relacional](../teoria/modelo-relacional-presentacion.md).
 - [Presentación de Normalización](../teoria/normalizacion-presentacion.md).
+- [Respuestas del Grupo 4 a esta guía](modelo-relacional-guia-de-tp-entrega-grupo-4.md).
 
 <!-- Fuente: Guia de TP 2018 - Unidad 3.pdf, página 1. -->
 
