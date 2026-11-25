@@ -1139,3 +1139,216 @@ e620b42f3ecc60a244e993b8bc0c74e919994fffb0c1326d9c23686d62e34ecb
   a los cinco integrantes del Grupo 4, igual que el cuestionario de la Unidad
   I); si la versión de 2018-06-25 reemplaza a la de 2018-05-19; el origen del
   emblema de la UTN y del dibujo manuscrito.
+
+## Lote 2026-11-25: Álgebra y Cálculo Relacional (Unidad IV)
+
+Revisión realizada el 2026-11-25 en la rama
+`claude/transcribir-gestion-de-datos-unidad-iv`. Fuente canónica local: la misma
+carpeta de OneDrive de las secciones anteriores. Alcance: el apunte, la
+presentación y la guía de ejercicios de álgebra relacional (53 páginas). Los
+originales se materializaron con el preflight en un directorio temporal nuevo,
+con SHA-256 y lectura completa verificados. No se modificó ni se incorporó
+ningún original a Git.
+
+### Numeración de la fuente
+
+La portada del apunte dice «Unidad 4: Álgebra y Cálculo Relacional», pero su
+índice y el título de la primera sección dicen «Unidad V»; la presentación dice
+«UNIDAD 4» y `PROGRAMA 2018.pdf` (SHA-256 `a7ebb61d…`) lo numera «Unidad IV –
+Algebra Relacional». Se conserva cada rótulo como está impreso. El README
+`unidad-V/README.md` del repo era una versión previa no verificada del apunte y
+se reemplaza por el texto íntegro; como el validador exige nombres publicados en
+minúsculas y en kebab-case, la nota se publica como
+`notes/2018/teoria/algebra-y-calculo-relacional-apunte.md` y se elimina la
+carpeta `unidad-V`. El programa incluye además en esta unidad «Operaciones del
+Álgebra Relacionales Extendida» (proyección generalizada y funciones de
+agregación) y «Modificación de la Base de Datos» (borrado, inserción y
+actualización): ninguno de los tres originales de este lote desarrolla esos
+temas.
+
+### Originales transcritos
+
+#### Unidad_IV.pdf
+
+- Ruta dentro de OneDrive: `2018/Unidad_IV.pdf`.
+- Paginación: 19 páginas A4.
+- Autoría y año: Ing. Carolina Orcola; Año 2013 en el pie de página. Metadatos:
+  Microsoft Office Word 2007, creado el 2014-05-11; su título residual es «EL
+  TAD COLA». La bibliografía dice que la mayoría de los contenidos del apunte,
+  «con ejemplos y gráficos incluidos», son extraídos del libro de Ramakrishnan y
+  Gehrke.
+- Tamaño materializado: 635299 bytes.
+- SHA-256:
+
+```text
+7d5b2eb7b810150edabdd56fd14fe02357aedbe49c3d72ebe5d47335b4f25898
+```
+
+- Transcripción:
+  [notes/2018/teoria/algebra-y-calculo-relacional-apunte.md](../../notes/2018/teoria/algebra-y-calculo-relacional-apunte.md).
+
+#### Capitulo4.pdf
+
+- Ruta dentro de OneDrive: `2018/Capitulo4.pdf`.
+- Paginación: 32 diapositivas de 720 × 540 pt. Pese a su nombre, no es un
+  capítulo de libro: es la presentación de la unidad.
+- Autoría y año: autor «andres» en los metadatos; Microsoft PowerPoint 2007,
+  creado el 2013-05-06; título residual «MODELO DE ENTIDAD RELACION».
+- Tamaño materializado: 458286 bytes.
+- SHA-256:
+
+```text
+a3c1a8aac6902d8e703ab5b28015f1f4c696a6994f52045b3116ff7058ab2862
+```
+
+- Transcripción:
+  [notes/2018/teoria/algebra-relacional-presentacion.md](../../notes/2018/teoria/algebra-relacional-presentacion.md).
+
+#### EjerciciosUnidad4.pdf
+
+- Ruta dentro de OneDrive: `2018/EjerciciosUnidad4.pdf`.
+- Paginación: 2 páginas A4, sin portada.
+- Autoría y año: no constan en el contenido. Metadatos: autor «aa»,
+  OpenOffice.org 3.2, creado el 2011-05-15; título residual «El Modelo
+  Entidad-Relación».
+- Tamaño materializado: 81108 bytes.
+- SHA-256:
+
+```text
+ae97a42ed9cad3fe39529bfac6e65e4a6fd6f73cfd9a772a6b05fcdde40e2d07
+```
+
+- Transcripción:
+  [notes/2018/practica/algebra-relacional-guia-de-ejercicios.md](../../notes/2018/practica/algebra-relacional-guia-de-ejercicios.md).
+
+### Duplicados y relacionados no incluidos
+
+- `2018/Apunte Teorico Gestion de Datos/Unidad_IV.pdf` es un duplicado exacto de
+  `2018/Unidad_IV.pdf` (635299 bytes y el mismo SHA-256 de arriba). Se
+  transcribe una sola vez.
+- La presentación y el apunte tratan los mismos temas, pero no son copias: la
+  presentación trae figuras propias (las dos láminas «Repasamos graficamente»),
+  ejemplos de consulta con otra redacción y un resumen; el apunte desarrolla las
+  consultas numeradas y el cálculo relacional. Se conservan por separado. La
+  figura de división de la diapositiva 19 es, píxel por píxel, la misma de la
+  página 10 del apunte y se publica una sola vez.
+- `EjerciciosUnidad4.pdf` es el enunciado que quedó sin identificar en el lote
+  del 2026-11-24: la numeración de las resoluciones del Grupo 4 (1 a 5, 3.1 a
+  3.12, 4.a a 4.e y 5.1 a 5.11) coincide con la suya. El enunciado no lleva el
+  número de guía («nº4») que sí figura en la resolución del 2018-06-25. No se
+  verificó la corrección de las respuestas.
+- `Capitulo5.pdf`, `Capitulo_5-SQL_2.pdf` y `Capitulo 6-SQL.pdf` pertenecen al
+  lote de la Unidad V (SQL) y no se transcribieron.
+
+### Contenido del README anterior que no figura en los originales
+
+El README `unidad-V` reemplazado resumía el apunte y agregaba o cambiaba
+material que no consta en los tres originales. No se conservó nada de eso:
+
+- La negación `¬` entre los conectores de la selección, la identidad
+  `R ∩ S = R − (R − S)`, el conteo `n×m` del producto cartesiano, la frase sobre
+  la eficiencia de la reunión condicional y la división expresada con las
+  relaciones `T1` y `T2`.
+- Una lista de consultas renumerada y con cambios de contenido (por ejemplo,
+  «Lubito» donde el apunte dice «López»), y una consulta «C12» sobre el marinero
+  de mayor categoría.
+- Ejemplos de cálculo relacional de tuplas y de dominios sobre marineros que no
+  están en el apunte (salvo la consulta C11 de categoría superior a 7), una
+  tabla comparativa de ambos cálculos y la mención a la «completitud
+  relacional».
+- Una «Bibliografía» reescrita de 3 entradas en lugar de las 7 del apunte.
+- Las imágenes `u5-*` eran capturas de páginas completas del apunte; se
+  reemplazaron por tablas en Markdown y por la figura de división, y se
+  eliminaron las 11 (`u5-division-temp1-temp2.png` ya no estaba enlazada).
+
+### Método y cobertura de la revisión
+
+- PDF: PyMuPDF4LLM 1.28.2 sin OCR como primera conversión, con contraste con
+  Poppler (`pdftotext -raw` y `-layout`, `pdftoppm`, `pdfimages`, `pdffonts`).
+  En una muestra de tres páginas del apunte, Docling tampoco recuperó los glifos
+  de la fuente Symbol, así que no se usó. Las dos extracciones pierden los
+  operadores, por lo que todas las fórmulas se reescribieron en LaTeX a partir
+  de las páginas renderizadas; negritas y cursivas se tomaron de las fuentes
+  declaradas en el PDF (con PyMuPDF). Se revisaron visualmente **las 19 páginas
+  del apunte, las 32 diapositivas y las 2 páginas de la guía**: 53 páginas
+  originales, con vistas ampliadas de tablas, esquemas y subíndices dudosos.
+- El texto de la capa PDF se contrastó con cada nota mediante una comparación
+  palabra por palabra de cada página y diapositiva, traduciendo los códigos de
+  las fuentes Symbol y Wingdings, y otra de signos de puntuación y paréntesis.
+  No faltan palabras. Las diferencias son los títulos y notas editoriales, los
+  rótulos de las figuras anotadas, los subíndices separados por la notación
+  LaTeX, los glifos de operadores, la numeración automática de las listas, el
+  orden de las celdas de tablas contiguas y la llamada de nota ¹. La comparación
+  de signos detectó que la consulta C8 abre `“rojo”` con otra comilla que las
+  demás; se respetó.
+- Las fórmulas de las diapositivas 15, 16, 18 y 24 a 27 y las tablas de las
+  diapositivas 15 y 16 son imágenes sin capa de texto: se transcribieron de las
+  imágenes incrustadas, extraídas con `pdfimages` y ampliadas al doble. En esas
+  fórmulas la comparación automática no aplica; se verificaron a la vista.
+- Figuras: los dos emblemas del apunte (distintos de los publicados en lotes
+  anteriores) y la figura de división se extrajeron del PDF con PyMuPDF,
+  aplicando la máscara de transparencia a los emblemas; las diapositivas 20 y 21
+  son las imágenes incrustadas sin recortar. Las cuatro fórmulas anotadas con
+  globos (páginas 4 y 5 del apunte y diapositivas 8 y 10) se recortaron a 150
+  dpi y además se transcriben en LaTeX; en la página 4 y en la diapositiva 10 se
+  quitó el texto vecino en una copia temporal antes de recortar.
+- Los subrayados de claves y títulos se escriben con `<ins>`. El resaltado gris
+  de la definición de compatibilidad (página 6) se representa como cita. El
+  rótulo lateral «Incorrecto» (página 13) se escribe como línea previa a las dos
+  expresiones que señala. La nota al pie de la página 17 queda como párrafo
+  antes del pie de esa página. En la diapositiva 6 no se conserva la negrita
+  aplicada a paréntesis y símbolos sueltos, que GitHub mostraría como
+  asteriscos.
+
+### Controles de fidelidad y formato
+
+- Las tres notas pasaron `mdformat` con las extensiones `gfm` y `myst`,
+  `markdownlint-cli2` con la configuración compartida de transcripción y
+  `check.py --base origin/main`, que valida con KaTeX las 143 expresiones: 96 en
+  el apunte (61 bloques y 35 en línea), 40 en la presentación (37 bloques y 3 en
+  línea) y 7 en la guía (en línea). El formato no cambió ninguna expresión. Se
+  verificaron los enlaces y medios relativos.
+
+### Conteo de contenido
+
+| Fuente | Ejercicios o consultas | Tablas | Figuras y anexos |
+| -- | -- | -- | -- |
+| Apunte `Unidad_IV.pdf` | 0 ejercicios; 11 consultas de ejemplo (Consulta 1 y C2 a C11), resueltas en el original | 1 índice de 24 entradas adaptado a tabla y 21 tablas de datos | 2 fórmulas anotadas, 1 figura de división, 1 emblema de portada y 1 repetido en el encabezado de las páginas 2–19; 1 nota al pie; 7 referencias bibliográficas; 0 anexos |
+| Presentación `Capitulo4.pdf` | 4 consultas de ejemplo con solución (diapositivas 24 a 27) | 16 | 2 fórmulas anotadas y 3 figuras (diapositivas 19 a 21); 0 anexos |
+| Guía `EjerciciosUnidad4.pdf` | 5 ejercicios, sin resolver: el 2 con 7 apartados, el 3 con 12 consultas, el 4 con 5 apartados y el 5 con 11 consultas | 0; 2 recuadros de esquemas | 0 figuras; 0 anexos |
+
+## Erratas conservadas y pendientes del lote de Álgebra y Cálculo Relacional
+
+- Apunte: «hacer las consultas más legibles» (página 3); «ide» como clave de
+  Marineros (página 3) y «ide=103» (página 11); «pos su nombre» (página 4); «La
+  expresión que mostramos de cómo resultado» (página 5); «el orden de los
+  campos; el orden de los campos» repetido y «R..» (página 7); el ejemplo
+  `ρ(C(1→idm, 5→idm2), …)` frente al esquema con `idm1` (página 8); «ya está
+  correspondiente a R» (página 9); «menara», «de9 B», «hay una tupla de A/B» y
+  `DEPARTAMENTO` en singular (página 10); «A. se pueden», «Tem1» y un paréntesis
+  de más en `ρ(Temp2, Temp1 ⋈ Marineros))` (página 11); «contrarío»,
+  «Barcostem», «Se identifica todos», «B1, B2 y M3» y la mención de «(C5)» para
+  la consulta de rojos y verdes (página 13); «los ejemplos B1, R2 y M3» y «no se
+  pueden emplear nombrem» (página 14); «CALCULO» sin tilde, «CDR» por CRD y
+  «Cálculo Relacional» como título repetido (página 16); «sensillo» y «conuslta»
+  (página 17); «del dominios» y «cuya únicas» (página 18); «Prentice may»
+  (página 19).
+- Apunte, página 11: el texto dice que la respuesta de la Consulta 1 es
+  (Dominguez), (Horacio) y (López) y agrega «solo uno de ellos ha reservado un
+  barco color rojo», aunque la consulta es por el barco 103. Se conserva sin
+  corregir.
+- Presentación: «manipulacion», «No esta diseñados» (diapositiva 2),
+  «definciones», «mas sencilla» (4), «notificacion», «de entrada entrada» (5),
+  «la primer relación» (6), «identico», «Composión» (9), «estan» (11), «¿Cúal»
+  (12), «Si M1 y R1 tiene» (13), «a la junta visto» (16), «mas eficiente» y la
+  relación «Botes» por Barcos (25), «elije» y «a que se quiere obtener» (32). La
+  diapositiva 15 rotula «CONDICIÓN DE REUNIÓN» en los dos lados de la igualdad,
+  mientras el apunte usa «CONDICIÓN DE SELECCIÓN» a la derecha.
+- Guía: «por por» (ejercicio 3, consulta 10) y «esten» (ejercicio 5, consulta
+  5). El ejercicio 2 escribe la unión con la letra `U` y la reunión se escribe
+  `|x|` en el ejercicio 4. El esquema usa `precio` y las consultas del ejercicio
+  4 usan `costo`.
+- Pendiente externo (registrado en la cola de transcripción): el apunte declara
+  que su contenido proviene mayormente del libro de Ramakrishnan y Gehrke, con
+  ejemplos y gráficos incluidos, y la figura de división y las dos láminas
+  «Repasamos graficamente» de la presentación no traen cita propia.
