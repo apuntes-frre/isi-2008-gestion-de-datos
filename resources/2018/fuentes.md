@@ -1352,3 +1352,234 @@ material que no consta en los tres originales. No se conservó nada de eso:
   que su contenido proviene mayormente del libro de Ramakrishnan y Gehrke, con
   ejemplos y gráficos incluidos, y la figura de división y las dos láminas
   «Repasamos graficamente» de la presentación no traen cita propia.
+
+## Lote 2026-11-26: SQL (Unidad V)
+
+Revisión realizada el 2026-11-26 en la rama
+`claude/transcribir-gestion-de-datos-unidad-v`. Fuente canónica local: la misma
+carpeta de OneDrive de las secciones anteriores. Alcance: la guía de trabajos
+prácticos de SQL, una resolución de estudiantes de esa guía y las dos versiones
+de la presentación de SQL (113 páginas PDF y un DOCX). Los originales se
+materializaron con el preflight en un directorio temporal nuevo, con SHA-256 y
+lectura completa verificados. No se modificó ni se incorporó ningún original a
+Git.
+
+### Numeración de la fuente
+
+`PROGRAMA 2018.pdf` numera el tema «Unidad V - SQL» y la guía «Unidad 5: SQL»;
+las portadas de las dos presentaciones dicen «UNIDAD VI: SQL». Se conserva cada
+rótulo como está impreso. Las notas se nombran por tema. El README
+`notes/2018/teoria/unidad-VI/README.md` no se tocó: resume el apunte
+`Unidad_V.pdf` («Unidad 6: SQL», 26 páginas, SHA-256 `e2493d06…`), que no forma
+parte de este lote.
+
+### Originales transcritos
+
+#### Guia de TP 2018 - Unidad 5.pdf
+
+- Ruta dentro de OneDrive: `2018/Guia de TP 2018 - Unidad 5.pdf`.
+- Paginación: 3 páginas A4 (portada y 2 páginas de enunciados).
+- Autoría y año: Ing. Carolina Orcola, Ing. Luis Eiman y Juan Carlos Fernández
+  según la portada, que no imprime el año. Metadatos: autor «USER», LibreOffice
+  5.1, creado el 2018-05-22.
+- Tamaño materializado: 88303 bytes.
+- SHA-256:
+
+```text
+04a985bfd9e478b99125f9e8450e6f4b1543af8f2c0902784d09588125e677cf
+```
+
+- Transcripción:
+  [notes/2018/practica/sql-guia-de-tp.md](../../notes/2018/practica/sql-guia-de-tp.md).
+- La cola de transcripción no la incluía en ningún ítem; se agregó a este lote
+  porque es la guía de la unidad y el enunciado que responde el DOCX siguiente.
+
+#### Gestión de Datos UNIDAD 5.docx
+
+- Ruta dentro de OneDrive: `2018/Gestión de Datos UNIDAD 5.docx`.
+- Paginación: el archivo no declara páginas; la vista previa de LibreOffice
+  tiene 11.
+- Autoría y año: no constan. El DOCX no trae propiedades de documento
+  (`docProps`); sus entradas ZIP están fechadas el 2018-06-15. Es una resolución
+  de estudiantes, no material docente.
+- Tamaño materializado: 14541 bytes.
+- SHA-256:
+
+```text
+34a85456d71af43ea53d66b47d78db4be55e164bb69c61a297e5c26d4471b93b
+```
+
+- Transcripción:
+  [notes/2018/practica/sql-guia-de-tp-resuelta.md](../../notes/2018/practica/sql-guia-de-tp-resuelta.md).
+
+#### Capitulo_5-SQL_2.pdf
+
+- Ruta dentro de OneDrive: `2018/Capitulo_5-SQL_2.pdf`.
+- Paginación: 50 diapositivas de 720 × 540 pt.
+- Autoría y año: autor «andres» en los metadatos; PowerPoint 2007, creado el
+  2012-05-23; título residual «MODELO DE ENTIDAD RELACION». La portada dice «UTN
+  – FRRe, Gestión de Datos». Pese a su nombre, es una presentación y no un
+  capítulo de libro.
+- Tamaño materializado: 3402236 bytes.
+- SHA-256:
+
+```text
+45b483e2de1e1cf6c495639a404febb3c5ee7acf29611b5c867eba9acb0c0b57
+```
+
+- Transcripción:
+  [notes/2018/teoria/sql-presentacion-2012-05-23.md](../../notes/2018/teoria/sql-presentacion-2012-05-23.md).
+
+#### Capitulo 6-SQL.pdf
+
+- Ruta dentro de OneDrive: `2018/Capitulo 6-SQL.pdf`.
+- Paginación: 60 diapositivas de 720 × 540 pt.
+- Autoría y año: autor «andres» en los metadatos; PowerPoint 2016, creado el
+  2018-05-22; mismo título residual y misma portada.
+- Tamaño materializado: 3714731 bytes.
+- SHA-256:
+
+```text
+efb62716af0045fa446091d1ed2e559961c9b020a697f806a30a5f79d20762a7
+```
+
+- Transcripción:
+  [notes/2018/teoria/sql-presentacion-2018-05-22.md](../../notes/2018/teoria/sql-presentacion-2018-05-22.md).
+- La fecha del nombre de cada presentación es la de creación de sus metadatos.
+
+### Original no transcrito: Capitulo5.pdf
+
+- Ruta dentro de OneDrive: `2018/Capitulo5.pdf`.
+- Paginación: 41 páginas escaneadas, sin capa de texto.
+- Contenido: no trata de SQL. Es el «Capítulo 5, Almacenamiento de registros y
+  organizaciones de ficheros primarios» de un libro publicado, completo: páginas
+  105 a 145 del libro (la primera no lleva número impreso). El encabezado de las
+  páginas pares dice «Fundamentos de sistemas de bases de datos»; el escaneo no
+  imprime autores, editorial ni año de edición. Metadatos: Acrobat 5.0 Image
+  Conversion Plug-in, creado el 2004-08-31.
+- Tamaño materializado: 3467389 bytes.
+- SHA-256:
+
+```text
+94a024957f5be2d549dbab156c492ce1643766ee9e523354201f0060e4942acd
+```
+
+- Motivo: transcribirlo publicaría en un repositorio público un capítulo
+  completo de un libro comercial. `CONTRIBUTING.md` indica no versionar material
+  con derechos que no se pueda redistribuir. No se convirtió ni se copió texto o
+  figuras suyas; queda pendiente de decisión del propietario.
+
+### Fuera de alcance y relacionados no incluidos
+
+- Los archivos de código y bases no se transcriben: `scripts unidad 5.sql`,
+  `U5 gestion.sql`, `tablas tp3-ej9.sql`, `prueba.sql`, `prueba.mwb`,
+  `clase 22-05.mwb`, `all_tables/`, `all_tables.zip`,
+  `Ejercicios prácticos complementarios-20180317.zip` y
+  `Capítulos del libro DBMS en inglés-20180317.zip`. Dos copias ya estaban en el
+  repositorio y son idénticas byte a byte a sus originales:
+  `notes/2018/practica/scripts-unidad-5.sql` y `u5-gestion.sql`.
+- Ninguno de los cuatro originales transcritos tiene un duplicado exacto
+  identificado. Las dos presentaciones son versiones distintas: de las
+  diapositivas 1 a 44 cambian las 4, 5, 6, 7 y 37; la de 2018 agrega la 45
+  (subconsultas en el `FROM`) y reemplaza las reuniones de las diapositivas 48 a
+  50 de 2012 por las 49 a 56, además de agregar las 57 a 60 (optimización). Se
+  publican completas y por separado.
+- `Unidad_V.pdf` y su duplicado en `Apunte Teorico Gestion de Datos/` quedan
+  para un lote propio.
+
+### Método y cobertura de la revisión
+
+- PDF: PyMuPDF4LLM 1.28.2 sin OCR como primera conversión de las presentaciones.
+  Mezclaba las líneas de las consultas, así que las notas se escribieron sobre
+  el texto de Poppler 26.11.0 (`pdftotext -raw` y `-layout`) y las páginas
+  renderizadas con `pdftoppm`. Se revisaron visualmente **las 50 diapositivas de
+  2012, las 60 de 2018 y las 3 páginas de la guía**.
+- DOCX: Pandoc 3.14 como primera conversión (perdió el encabezado «Ejercicio
+  1»), volcado del XML con la biblioteca estándar de Python y vista previa de
+  **11 páginas** generada con LibreOfficeDev 26.8.0.0.alpha0 y un perfil
+  temporal aislado. La paginación de la vista previa depende de ese motor.
+- Los títulos de las diapositivas y varios enunciados en cursiva son imágenes
+  sin capa de texto: se transcribieron de las páginas renderizadas. También el
+  texto dentro de las imágenes de las diapositivas 55 y 56 de 2018 y 50 de 2012,
+  que se verificó sobre la imagen ampliada.
+- La fórmula de la diapositiva 5 de 2018 usa fuentes Symbol y Wingdings que el
+  extractor devuelve como `s`, `p` y `wv`; se reescribió en LaTeX desde la
+  página renderizada.
+- Comparación automática de las presentaciones, diapositiva por diapositiva, de
+  palabras y signos: no falta texto, salvo la capa duplicada (sombra) de las
+  tablas de la diapositiva 2 y los glifos de la fórmula. Lo agregado son los
+  títulos y enunciados que son imágenes, el texto de las diapositivas que solo
+  son imagen, la fórmula en LaTeX y frases editoriales. Los bloques SQL con capa
+  de texto aparecen contiguos en el original (84 de 84 en 2018 y 69 de 69 en
+  2012\) y coincide el número de asteriscos.
+- Guía: los 4607 caracteres de la capa de texto, sin contar espacios ni viñetas,
+  coinciden en orden con la nota. DOCX: coinciden en orden los caracteres del
+  XML sin espacios, salvo los dos puntos de «Punto 3:» y «Punto 5:», omitidos
+  porque el linter no admite encabezados terminados en ese signo.
+- La sangría de las consultas reproduce la jerarquía visible, no la posición
+  exacta de cada columna. En la resolución se unieron las líneas que la vista
+  previa corta por ancho.
+- Figuras, en `resources/2018/sql-presentaciones/`: 3 recortes a 150 dpi de las
+  diagramaciones con flechas de las diapositivas 23, 29 y 31 (iguales en las dos
+  versiones; las de las diapositivas 23 y 31 y la lámina de la 56 conservan un
+  resto de la plantilla); 6 diagramas de reuniones incrustados en la versión de
+  2018; 1 recorte de la lámina de la diapositiva 56; y 4 imágenes incrustadas de
+  la versión de 2012. Cinco diagramas de 2018 y la lámina «SQL JOINS» tenían
+  fondo transparente y se aplanaron sobre blanco, como se ven en la diapositiva.
+  El emblema de la guía se extrajo con su máscara en
+  `resources/2018/sql-guia-logo-utn.png`; es distinto de los publicados antes.
+- Los subrayados se escriben con `<ins>`. El resaltado rojo de la «y» de la
+  diapositiva 19 se escribe en negrita.
+
+### Controles de fidelidad y formato
+
+- Las cuatro notas pasaron `mdformat` con las extensiones `gfm` y `myst`,
+  `markdownlint-cli2` con la configuración compartida de transcripción y
+  `check.py --base origin/main`. Hay una sola expresión matemática (bloque
+  `math`, diapositiva 5 de 2018), válida en KaTeX. El formato no cambió ningún
+  bloque de código ni la expresión. Se verificaron los enlaces y medios
+  relativos. No se ejecutó ninguna consulta.
+
+### Conteo de contenido
+
+| Fuente | Ejercicios o consultas | Tablas | Figuras y anexos |
+| -- | -- | -- | -- |
+| Guía `Guia de TP 2018 - Unidad 5.pdf` | 9 ejercicios sin resolver: el 2 con 5 apartados, el 3 con 12, el 4 con 5, el 7 con 2 y el 9 con 2; 1 consulta dada en el 6 | 0; 5 esquemas | 1 emblema; 0 anexos |
+| Resolución `Gestión de Datos UNIDAD 5.docx` | Ejercicio 1 (12 consultas del «Punto 3» y 11 respuestas del «Punto 5») y ejercicios 2 a 9; sin respuesta 3.g, 3.j a 3.l y 4.d | 0 | 0 figuras; 0 anexos |
+| Presentación de 2012 | 50 diapositivas; 76 bloques de código | 6 | 3 figuras compartidas y 4 propias; 0 anexos |
+| Presentación de 2018 | 60 diapositivas; 92 bloques de código y 1 fórmula | 6 | 3 figuras compartidas y 7 propias (6 diagramas y 1 lámina), con 3 diagramas repetidos; 0 anexos |
+
+## Erratas conservadas y pendientes del lote de SQL
+
+- Ambas presentaciones: «..» y «los tuplas duplicadas» (diapositiva 3);
+  consultas con `MAX M.categoria` y `AVG M.edad` sin paréntesis (10, 21, 32); el
+  texto pide edades 15, 20 y 30 y la consulta usa 35 (12); `Reserrvas` y
+  `ALL`/`ANY`/`EXISTS` sin paréntesis (14, 15); «compatibles con la unión» en
+  `INTERSECT` y `EXCEPT` (18, 24) y «a partir de la intersección» en `EXCEPT`
+  (24); `NOT XISTS` (26); `M.ide`/`R.ide`, «Observese», `EXIST` y comas
+  sobrantes en `FROM` (27 a 31); `B2.color=”verde)` (30); «algebra» (32);
+  «primer consulta», «mas viejo» y una consulta de mínimo para el más viejo
+  (33); `MIX` (35); «los mismo valores» (36); «se agrupan que restan» (41); «=>
+  18» (43); «rating» y «chequeen» (47 de 2018, 46 de 2012); «unos de estos
+  operadores» (48 de 2018, 47 de 2012). Las comillas tipográficas de las
+  consultas se conservan.
+- El paso 2 de la diapositiva 6 dice `M.ide = R.ide AND R.ide = 103` en las dos
+  versiones, aunque las consultas de 2018 usan `idm` e `idb`. La fórmula de la
+  diapositiva 5 de 2018 aplica la selección sobre el resultado de la proyección.
+- Solo 2012: «producto artesiano» (37) y «se realizara» (49).
+- Solo 2018: «la subconsultas» (45); «no tiene por que ser» (50); «mas rápido»,
+  «Es mas optimo», «Clausula» y las comillas desparejas de `'Quimica’` (57);
+  «más de un subconsultas» (58); «son transacción» y `product_id` frente a
+  `producto_id` (59).
+- Guía: el ejercicio 6 pregunta por `r2.a2` donde la consulta usa `r2.a1`.
+- Resolución: «Encontrar os idps» y «por por»; la consulta 11 del «Punto 3»
+  filtra `',Acme Widget Suppliers'` aunque se pide Juan García; en el «Punto 5»,
+  la 3 pide Bonn–Madras y filtra Los Ángeles–Chicago, la 4 compara con 10000 en
+  lugar de 100,000 y la 5 habla de Boeing y excluye Airbus; el ejercicio 7 usa
+  `FROM note n` en la primera consulta, comparaciones encadenadas y 8.4 en lugar
+  de 8,5; los `ADD CHECK` del ejercicio 9 tienen un `SELECT` sin columnas. No se
+  revisó la corrección del resto de las respuestas.
+- Pendiente externo (registrado en la cola de transcripción): `Capitulo5.pdf`;
+  la lámina «SQL JOINS» (© C.L. Moffatt, 2008) y los diagramas de reuniones de
+  las dos presentaciones, sin otra cita en las diapositivas; y la publicación de
+  la resolución de estudiantes sin atribución.
