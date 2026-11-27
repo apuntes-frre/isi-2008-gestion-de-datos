@@ -1583,3 +1583,245 @@ efb62716af0045fa446091d1ed2e559961c9b020a697f806a30a5f79d20762a7
   la lámina «SQL JOINS» (© C.L. Moffatt, 2008) y los diagramas de reuniones de
   las dos presentaciones, sin otra cita en las diapositivas; y la publicación de
   la resolución de estudiantes sin atribución.
+
+## Lote 2026-11-27: Introducción a Big Data (Unidad VII)
+
+Revisión realizada el 2026-11-27 en la rama
+`claude/transcribir-gestion-de-datos-unidad-vii-big-data`. Fuente canónica
+local: la misma carpeta de OneDrive de las secciones anteriores. Alcance
+inventariado: seis documentos sobre Big Data (59 diapositivas en PPT, 16 en PPTX
+y 59 páginas PDF). Se transcribió la presentación de la cátedra; los otros cinco
+son obras de terceros y quedan sin transcribir. Los seis originales se
+materializaron con el preflight en un directorio temporal nuevo, con SHA-256 y
+lectura completa verificados. No se modificó ni se incorporó ningún original a
+Git.
+
+### Numeración de la fuente
+
+La portada de la presentación dice «Unidad VII: Introducción a Big Data», igual
+que `PROGRAMA 2018.pdf`; sus metadatos dicen «Unidad I: Introducción». La cola
+de transcripción llamaba «Unidad VI» a este lote, pero en el programa 2018 la
+Unidad VI es Almacenamiento de registros. La nota se nombra por tema.
+
+### Originales transcritos
+
+#### Unidad BIG DATA.ppt
+
+- Ruta dentro de OneDrive: `2018/Unidad BIG DATA.ppt`.
+- Paginación: 59 diapositivas de 4:3, sin diapositivas ocultas.
+- Autoría y año: autora «Carolina» y último guardado por «Ana Carolina ORCOLA»
+  en los metadatos; creado en 2005 y guardado por última vez en junio de 2018.
+  Ninguna diapositiva imprime autor ni año.
+- Tamaño materializado: 12824064 bytes.
+- SHA-256:
+
+```text
+39b38b26a0ec294b6a5065e5d93e7dc6b5c06f6a8c5df8d2ef10ad69b6444985
+```
+
+- Transcripción:
+  [notes/2018/teoria/introduccion-a-big-data-presentacion.md](../../notes/2018/teoria/introduccion-a-big-data-presentacion.md).
+- La cola de transcripción no la incluía en ningún ítem; se agregó a este lote
+  porque es la presentación de la cátedra sobre el tema.
+
+### Originales no transcritos: obras de terceros
+
+Transcribirlos publicaría en un repositorio público obras completas ajenas.
+`CONTRIBUTING.md` indica no versionar material con derechos que no se pueda
+redistribuir y no copiar material protegido completo. No se publicó texto ni
+figuras de estos cinco archivos. Se revisaron sus páginas para identificarlos y
+quedan pendientes de decisión del propietario.
+
+#### que-es-big-data-pdf.pdf
+
+- Ruta dentro de OneDrive: `2018/que-es-big-data-pdf.pdf`.
+- Paginación: 11 páginas.
+- Contenido: «¿Qué es Big Data? Todos formamos parte de ese gran crecimiento de
+  datos», artículo de Ricardo Barranco Fragoso (IBM Software Group México),
+  fechado el 18-06-2012, de IBM developerWorks. Imprime «© Copyright IBM
+  Corporation 2012» y el sitio `ibm.com/developerWorks/ssa/`.
+- Tamaño materializado: 376721 bytes.
+- SHA-256:
+
+```text
+e9ac9c8835d8bd89ef118dcc47e76dc1c505ec96b23e814b95fdeab690a105a2
+```
+
+#### Guia_PowerData_Data_Lake.pdf
+
+- Ruta dentro de OneDrive: `2018/Guia_PowerData_Data_Lake.pdf`.
+- Paginación: 16 páginas.
+- Contenido: «Data Lake. Superando las limitaciones del Data Warehouse», guía
+  comercial de la empresa PowerData. No imprime autor personal ni año.
+  Metadatos: modificado el 2017-02-20.
+- Tamaño materializado: 1960252 bytes.
+- SHA-256:
+
+```text
+9753cb2b833fbed2d2f9b251964d81cfdbc9f5bea35cf4646e2a25a68942c641
+```
+
+#### `PWD_-_BIG_DATA_-_hadoop_-_que_significa_haddop_en_el_mundo_del_big_data.pdf`
+
+- Ruta dentro de OneDrive:
+  `2018/PWD_-_BIG_DATA_-_hadoop_-_que_significa_haddop_en_el_mundo_del_big_data.pdf`.
+- Paginación: 10 páginas.
+- Contenido: «¿Qué significa Hadoop en el mundo del Big Data? Un contenido para
+  perfiles técnicos», guía de PowerData con figuras que acreditan a otros
+  sitios. La última página da el sitio `www.powerdata.es`. No imprime año;
+  metadatos: creado el 2014-05-26.
+- Tamaño materializado: 843518 bytes.
+- SHA-256:
+
+```text
+4509a4cd77aa76b4ac28635a81619b048867b018ebb2077d8f3be177547a52e8
+```
+
+- La cola de transcripción no lo incluía en ningún ítem.
+- La mayor parte del texto de las diapositivas 41 y 42 de la presentación de la
+  cátedra coincide palabra por palabra con esta guía (72 de 77 y 78 de 87
+  palabras, en secuencias de ocho o más). Ese texto se publica como parte de las
+  diapositivas.
+
+#### MOSTRAR ORACLE.pdf
+
+- Ruta dentro de OneDrive: `2018/MOSTRAR ORACLE.pdf`.
+- Paginación: 22 diapositivas.
+- Contenido: «Soluciones Tecnológicas de Analítica en Tiempo Real», de J. Andrés
+  Araújo (Oracle Ibérica), fechado el 2015-11-05. Las diapositivas interiores
+  imprimen «Copyright © 2015, Oracle and/or its affiliates. All rights reserved»
+  y varias agregan «Oracle Confidential».
+- Tamaño materializado: 2035995 bytes.
+- SHA-256:
+
+```text
+5eafd87ea5012df2956e5994819cdb5f736d4df55a126a3fafb2203467dfe4be
+```
+
+#### 15 BID DATA.pptx
+
+- Ruta dentro de OneDrive: `2018/15 BID DATA.pptx`.
+- Paginación: 16 diapositivas, sin notas.
+- Contenido: cada diapositiva es una sola imagen de una galería sobre las 15
+  empresas de Big Data más poderosas, en español, firmada «María Korolov,
+  Network World (EE.UU.)». Los metadatos dan como autora del PPTX a Ana Carolina
+  ORCOLA, creado el 2018-06-09; el texto y las imágenes son de la galería.
+- Tamaño materializado: 10673485 bytes.
+- SHA-256:
+
+```text
+bae02da42b47046a1d9c68456400e0833b584e142860b0219d3019b37dcf9b2d
+```
+
+### Figuras de la presentación
+
+Varias imágenes incrustadas en el PPT son capturas de pantalla más amplias que
+el área que muestra la diapositiva, y otras recortan marcas o firmas. Por eso no
+se publica ningún archivo incrustado sin comprobar su recorte: las figuras son
+el área visible. Se publican 29 archivos en
+`resources/2018/introduccion-a-big-data-presentacion/`: 19 figuras y 10
+logotipos (Tableau y d3.js en la diapositiva 46 y ocho en la 49). En 27 el
+archivo de partida figura byte a byte dentro del PPT; en
+`madurez-analitica-de-las-empresas.png` y `arquitectura-hdfs.png` se partió del
+PNG con transparencia que exporta LibreOffice.
+
+- Sin cambios: las que son opacas y no tienen recorte.
+- Recortadas según la diapositiva: la de la diapositiva 2, la de pirámide de
+  niveles (29), el logotipo de Tableau (46) y el gráfico de madurez (28).
+- Aplanadas sobre blanco: las que tenían transparencia.
+- La imagen de las cuatro tarjetas de la diapositiva 28 se publica entera; la
+  diapositiva la muestra en cuatro recortes animados.
+
+Ninguna de las figuras publicadas tiene un permiso verificado. Pistas de origen:
+`unidades-de-almacenamiento-significado.png` y
+`internet-en-60-segundos-2014-2016.png` conservan en su texto alternativo del
+PPT las direcciones de `boscolg.files.wordpress.com` y `www.tmrgroup.co.uk`; el
+gráfico de la diapositiva 7 imprime «Fuente: IDC».
+
+No se reproducen 18 imágenes, usadas en 25 diapositivas, porque identifican a un
+titular ajeno. «Imagen» es el nombre en la conversión a PPTX con LibreOffice.
+
+| Diapositiva | Imagen | Motivo |
+| -- | -- | -- |
+| 5 | image3 | Aviso «Copyright» y marca TecMundo |
+| 8 | image7 | Marcas Hootsuite y We Are Social |
+| 12 | image10 | Firma «@LoriLewis @OfficiallyChadd» |
+| 17 | image12 | Marca Vodafone |
+| 18 | image14 | Restos tenues de una marca de agua (líneas diagonales y fragmento de texto); la identificación del titular no es posible |
+| 19 | image15 | Marca IBM |
+| 32 | image26 | Fuera del recorte: «Estudio realizado por» EY, frontQuery y Teradata |
+| 33 | image27 | Captura de la página 10 de un PDF ajeno sobre Big Data y turismo, según el nombre de archivo visible |
+| 34 | image28 | Captura del sitio `morrisopazo.com` |
+| 35 | image29 | Captura de la página 12 de un PDF ajeno; el nombre de archivo visible menciona a Wolfram Rozas |
+| 36 | image30 | Fuera del recorte: marca Stratebi |
+| 37 | image31 | Fuera del recorte: firma de Luis Carlos Molina |
+| 39 | image32 | Fuera del recorte: marca Stratebi |
+| 43 | image35 | Captura de un blog de LUCA (`data-speaks.luca-d3.com`) |
+| 44 | image36 | Firma «@guru99.com», tapada en la diapositiva por un adorno |
+| 45 | image37 | Firma «2013 Jorge Ubero» |
+| 50 | image48 | Captura de la página 8 de un PDF ajeno |
+| 51 a 58 | image49 | Infografía con «Fuente / cincodias.com» |
+
+### Fuera de alcance y relacionados no incluidos
+
+- Ejecutables, sin abrir ni transcribir: `Prezi WIN Big Data 4V.exe` y
+  `Prezi WIN HISTORIA DEL BIG DAT.exe`.
+- Ninguno de los seis documentos tiene en la carpeta de la materia otro archivo
+  de igual tamaño, por lo que no hay duplicados exactos.
+
+### Método y cobertura de la revisión
+
+- LibreOfficeDev 26.8.0.0.alpha0, el del runtime de Codex, con perfil temporal
+  aislado, convirtió el PPT a PPTX y a PDF y el PPTX de la galería a PDF.
+- Presentación: se leyó el texto, las tablas, las notas del orador, los recortes
+  y las animaciones del XML del PPTX convertido, con un volcado propio
+  (`zipfile` y `ElementTree`) y MarkItDown 0.1.9. `olefile` confirmó en el PPT
+  original 59 diapositivas, ninguna oculta, y 50 imágenes. Todas las líneas de
+  texto leídas de sus registros binarios están en el volcado, salvo las del
+  patrón de diapositivas.
+- Se revisaron las 59 páginas renderizadas. Por diapositiva, los 2015 signos y
+  palabras del volcado XML están en la nota, y las 1465 palabras que extrae
+  `pdftotext -layout` de las 59 páginas también.
+- Las tablas de las diapositivas 4 y 27 son imágenes sin texto: se
+  transcribieron de la imagen ampliada. El texto de las demás figuras se lee en
+  la imagen y no se repite.
+- El enlace de la diapositiva 37 se leyó de una imagen de baja resolución; no se
+  abrió.
+- La vista de LibreOffice no es la de PowerPoint: puede variar el ajuste de
+  líneas y la superposición de objetos. No se reprodujeron las animaciones.
+- Los cinco documentos de terceros: `pdftotext -layout` y vista de sus 59
+  páginas PDF, y vista de las 16 diapositivas del PPTX convertido.
+
+### Controles de fidelidad y formato
+
+- La nota pasó `mdformat` con las extensiones `gfm` y `myst`,
+  `markdownlint-cli2` con la configuración compartida de transcripción y
+  `check.py --base origin/main`. Tiene 18 expresiones matemáticas en línea
+  (potencias de 2 de las diapositivas 3 y 4), válidas en KaTeX. Se verificaron
+  los enlaces y medios relativos.
+
+### Conteo de contenido
+
+| Fuente | Ejercicios | Tablas | Figuras y anexos |
+| -- | -- | -- | -- |
+| `Unidad BIG DATA.ppt` | 0 | 3 nativas (diapositivas 3, 48 y 49) y 2 transcritas de imágenes (4 y 27) | 29 archivos publicados; 18 imágenes no reproducidas; 8 diapositivas con notas del orador; 0 anexos |
+| Cinco documentos de terceros | No transcritos | No transcritas | No publicadas |
+
+## Erratas conservadas y pendientes del lote de Big Data
+
+- Tabla de la diapositiva 3: la columna «Número de Bytes» da 1 al bit y 8 al
+  byte, y la medición binaria del byte es 2 elevado a 3.
+- Tabla de la diapositiva 4: el kilobyte figura como «1.000 o» 2 elevado a 30
+  bytes, igual exponente que el gigabyte.
+- Diapositivas: cifras en «billones» (8); comilla de cierre sin apertura (15);
+  «Cuántos datos?» y las demás preguntas sin signo de apertura y un hueco de
+  varios espacios antes de «valor» (16); «PROCESO DE DECUBRIMIENTO» (23);
+  «contienen» por «contiene» (38); «Empiezan entonces aparecer» y «que se está
+  guardada» (40); «relacionados entre si» (49).
+- Diapositiva 27: «Procesos de carga» y «Calidad del dato» repiten la misma
+  descripción; «ESTRACCION», «TRANSFORMACION» sin tilde y «tunning».
+- Notas de la diapositiva 30: «Query drill sown».
+- Pendiente externo (registrado en la cola de transcripción): los cinco
+  documentos de terceros; las 18 imágenes no reproducidas; el permiso de las
+  figuras publicadas sin titular identificado; y el texto de las diapositivas 41
+  y 42 que coincide con la guía de PowerData.
