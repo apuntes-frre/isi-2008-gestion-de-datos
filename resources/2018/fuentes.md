@@ -1825,3 +1825,285 @@ titular ajeno. «Imagen» es el nombre en la conversión a PPTX con LibreOffice.
   documentos de terceros; las 18 imágenes no reproducidas; el permiso de las
   figuras publicadas sin titular identificado; y el texto de las diapositivas 41
   y 42 que coincide con la guía de PowerData.
+
+## Lote 2026-11-28: apunte de SQL, programa y modelos de parcial
+
+Revisión realizada el 2026-11-28 en la rama
+`claude/transcribir-gestion-de-datos-apunte-sql-programa-y-parciales`. Fuente
+canónica local: la misma carpeta de OneDrive de las secciones anteriores.
+Alcance: el apunte de SQL, el programa, el cronograma, el régimen de evaluación,
+un modelo de examen y las cinco fotografías de «Modelos de Parcial 2018». Los
+originales se materializaron con el preflight en un directorio temporal nuevo,
+con SHA-256 y lectura completa verificados. No se modificó ni se incorporó
+ningún original a Git.
+
+### Originales transcritos
+
+#### Unidad_V.pdf
+
+- Ruta dentro de OneDrive: `2018/Unidad_V.pdf`.
+- Paginación: 26 páginas.
+- Autoría y año: Ing. Carolina Orcola; los pies de página dicen «Año 2010».
+  Metadatos: Microsoft Office Word 2007, creado el 2013-05-25; título residual
+  «EL TAD COLA».
+- Tamaño materializado: 691619 bytes.
+- SHA-256:
+
+```text
+e2493d06ed396e191248b88f19fe31ac9401c852ccb5ec9124775ffb2c9a8b91
+```
+
+- Transcripción:
+  [notes/2018/teoria/sql-apunte.md](../../notes/2018/teoria/sql-apunte.md).
+- La página 26 declara que «la mayoría de los contenidos de este apunte son
+  extraídos» del libro de Ramakrishnan y Gehrke, «con ejemplos y gráficos
+  incluidos». Se publica con el mismo criterio que `Unidad_IV.pdf` y queda como
+  decisión pendiente del propietario.
+
+#### PROGRAMA 2018.pdf
+
+- Ruta dentro de OneDrive: `2018/PROGRAMA 2018.pdf`.
+- Paginación: 3 páginas.
+- Autoría y año: Ana Carolina ORCOLA en los metadatos; Microsoft Word 2016,
+  creado el 2018-03-09.
+- Tamaño materializado: 129657 bytes.
+- SHA-256:
+
+```text
+a7ebb61d3955dc7d3fe899258691ff593afeb523d755cc0944bd95f699a142b6
+```
+
+- Transcripción:
+  [notes/2018/teoria/programa-analitico.md](../../notes/2018/teoria/programa-analitico.md).
+
+#### CRONOGRAMA 2018.pdf
+
+- Ruta dentro de OneDrive: `2018/CRONOGRAMA 2018.pdf`.
+- Paginación: 1 página.
+- Autoría y año: Ana Carolina ORCOLA en los metadatos; creado el 2018-03-09.
+- Tamaño materializado: 172328 bytes.
+- SHA-256:
+
+```text
+dd7f8561a0f1958cad5cdac1b7666d8e59e2e3e451f4cfd1a9e349c66d5cfaca
+```
+
+- Transcripción:
+  [notes/2018/teoria/cronograma.md](../../notes/2018/teoria/cronograma.md).
+
+#### EVALUACION Y REGIMEN DE PROMOCION 2018.pdf
+
+- Ruta dentro de OneDrive: `2018/EVALUACION Y REGIMEN DE PROMOCION 2018.pdf`.
+- Paginación: 1 página.
+- Autoría y año: Ana Carolina ORCOLA en los metadatos; creado el 2018-03-09.
+- Tamaño materializado: 130669 bytes.
+- SHA-256:
+
+```text
+c88e9f7a5b3883e058330133dd003eec1d36b0d87d000810e15f36f5bc465e93
+```
+
+- Transcripción:
+  [notes/2018/teoria/evaluacion-y-regimen-de-promocion.md](../../notes/2018/teoria/evaluacion-y-regimen-de-promocion.md).
+
+#### modelo examen.pdf
+
+- Ruta dentro de OneDrive: `2018/modelo examen.pdf`.
+- Paginación: 1 página.
+- Autoría y año: Juan Fernández en los metadatos; LibreOffice 3.5, creado el
+  2013-04-20. La página no imprime materia ni año.
+- Tamaño materializado: 49509 bytes.
+- SHA-256:
+
+```text
+79e2a18ae96463eb96f84989b0988f84492157c27e098d349a6d208d92815f47
+```
+
+- Transcripción:
+  [notes/2018/practica/modelo-de-examen-administracion-de-consorcios.md](../../notes/2018/practica/modelo-de-examen-administracion-de-consorcios.md).
+
+#### Modelos de Parcial 2018: tema 1, hojas 1 y 2
+
+- Rutas dentro de OneDrive:
+  `2018/Modelos de Parcial 2018/Modelo 1er Parcial 2018 - Tema 1 - Hoja 1.jpeg`
+  y la misma con `Hoja 2.jpeg`.
+- Formato: dos fotografías de 960 × 1280 píxeles. Autor no indicado. En la hoja
+  1 hay una fecha manuscrita, 23 / 4 / 2018.
+- Tamaños materializados: 179273 y 60001 bytes.
+- SHA-256, hoja 1 y hoja 2:
+
+```text
+9305a14f2642e5f2a4e3005ac40f123d191ca2dee29464364344cc46197a5f03
+f6f1fffee3cbed955fbadd6aa73b8f1e20d7e280bc307899a0c78708bb56797d
+```
+
+- Transcripción:
+  [notes/2018/practica/primer-parcial-tema-1-empresas-de-mudanza.md](../../notes/2018/practica/primer-parcial-tema-1-empresas-de-mudanza.md).
+
+#### Modelos de Parcial 2018: tema 2, hojas 1 y 2
+
+- Rutas dentro de OneDrive:
+  `2018/Modelos de Parcial 2018/Modelo 1er Parcial 2018 - Tema 2 - Hoja 1.jpeg`
+  y la misma con `Hoja 2.jpeg`.
+- Formato: fotografías de 708 × 912 y 694 × 486 píxeles. Autor no indicado.
+- Tamaños materializados: 133705 y 63879 bytes.
+- SHA-256, hoja 1 y hoja 2:
+
+```text
+21be6fa490200ac5e108bde58d2cd71bf6f40940d7dda41bba3ca51ef3993ba0
+6c921579259adb9d49cd0850c69e64937282367154296dff0a733342d9ad0291
+```
+
+- Transcripción:
+  [notes/2018/practica/primer-parcial-tema-2-empresa-de-videos.md](../../notes/2018/practica/primer-parcial-tema-2-empresa-de-videos.md).
+
+#### 20180703_093827.jpg
+
+- Ruta dentro de OneDrive: `2018/Modelos de Parcial 2018/20180703_093827.jpg`.
+- Formato: una fotografía de una hoja numerada «1». Autor no indicado; la fecha
+  2018-07-03 sale del nombre del archivo.
+- Tamaño materializado: 2550760 bytes.
+- SHA-256:
+
+```text
+2b17072a8ae78a1578256afca0b79decc24df06dd80c6ae20afb408b2df83843
+```
+
+- Transcripción:
+  [notes/2018/practica/recuperatorio-primer-parcial-sistema-para-aeropuertos.md](../../notes/2018/practica/recuperatorio-primer-parcial-sistema-para-aeropuertos.md).
+
+### Original no transcrito: fotografía de un borrador manuscrito
+
+- Ruta dentro de OneDrive: `2018/WhatsApp Image 2018-04-10 at 19.53.35.jpeg`.
+- Contenido: foto de una hoja de cuaderno con un borrador a lápiz de un diagrama
+  sobre vehículos de una compañía. No muestra autor.
+- Tamaño materializado: 75503 bytes.
+- SHA-256:
+
+```text
+4b4f16d17f8de7566d50eb45a370dd8d055427addeae24755ef695d67f58b200
+```
+
+- No se publicó la foto ni su texto: no consta de quién es el manuscrito y el
+  repositorio es público. Queda pendiente de decisión del propietario.
+
+### Duplicados, material ya transcrito y fuera de alcance
+
+- `2018/Apunte Teorico Gestion de Datos/Unidad_V.pdf` es un duplicado exacto de
+  `2018/Unidad_V.pdf` (691619 bytes y el mismo SHA-256). Se transcribe una sola
+  vez. Los demás archivos de esa subcarpeta ya figuran en lotes anteriores.
+- `Unidad I v2.pdf` y `Cuestionario 1.docx` ya estaban transcritos en el piloto;
+  su SHA-256 actual coincide con el registrado entonces.
+- Fuera de alcance, sin transcribir: `Nuevas Tablas/generador de tablas.py` y
+  `Nuevas Tablas/persona.csv` (código y datos).
+
+### Contenido del README anterior que no figura en el original
+
+El README `unidad-VI` reemplazado resumía el apunte. No se conservó lo que
+agregaba o cambiaba respecto de `Unidad_V.pdf`:
+
+- Consultas corregidas sin aviso (por ejemplo `M.idm = R.idm AND R.idb = 103`
+  donde el apunte dice `M.ide = R.ide AND R.ide = 103`, comillas rectas,
+  paréntesis añadidos en `MAX` y `AVG` y `MIN` donde el apunte dice `MIX`), una
+  variante de C6 con `IN` distinta y una reescritura de C37 con `Temp2`.
+- Descripciones propias, tablas de operadores de agregación, de lógica de tres
+  valores y de reuniones externas que no están así en el original, y la
+  afirmación de que `COUNT` devuelve 0 sobre valores nulos.
+- Una bibliografía de tres entradas, la tercera («Introduction to Database
+  Systems», 8ª ed., 2004) ausente de las siete del apunte.
+- Las imágenes `u6-joins-diagramas.png` y `u6-joins-sintaxis.png` eran páginas
+  completas; se eliminaron. La nota nueva se publica como
+  `notes/2018/teoria/sql-apunte.md` y se elimina la carpeta `unidad-VI`.
+
+### Método y cobertura de la revisión
+
+- PDF: PyMuPDF4LLM 1.28.2 sin OCR como primera extracción, que unía en un
+  renglón las cláusulas de las consultas. La nota de SQL se generó desde la capa
+  de texto con PyMuPDF (posición y tipografía de cada renglón); las tablas, las
+  fórmulas, las figuras y algunos bloques se escribieron a mano desde las
+  páginas renderizadas. Contraste con Poppler (`pdftotext -raw` y `-layout`,
+  `pdftoppm`, `pdfimages`).
+- Se revisaron visualmente las **26 páginas del apunte** y las **6 páginas** de
+  los otros cuatro PDF: 32 páginas. También las 6 fotografías.
+- Apunte: la comparación de palabras de las páginas 3 a 26 solo difiere en la
+  matemática reescrita en LaTeX, las dos oraciones que cruzan de página (4 a 5 y
+  8 a 9), la numeración de una lista, la lista editorial de hipervínculos de la
+  página 3 y la página 25, que es una imagen. Los 77 bloques de consultas o
+  reglas con capa de texto aparecen contiguos en el original, sin contar los
+  espacios. En la prosa, 214 tramos también; los 12 restantes se explican por
+  las dos oraciones unidas o por asteriscos y corchetes que esa comprobación no
+  compara.
+- Los cuatro PDF cortos coinciden en palabras y orden con su capa de texto,
+  salvo los encabezados y pies repetidos, anotados una vez, y las «o» que Word
+  usa como viñetas. La sangría del programa se leyó de las coordenadas; tres
+  renglones de la Unidad IV son una sola enumeración y quedan en un ítem.
+- Fotografías: se transcribieron leyendo recortes ampliados. Tesseract en
+  español se usó solo como control; coincide en 323 de 330 palabras del
+  recuperatorio y bastante menos en las fotos oscuras o inclinadas del primer
+  parcial, donde sus diferencias son lecturas ilegibles del OCR.
+- Las seis fotografías no se publican: son hojas de texto sin figuras; una tiene
+  un nombre tapado y otra muestra apuntes manuscritos ajenos al enunciado.
+- Figuras: es nuevo el recorte a 150 dpi de la consulta con flecha y óvalo de la
+  página 16 (`resources/2018/sql-apunte/`) y el logotipo del encabezado de los
+  documentos de cátedra, extraído con su máscara y aplanado sobre blanco
+  (`resources/2018/documentos-de-catedra/`). Los tres diagramas de la página 24
+  son idénticos píxel a píxel a tres de `sql-presentaciones/`; la lámina «SQL
+  JOINS» de la página 25 es la misma imagen recodificada, y el emblema de la
+  portada es idéntico byte a byte al del apunte de la Unidad IV. Se reutilizan,
+  igual que el emblema del encabezado de ese apunte.
+- Los 18 hipervínculos de la tabla de la página 3 apuntan a `wapedia.mobi` y,
+  uno de ellos, a `acm.org`; se anotan como texto, sin activar.
+
+### Controles de fidelidad y formato
+
+- Las ocho notas pasaron `mdformat` con las extensiones `gfm` y `myst`,
+  `markdownlint-cli2` con la configuración compartida de transcripción y
+  `check.py --base origin/main`. El apunte tiene 6 expresiones matemáticas (2 en
+  línea y 4 bloques `math`), válidas en KaTeX; las demás notas no tienen
+  matemática. El formato no cambió ningún bloque de código ni expresión del
+  apunte. No se ejecutó ninguna consulta.
+
+### Conteo de contenido
+
+| Fuente | Ejercicios o consultas | Tablas | Figuras y anexos |
+| -- | -- | -- | -- |
+| Apunte `Unidad_V.pdf` | 26 rótulos de consulta distintos, de (C1) a (C37), y ningún ejercicio por resolver | 12 (índice de 26 entradas, historia de SQL y 10 de ejemplos) | 7 imágenes: 2 emblemas, 1 consulta con flecha, 3 diagramas y 1 lámina; 7 referencias bibliográficas |
+| `PROGRAMA 2018.pdf` | 0 | 0 | 1 logotipo; 7 unidades |
+| `CRONOGRAMA 2018.pdf` | 0 | 1 de 45 filas | 1 logotipo |
+| `EVALUACION Y REGIMEN DE PROMOCION 2018.pdf` | 0 | 0 | 1 logotipo |
+| `modelo examen.pdf` | 1 escenario sin consignas | 0 | 0 figuras |
+| Primer parcial, tema 1 | 2 consignas (la 2 con 2 apartados), sin resolver | 0 | 0 figuras |
+| Primer parcial, tema 2 | 2 consignas (la 2 con 2 apartados), sin resolver | 0 | 0 figuras |
+| Recuperatorio | 3 consignas, sin resolver | 0 | 0 figuras |
+
+## Erratas conservadas y pendientes del lote del 2026-11-28
+
+- Apunte, numeración: la portada dice «Unidad 6», el índice y el primer título
+  «Unidad VI» y el programa «Unidad V». El índice lista «¿Que trae de nuevo SQL
+  Server 2008?» con «¡Error! Marcador no definido.»; esa sección no existe.
+- Apunte, consultas: columnas `ide` donde las tablas usan `idm` e `idb` (páginas
+  6, 7, 15 y 16); `M.nombre` (8); `MAX` y `AVG` sin paréntesis (9 y 17);
+  `Reserrvas`, `ALL`, `ANY` y `EXISTS` sin paréntesis (10 y 11); el texto pide
+  edades 15, 20 y 30 y la consulta usa 35 (10); `B2.color` con el alias `B` y
+  `”verde)` sin comilla (16); paréntesis sin cerrar en las dos consultas de C9
+  (17); `MIX` (19); `FROM` con coma final en varias consultas. La fórmula de C1
+  (6) aplica la selección sobre el resultado de la proyección.
+- Apunte, texto: entre otras, «Lenguage», «consultas e SQL», «bastante
+  ineficiente», «SQL\_», «variables de rengo», «ya vismos», «clásula», «pesnar»,
+  «mariner», «considerer», «si o si», «EEVRY», «se agrupan que restan», «se la
+  siguiente», «valore», «dani», «se trara», «unos de estos», «RIGTH JOIN»,
+  «CHART(20)», «se realizara» y «Prentice may».
+- Programa y cronograma: «Primer Forma Normal», «Tercer Forma Normal»,
+  «Algebra», «Álgebra Relacionales», «CALCULO», «concepto básicos» y
+  «Miercoles». El cronograma repite la fecha 31/07/2018 en dos filas.
+- Evaluación: «se buscando», «practicas», «El Trabajo Práctico Grupal pasarán»,
+  «de carácter escritos, compuesto» y «REGIMEN».
+- Modelo de examen: «a cada una de ellas» (por consorcios) y «desea se le
+  domicilie».
+- Parciales: «éste ha rellenar», «Donosita», falta el punto en «concurso Dos»,
+  «el nombre el premio», un paréntesis sin apertura tras «Pride and Prejudice» y
+  «etc..,».
+- Ilegible: en la hoja 1 del tema 1, el borde de la fotografía corta el final de
+  la palabra que empieza con «qu»; se marca en la nota sin completarla.
+- Pendiente externo (registrado en la cola de transcripción): derechos del
+  apunte de SQL y la publicación del borrador manuscrito.
